@@ -467,11 +467,14 @@ function Directory() {
         <div className="mt-12">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Додаткові контакти</p>
           <h3 className="mt-3 font-display text-2xl text-forest md:text-3xl">
-            Суміжні спільноти та лінії підтримки
+            Реальні контакти підтримки
           </h3>
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {EXTRA_CONTACTS.map((c) => (
-              <div key={c.name} className="flex flex-col rounded-2xl border border-border bg-card p-6">
+              <div
+                key={c.name}
+                className="flex flex-col rounded-2xl bg-sage/60 p-6 transition hover:bg-sage"
+              >
                 <h4 className="font-display text-lg text-forest">{c.name}</h4>
                 <p className="mt-2 text-sm leading-relaxed text-moss">{c.desc}</p>
                 <ul className="mt-4 space-y-1.5">
