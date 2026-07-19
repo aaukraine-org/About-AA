@@ -433,7 +433,7 @@ function Directory() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 05 · довідник</p>
+            <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 06 · довідник</p>
             <h2 className="mt-4 font-display text-4xl text-forest md:text-5xl">Групи АА</h2>
           </div>
           <p className="max-w-md text-sm text-muted-foreground">
