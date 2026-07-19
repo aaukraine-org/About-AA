@@ -494,32 +494,51 @@ function Directory() {
             <h2 className="mt-4 font-display text-4xl text-forest md:text-5xl">Групи АА</h2>
           </div>
           <p className="max-w-md text-sm text-muted-foreground">
-            Наведені рядки — приклади для демонстрації структури довідника.
-            Актуальний список груп у вашому місті шукайте на офіційному сайті АА України.
+            Оберіть регіон, щоб побачити перелік груп: адреси, час зустрічей і контактні телефони.
           </p>
         </div>
 
-        <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-card">
-          <div className="hidden grid-cols-[100px_1fr_1.4fr_1fr_1.2fr] gap-4 border-b border-border bg-sage/50 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-forest md:grid">
-            <span>Місто</span>
-            <span>Група</span>
-            <span>Адреса</span>
-            <span>Час</span>
-            <span>Контакт</span>
-          </div>
-          {DIRECTORY.map((row, i) => (
-            <div
-              key={i}
-              className="grid grid-cols-1 gap-1 border-b border-border px-5 py-4 last:border-b-0 md:grid-cols-[100px_1fr_1.4fr_1fr_1.2fr] md:gap-4 md:py-3.5"
+        <Accordion type="multiple" className="mt-10 space-y-3">
+          {DIRECTORY_REGIONS.map((r) => (
+            <AccordionItem
+              key={r.region}
+              value={r.region}
+              className="overflow-hidden rounded-2xl border border-border bg-card"
             >
-              <span className="font-display text-forest">{row.city}</span>
-              <span className="text-sm text-forest">{row.name}</span>
-              <span className="font-mono text-[13px] text-moss">{row.addr}</span>
-              <span className="font-mono text-[13px] text-moss">{row.time}</span>
-              <span className="font-mono text-[13px] text-moss">{row.contact}</span>
-            </div>
+              <AccordionTrigger className="px-5 py-4 text-left font-display text-lg text-forest hover:no-underline md:px-6">
+                <span className="flex flex-1 items-baseline justify-between gap-4 pr-3">
+                  <span>{r.region}</span>
+                  <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                    {r.rows.length} груп
+                  </span>
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="p-0">
+                <div className="hidden grid-cols-[1.1fr_1.6fr_1.1fr_1.2fr] gap-4 border-t border-border bg-sage/50 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-forest md:grid md:px-6">
+                  <span>Група</span>
+                  <span>Адреса</span>
+                  <span>Час зустрічей</span>
+                  <span>Контакт</span>
+                </div>
+                {r.rows.map((row, i) => (
+                  <div
+                    key={i}
+                    className="grid grid-cols-1 gap-1 border-t border-border px-5 py-4 md:grid-cols-[1.1fr_1.6fr_1.1fr_1.2fr] md:gap-4 md:px-6 md:py-3.5"
+                  >
+                    <span className="font-display text-forest">{row.name}</span>
+                    <span className="font-mono text-[13px] text-moss">{row.addr}</span>
+                    <span className="font-mono text-[13px] text-moss">{row.time}</span>
+                    <span className="font-mono text-[13px] text-moss">{row.contact}</span>
+                  </div>
+                ))}
+              </AccordionContent>
+            </AccordionItem>
           ))}
-        </div>
+        </Accordion>
+
+        <p className="mt-6 text-xs text-muted-foreground">
+          Джерела: aa.kiev.ua, aa.org.ua/groups, aa-zakhid.org.ua. Дані можуть змінюватись — перед візитом рекомендуємо уточнити.
+        </p>
 
         <div className="mt-12">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Додаткові контакти</p>
