@@ -321,8 +321,7 @@ function Steps() {
         </ol>
 
         <p className="mx-auto mt-12 max-w-xl text-center text-sm text-muted-foreground">
-          Тексти вище — авторський переказ. Офіційне формулювання 12 Кроків
-          належить AA World Services, Inc.
+          Авторські права на офіційний текст 12 Кроків належать AA World Services, Inc.
         </p>
       </div>
     </section>
