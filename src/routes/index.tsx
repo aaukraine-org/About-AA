@@ -503,6 +503,7 @@ function Home() {
         <About />
         <Steps />
         <Faq />
+        <Quiz />
         <Chat />
         <Directory />
       </main>
