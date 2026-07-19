@@ -359,7 +359,7 @@ function Chat() {
     <section id="chat" className="border-t border-border/60 py-24">
       <div className="mx-auto max-w-3xl px-6">
         <div className="text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 04 · розмова</p>
+          <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 05 · розмова</p>
           <h2 className="mt-4 font-display text-4xl text-forest md:text-5xl">
             Запитати напряму
           </h2>
