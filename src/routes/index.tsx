@@ -463,10 +463,186 @@ function Directory() {
             </div>
           ))}
         </div>
+
+        <div className="mt-12">
+          <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Додаткові контакти</p>
+          <h3 className="mt-3 font-display text-2xl text-forest md:text-3xl">
+            Суміжні спільноти та лінії підтримки
+          </h3>
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {EXTRA_CONTACTS.map((c) => (
+              <div key={c.name} className="flex flex-col rounded-2xl border border-border bg-card p-6">
+                <h4 className="font-display text-lg text-forest">{c.name}</h4>
+                <p className="mt-2 text-sm leading-relaxed text-moss">{c.desc}</p>
+                <ul className="mt-4 space-y-1.5">
+                  {c.lines.map((l, i) => (
+                    <li key={i} className="font-mono text-[13px] text-moss">
+                      <span className="text-forest/60">{l.label}: </span>
+                      <a href={l.href} className="underline decoration-forest/30 underline-offset-2 hover:text-forest">
+                        {l.value}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
 }
+
+function Quiz() {
+  const [answers, setAnswers] = useState<(boolean | null)[]>(
+    () => Array(QUIZ_QUESTIONS.length).fill(null),
+  );
+  const [showResult, setShowResult] = useState(false);
+  const resultRef = useRef<HTMLDivElement>(null);
+
+  const answeredCount = answers.filter((a) => a !== null).length;
+  const yesCount = answers.filter((a) => a === true).length;
+  const allAnswered = answeredCount === QUIZ_QUESTIONS.length;
+
+  function setAnswer(i: number, value: boolean) {
+    setAnswers((prev) => {
+      const next = [...prev];
+      next[i] = value;
+      return next;
+    });
+  }
+
+  function reveal() {
+    setShowResult(true);
+    setTimeout(() => {
+      resultRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 30);
+  }
+
+  function reset() {
+    setAnswers(Array(QUIZ_QUESTIONS.length).fill(null));
+    setShowResult(false);
+  }
+
+  return (
+    <section id="quiz" className="border-t border-border/60 py-24">
+      <div className="mx-auto max-w-3xl px-6">
+        <div className="text-center">
+          <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 04 · роздуми</p>
+          <h2 className="mt-4 font-display text-4xl text-forest md:text-5xl">
+            Наскільки серйозна проблема?
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-moss">
+            12 спокійних питань — тільки для вас. Відповіді нікуди не надсилаються
+            і залишаються у вашому браузері.
+          </p>
+        </div>
+
+        <ol className="mt-12 space-y-4">
+          {QUIZ_QUESTIONS.map((q, i) => {
+            const n = String(i + 1).padStart(2, "0");
+            const value = answers[i];
+            return (
+              <li
+                key={i}
+                className="rounded-2xl border border-border bg-card p-5 md:p-6"
+              >
+                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between md:gap-6">
+                  <div className="flex items-baseline gap-4">
+                    <span className="font-display text-xl text-gold">{n}</span>
+                    <p className="text-[15px] leading-relaxed text-forest">{q}</p>
+                  </div>
+                  <div className="flex shrink-0 gap-2 md:pt-1">
+                    {[
+                      { label: "Так", val: true },
+                      { label: "Ні", val: false },
+                    ].map((opt) => {
+                      const active = value === opt.val;
+                      return (
+                        <button
+                          key={opt.label}
+                          type="button"
+                          onClick={() => setAnswer(i, opt.val)}
+                          className={
+                            active
+                              ? "min-w-[68px] rounded-full bg-forest px-4 py-2 text-sm font-medium text-linen transition"
+                              : "min-w-[68px] rounded-full border border-forest/40 px-4 py-2 text-sm text-forest transition hover:border-forest hover:bg-forest/5"
+                          }
+                          aria-pressed={active}
+                        >
+                          {opt.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+
+        <div className="mt-8 flex flex-col items-center gap-3">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
+            Відповіли: {answeredCount} / {QUIZ_QUESTIONS.length}
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <button
+              type="button"
+              onClick={reveal}
+              disabled={!allAnswered}
+              className="rounded-full bg-forest px-7 py-3 text-sm font-medium text-linen transition hover:bg-moss disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              Показати результат
+            </button>
+            {(showResult || answeredCount > 0) && (
+              <button
+                type="button"
+                onClick={reset}
+                className="rounded-full border border-forest/40 px-7 py-3 text-sm text-forest transition hover:border-forest"
+              >
+                Почати спочатку
+              </button>
+            )}
+          </div>
+        </div>
+
+        {showResult && (
+          <div
+            ref={resultRef}
+            className="mt-10 rounded-2xl border border-border bg-sage/40 p-7 md:p-9"
+          >
+            <p className="font-mono text-xs uppercase tracking-[0.24em] text-gold">
+              Ваших «Так»: {yesCount} з {QUIZ_QUESTIONS.length}
+            </p>
+            <p className="mt-4 font-display text-2xl leading-snug text-forest md:text-3xl">
+              Тільки ви можете вирішити, чи є для вас сенс у цих відповідях.
+            </p>
+            <p className="mt-4 text-[15px] leading-relaxed text-moss">
+              АА нічого не вказує і не змушує — просто ділиться досвідом тих,
+              хто через це вже пройшов. Якщо відчуваєте, що варто поговорити —
+              довідник груп і чат нижче завжди відкриті.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href="#directory"
+                className="rounded-full bg-forest px-6 py-2.5 text-sm font-medium text-linen transition hover:bg-moss"
+              >
+                Довідник груп
+              </a>
+              <a
+                href="#chat"
+                className="rounded-full border border-forest px-6 py-2.5 text-sm text-forest transition hover:bg-forest hover:text-linen"
+              >
+                Поговорити в чаті
+              </a>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
 
 function Footer() {
   return (
