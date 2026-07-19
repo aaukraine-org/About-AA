@@ -62,7 +62,7 @@ const QUIZ_QUESTIONS = [
 const EXTRA_CONTACTS = [
   {
     name: "Ал-Анон Україна",
-    desc: "Всеукраїнський Центр Обслуговування Родинних груп Ал-Анон в Україні — для близьких людей залежних.",
+    desc: "Всеукраїнський Центр Обслуговування Родинних груп Ал-Анон в Україні.",
     lines: [
       { label: "Сайт", value: "www.al-anon.org.ua", href: "https://www.al-anon.org.ua" },
       { label: "Телефон", value: "+38 095 838 29 33 (9:00–19:00)", href: "tel:+380958382933" },
@@ -70,11 +70,11 @@ const EXTRA_CONTACTS = [
     ],
   },
   {
-    name: "Українська група АА · США та Канада",
-    desc: "Онлайн-зустрічі щопонеділка та щосереди о 20:00 (EST, Нью-Йорк). Спілкування також у Viber-чаті — приєднатися можна через SMS.",
+    name: "Українська група АА (США та Канада)",
+    desc: "Зустрічі щопонеділка та щосереди о 20:00 (EST, Нью-Йорк), онлайн. Viber-чат — приєднатися через SMS.",
     lines: [
-      { label: "Філадельфія", value: "+1 267 902 9217", href: "sms:+12679029217" },
-      { label: "Сакраменто", value: "+1 916 792 1654", href: "sms:+19167921654" },
+      { label: "SMS (Філадельфія)", value: "+1 267 902 9217", href: "sms:+12679029217" },
+      { label: "SMS (Сакраменто)", value: "+1 916 792 1654", href: "sms:+19167921654" },
     ],
   },
   {
@@ -467,11 +467,14 @@ function Directory() {
         <div className="mt-12">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Додаткові контакти</p>
           <h3 className="mt-3 font-display text-2xl text-forest md:text-3xl">
-            Суміжні спільноти та лінії підтримки
+            Реальні контакти підтримки
           </h3>
-          <div className="mt-8 grid gap-5 md:grid-cols-3">
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {EXTRA_CONTACTS.map((c) => (
-              <div key={c.name} className="flex flex-col rounded-2xl border border-border bg-card p-6">
+              <div
+                key={c.name}
+                className="flex flex-col rounded-2xl bg-sage/60 p-6 transition hover:bg-sage"
+              >
                 <h4 className="font-display text-lg text-forest">{c.name}</h4>
                 <p className="mt-2 text-sm leading-relaxed text-moss">{c.desc}</p>
                 <ul className="mt-4 space-y-1.5">
