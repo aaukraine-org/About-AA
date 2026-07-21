@@ -11,20 +11,6 @@ export const Route = createFileRoute("/")({
   component: Home,
 });
 
-const STEPS: { title: string; body: string }[] = [
-  { title: "Визнання", body: "Ми визнали, що ми були безсилими перед алкоголем, що наше життя стало некерованим." },
-  { title: "Надія", body: "Прийшли до віри, що Сила, могутніша за нас, може повернути нам здоровий розум." },
-  { title: "Рішення", body: "Прийняли рішення передати свою волю і своє життя під опіку Бога, як ми розуміли Його." },
-  { title: "Інвентаризація", body: "Зробили ретельну та безстрашну моральну інвентаризацію самих себе." },
-  { title: "Визнання помилок", body: "Визнали перед Богом, перед собою та іншою людиною справжню природу своїх помилок." },
-  { title: "Готовність", body: "Були повністю готові до того, щоб Бог усунув всі ці вади характеру." },
-  { title: "Прохання", body: "Покірно попросили Його усунути наші недоліки." },
-  { title: "Список", body: "Склали список усіх людей, кому ми заподіяли кривду, і сповнились бажанням відшкодувати всім їм завдані збитки." },
-  { title: "Відшкодування", body: "Особисто відшкодовували заподіяну цим людям кривду, де тільки можливо, крім тих випадків, коли це могло зашкодити їм або іншим." },
-  { title: "Щоденна практика", body: "Продовжували робити особисту інвентаризацію, і коли ми були неправі, відразу визнавали це." },
-  { title: "Молитва і медитація", body: "Шляхом молитви і медитації шукали покращення свого свідомого контакту з Богом, як ми розуміли Його, молячись лише про пізнання Його волі щодо нас і силу виконати її." },
-  { title: "Передати далі", body: "Отримавши духовне пробудження в результаті виконання цих кроків, ми намагалися донести цю звістку до алкоголіків і застосовувати ці принципи в усіх своїх справах." },
-];
 
 const DIRECTORY_REGIONS: {
   region: string;
@@ -147,7 +133,6 @@ const EXTRA_CONTACTS = [
 function Nav() {
   const links = [
     ["#about", "Про АА"],
-    ["#steps", "12 Кроків"],
     ["#faq", "Питання"],
     ["#quiz", "Тест"],
     ["#chat", "Запитати"],
@@ -157,7 +142,7 @@ function Nav() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#top" className="font-display text-lg text-forest">
-          <span className="text-gold">·</span> Один крок
+          <span className="text-gold">·</span> Коротко про АА
         </a>
         <ul className="hidden gap-7 text-sm text-moss md:flex">
           {links.map(([href, label]) => (
@@ -208,21 +193,14 @@ function Hero() {
           Інформаційний ресурс · українською
         </p>
         <h1 className="font-display text-5xl leading-[1.05] text-forest md:text-7xl">
-          Один день.<br />
-          <span className="italic text-moss">Один крок.</span><br />
-          Разом.
+          Коротко<br />
+          <span className="italic text-moss">про АА.</span>
         </h1>
         <p className="mx-auto mt-8 max-w-xl text-lg text-moss">
           Спокійна розмова про Анонімних Алкоголіків та програму 12 Кроків —
           без осуду, без страху, у власному темпі.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href="#steps"
-            className="rounded-full bg-forest px-7 py-3 text-sm font-medium text-linen transition hover:bg-moss"
-          >
-            Про 12 Кроків
-          </a>
           <a
             href="#directory"
             className="rounded-full border border-forest px-7 py-3 text-sm font-medium text-forest transition hover:bg-forest hover:text-linen"
@@ -280,53 +258,6 @@ function About() {
   );
 }
 
-function Steps() {
-  return (
-    <section id="steps" className="relative overflow-hidden border-t border-border/60 py-24">
-      <PathTrail />
-      <div className="relative mx-auto max-w-5xl px-6">
-        <div className="text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 02 · шлях</p>
-          <h2 className="mt-4 font-display text-4xl text-forest md:text-5xl">
-            Програма <span className="italic">12 Кроків</span>
-          </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-moss">
-            Не інструкція й не правила. Радше — 12 орієнтирів, за якими люди
-            в спільноті йдуть у власному темпі.
-          </p>
-          <p className="mx-auto mt-4 max-w-xl text-xs text-muted-foreground">
-            Офіційний переклад, Літературний Комітет Української Ради по Обслуговуванню АА, 2012. Джерело: aa.org.ua
-          </p>
-        </div>
-
-        <ol className="mt-16 space-y-4">
-          {STEPS.map((s, i) => {
-            const n = String(i + 1).padStart(2, "0");
-            const offset = i % 2 === 0 ? "md:pr-24 md:mr-auto" : "md:pl-24 md:ml-auto";
-            return (
-              <li
-                key={s.title}
-                className={`relative max-w-2xl rounded-2xl border border-border bg-card p-6 shadow-[0_1px_0_rgba(30,43,34,0.04)] md:p-7 ${offset}`}
-              >
-                <div className="flex items-baseline gap-5">
-                  <span className="font-display text-3xl text-gold md:text-4xl">{n}</span>
-                  <div>
-                    <h3 className="font-display text-xl text-forest">{s.title}</h3>
-                    <p className="mt-2 text-[15px] leading-relaxed text-moss">{s.body}</p>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        </ol>
-
-        <p className="mx-auto mt-12 max-w-xl text-center text-sm text-muted-foreground">
-          Авторські права на офіційний текст 12 Кроків належать AA World Services, Inc.
-        </p>
-      </div>
-    </section>
-  );
-}
 
 function Faq() {
   return (
