@@ -659,7 +659,7 @@ function Footer() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
           <div>
-            <p className="font-display text-2xl">Один день. Один крок. Разом.</p>
+            <p className="font-display text-2xl">Коротко про АА.</p>
             <p className="mt-2 font-mono text-xs uppercase tracking-[0.24em] text-sage">
               Інформаційний ресурс
             </p>
@@ -686,7 +686,7 @@ function Home() {
       <main>
         <Hero />
         <About />
-        <Steps />
+        
         <Faq />
         <Quiz />
         <Chat />
