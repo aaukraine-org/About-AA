@@ -164,26 +164,6 @@ function Nav() {
   );
 }
 
-/** Signature meandering path connecting sections */
-function PathTrail() {
-  return (
-    <svg
-      aria-hidden
-      className="pointer-events-none absolute left-1/2 top-0 -z-0 h-full w-[200px] -translate-x-1/2 opacity-40"
-      viewBox="0 0 200 3000"
-      preserveAspectRatio="none"
-      fill="none"
-    >
-      <path
-        d="M100 0 C 40 200, 160 400, 100 600 S 40 1000, 100 1200 S 160 1600, 100 1800 S 40 2200, 100 2400 S 160 2800, 100 3000"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeDasharray="3 8"
-        className="text-moss"
-      />
-    </svg>
-  );
-}
 
 function Hero() {
   return (
