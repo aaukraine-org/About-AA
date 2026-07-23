@@ -631,9 +631,126 @@ function Quiz() {
           </div>
         )}
       </div>
+
+      {showModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-forest/70 p-4 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="quiz-modal-title"
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-linen p-7 shadow-2xl md:p-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setShowModal(false)}
+              aria-label="Закрити"
+              className="absolute right-4 top-4 rounded-full border border-forest/30 px-3 py-1 text-sm text-forest transition hover:bg-forest hover:text-linen"
+            >
+              ✕
+            </button>
+            <p className="font-mono text-xs uppercase tracking-[0.24em] text-gold">
+              Ваших «Так»: {yesCount} з {QUIZ_QUESTIONS.length}
+            </p>
+            <h3
+              id="quiz-modal-title"
+              className="mt-3 font-display text-2xl leading-snug text-forest md:text-3xl"
+            >
+              Отже, що у Вас вийшло?
+            </h3>
+
+            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-forest/90">
+              <p>
+                Ви відповіли <strong>ТАК</strong> на 4 або більше запитань?
+                Ймовірно Ви потрапили у лихо.
+              </p>
+              <p>
+                Тільки Ви можете прийняти рішення щодо Вашого одужання, щоб
+                прийти в АА.
+              </p>
+              <p className="pl-4 border-l-2 border-gold/60 italic text-moss">
+                В АА ми не вказуємо, що треба робити комусь.
+              </p>
+              <p>
+                Ми просто розповідаємо, як пили самі, до яких негараздів це
+                призвело, і як нам вдалось це припинити. Ми будемо раді
+                допомогти і Вам, якщо Ви цього захочете.
+              </p>
+              <p>
+                Багато хто з нас дурив себе, вважаючи, ніби ми п'ємо за
+                бажанням. Багато хто з нас починав пити тому, що випиваючи,
+                життя здавалося кращим (принаймні на деякий час).
+              </p>
+              <p>
+                Доки ми не прийшли в АА, багато хто з нас казав, що нас
+                підштовхують до випивки проблеми або люди у дома. Багато хто з
+                нас визнає, що досить-таки часто не виходили на роботу, кажучи,
+                що захворіли — хоча насправді були п'яні або у важкому
+                похміллі. Час від часу багато хто з нас замислювався, чому ми
+                відрізняємося від більшості інших людей, які можуть
+                контролювати свою випивку.
+              </p>
+              <p className="font-display text-xl text-forest">Будьмо чесними!</p>
+              <p>
+                Лікарі стверджують, якщо виникає пов'язана з алкоголем
+                проблема, а Ви продовжуєте пити, то ця проблема може тільки
+                погіршуватися — вона ніколи не полегшується.
+              </p>
+              <p>
+                Ми утримуємося тільки від цієї першої чарки. Якщо не буде
+                першої, то не буде і десятої. Ми залишаємося тверезими лише
+                сьогодні — день за днем, година за годиною.
+              </p>
+              <p>
+                Тверезість підтримується завдяки обміну досвідом, силами і
+                надіями на зборах групи АА і завдяки програмі «Дванадцять
+                Кроків», яка пропонуються як програма одужання.
+              </p>
+              <p>
+                Більшість членів АА будуть раді дати Вам свій номер телефону,
+                і їм буде приємно, якщо Ви зателефонуєте, і попросите
+                відповісти на запитання.
+              </p>
+              <p>
+                Ми, учасники Анонімних Алкоголіків, — не обіцяємо вирішення
+                усіх ваших проблем, але багатьом з нас вдалося вирішити
+                проблему свого алкоголізму.
+              </p>
+            </div>
+
+            <div className="mt-7 flex flex-wrap gap-3">
+              <a
+                href="#directory"
+                onClick={() => setShowModal(false)}
+                className="rounded-full bg-forest px-6 py-2.5 text-sm font-medium text-linen transition hover:bg-moss"
+              >
+                Довідник груп
+              </a>
+              <a
+                href="#chat"
+                onClick={() => setShowModal(false)}
+                className="rounded-full border border-forest px-6 py-2.5 text-sm text-forest transition hover:bg-forest hover:text-linen"
+              >
+                Поговорити в чаті
+              </a>
+              <button
+                type="button"
+                onClick={() => setShowModal(false)}
+                className="ml-auto rounded-full border border-forest/40 px-6 py-2.5 text-sm text-forest transition hover:border-forest"
+              >
+                Закрити
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
+
 
 
 function Footer() {
