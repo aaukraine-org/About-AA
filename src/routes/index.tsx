@@ -487,6 +487,7 @@ function Quiz() {
     () => Array(QUIZ_QUESTIONS.length).fill(null),
   );
   const [showResult, setShowResult] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
 
   const answeredCount = answers.filter((a) => a !== null).length;
@@ -503,6 +504,7 @@ function Quiz() {
 
   function reveal() {
     setShowResult(true);
+    setShowModal(true);
     setTimeout(() => {
       resultRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
     }, 30);
@@ -511,6 +513,7 @@ function Quiz() {
   function reset() {
     setAnswers(Array(QUIZ_QUESTIONS.length).fill(null));
     setShowResult(false);
+    setShowModal(false);
   }
 
   return (
