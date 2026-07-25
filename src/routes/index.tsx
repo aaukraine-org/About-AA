@@ -176,8 +176,8 @@ function Hero() {
           Коротко <span className="italic text-moss">про АА</span>
         </h1>
         <p className="mx-auto mt-8 max-w-xl text-lg text-moss">
-          Спокійна розмова про Анонімних Алкоголіків та програму 12 Кроків —
-          без осуду, без страху, у власному темпі.
+          Про алкоголізм та Анонімних Алкоголіків — конфіденційно та
+          самостійно, без осуду, без страху...
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
