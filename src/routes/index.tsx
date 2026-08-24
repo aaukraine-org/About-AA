@@ -12,66 +12,6 @@ export const Route = createFileRoute("/")({
 });
 
 
-const DIRECTORY_REGIONS: {
-  region: string;
-  rows: { name: string; addr: string; time: string; contact: string }[];
-}[] = [
-  {
-    region: "Київ",
-    rows: [
-      { name: "Лівобережка", addr: "бульвар Перова, 1-б (Костел, м. Дарниця)", time: "Пн–Нд 18:00", contact: "+38 099 782-30-31" },
-      { name: "Апельсин", addr: "пров. Деміївський, 5-А (Соціотерапія, м. Голосіївська)", time: "Пн–Нд 19:00; Сб, Нд додатково 13:00", contact: "+38 095 774-30-89" },
-      { name: "Десна", addr: "вул. М. Закревського, 29а (ЖЕД 305, Троєщина)", time: "Пн–Нд 19:00", contact: "+38 068 372-68-78" },
-      { name: "Либідь", addr: "вул. Велика Китаївська, 83 (м. Деміївська)", time: "Пн, Ср 19:00", contact: "+38 095 273-85-24" },
-      { name: "Оболонь", addr: "вул. Героїв полку «Азов», 27/23", time: "Пн–Нд 19:00", contact: "+38 096 631-13-93" },
-      { name: "Фенікс", addr: "Печерський узвіз, 19 (м. Кловська)", time: "Пн–Нд 19:00", contact: "+38 098 300-01-01" },
-      { name: "Михайлівська", addr: "вул. Трьохсвятительська, 4-Б", time: "Вт, Чт 19:00; Сб 10:00; Нд 9:00", contact: "+38 097 186-58-50" },
-      { name: "Житомирська", addr: "вул. Чорнобильська, 2 (Храм)", time: "Пн, Ср, Пт 19:00", contact: "+38 093 694-92-88" },
-      { name: "Дім На Горі", addr: "вул. Карпатської Січі, 2А", time: "Вт, Пт 17:00", contact: "+38 095 774-30-89" },
-      { name: "Опора", addr: "вул. Каменярів, 68 (притулок)", time: "Ср 19:00", contact: "+38 095 095-2000" },
-      { name: "Ти не одна (жіноча)", addr: "Печерський узвіз, 19", time: "Сб 16:00", contact: "+38 098 300-01-01" },
-      { name: "На районі (чоловіча)", addr: "вул. Сержа Лифаря, 20 (Троєщина)", time: "Сб 16:00", contact: "+38 097 162-58-08" },
-    ],
-  },
-  {
-    region: "Львів",
-    rows: [
-      { name: "Криниця", addr: "пл. Соборна, 3 (Церква Св. Андрія)", time: "Сб 18:30", contact: "+38 067 944-21-86" },
-      { name: "Світло", addr: "вул. Симоненка, 5 (храм Св. Володимира і Ольги)", time: "Пн, Ср, Пт 19:00", contact: "+38 067 420-01-13" },
-      { name: "Човник", addr: "вул. Озеркевича, 4 (шпиталь Шептицького)", time: "Нд 17:30", contact: "+38 098 253-57-58, +38 093 929-26-32, +38 066 988-43-35" },
-      { name: "Сихів", addr: "пр. Червоної Калини, 70 (церква Різдва Богородиці)", time: "Ср 18:30", contact: "+38 067 947-72-77" },
-      { name: "На Привокзальній", addr: "пл. Кропивницького, 1 (церква св. Єлизавети)", time: "Нд 15:30", contact: "+38 098 449-00-69" },
-      { name: "Вежа", addr: "вул. Винниченка, 22 (храм Св. Арх. Михаїла)", time: "Вт 19:30", contact: "+38 063 068-69-71 (Юра)" },
-      { name: "Вогник", addr: "вул. Ужгородська, 8а (костел Івана Хрестителя)", time: "Ср 18:30", contact: "+38 066 725-58-02" },
-      { name: "Свобода", addr: "вул. Городоцька, 321 (Церква Воскресіння)", time: "Вт 18:30", contact: "+38 097 038-74-91" },
-      { name: "Переможець", addr: "пл. Св. Юра, 5", time: "Сб 18:00", contact: "+38 097 297-64-25" },
-      { name: "Самі свої", addr: "вул. Театральна, 11 (хр. Св. Петра і Павла)", time: "Вт 18:30", contact: "немає даних" },
-      { name: "Кроки", addr: "вул. Франка, 56–58 (Церква Непорочного Зачаття)", time: "Сб 16:30", contact: "+38 067 944-21-86" },
-      { name: "Бочка", addr: "вул. Винниченка, 32 (Палац єпископів)", time: "Чт 18:30", contact: "+38 098 199-99-95" },
-    ],
-  },
-  {
-    region: "Інші регіони",
-    rows: [
-      { name: "Рубікон (Чернігів)", addr: "вул. Реміснича, 49 (ДОСААФ)", time: "Пн–Нд 18:00", contact: "+38 073 429-89-78" },
-      { name: "У Броварах (Київська обл.)", addr: "вул. Симона Петлюри, 34", time: "Пн, Ср, Пт 20:00", contact: "+38 050 071-90-05" },
-      { name: "Сходинки (Бородянка)", addr: "вул. Польова, 11", time: "час уточнювати", contact: "+38 097 969-00-98 (Олександр)" },
-      { name: "Ми (Черкаси)", addr: "вул. Верхня Горова, 178 (БФ «ВАМ»)", time: "Чт 17:30; Сб 12:00", contact: "+38 096 027-56-10" },
-      { name: "Надія (Стрий)", addr: "вул. Успенська (Храм Успенія)", time: "Ср 18:00; Нд 15:00", contact: "+38 073 134-31-73" },
-      { name: "Надія (Самбір)", addr: "вул. Франка (Церква Покрови)", time: "Сб 16:00", contact: "+38 096 465-14-99" },
-      { name: "Едем (Дрогобич)", addr: "вул. Трускавецька, 2 (Катедральний Собор)", time: "Пн, Чт 17:45", contact: "+38 097 338-43-44" },
-      { name: "Гаряча лінія Полтава", addr: "немає адреси", time: "немає розкладу", contact: "+38 095 498-63-31, +38 096 187-11-83" },
-    ],
-  },
-  {
-    region: "Онлайн-групи",
-    rows: [
-      { name: "Промінь", addr: "Онлайн", time: "Щодня 21:00–22:00; Нд 12:00–13:00", contact: "+38 093 744-10-11 (Христина)" },
-      { name: "Все Просто", addr: "Онлайн", time: "Щодня 21:30 (Нд — спікерські виступи)", contact: "+38 063 738-10-93 (Сергій)" },
-      { name: "Вільна (жіноча)", addr: "Онлайн", time: "Щодня 20:00", contact: "немає даних" },
-    ],
-  },
-];
 
 const FAQ = [
   { q: "Чи АА — це релігійна організація?", a: "Ні. АА не пов'язана з жодною конфесією, партією чи установою. У програмі йдеться про «силу більшу за нас» — кожен розуміє це по-своєму: хтось як Бога, хтось як спільноту, природу чи власне сумління." },
@@ -100,7 +40,38 @@ const QUIZ_QUESTIONS = [
   "Чи з'являлось у Вас коли-небудь відчуття, що якби Ви не пили, то Ваше життя було б кращим?",
 ];
 
-const EXTRA_CONTACTS = [
+const EXTRA_CONTACTS: {
+  name: string;
+  nameHref?: string;
+  desc: string;
+  lines: { label: string; value: string; href?: string }[];
+}[] = [
+  {
+    name: "Український Центр Обслуговування груп АА",
+    nameHref: "https://aa.org.ua/contacts/",
+    desc: "36023, м. Полтава, вул. Героїв АТО, 116/1",
+    lines: [
+      { label: "Email", value: "aa.ua.gso@gmail.com", href: "mailto:aa.ua.gso@gmail.com" },
+      { label: "Сайт", value: "aa.org.ua/contacts", href: "https://aa.org.ua/contacts/" },
+    ],
+  },
+  {
+    name: "Українська група АА (США та Канада)",
+    desc: "Зустрічі відбуваються в мережі ZOOM у понеділок та середу о 20:00 за часом Нью-Йорка. Також є Viber-чат для спілкування — щоб доєднатися, надішліть SMS на +1 916 792 1654.",
+    lines: [
+      { label: "ZOOM", value: "us06web.zoom.us/j/4201339480", href: "https://us06web.zoom.us/j/4201339480?pwd=vlF69iVIZlTbbKxcSHFuaUibJqnpTt.1" },
+      { label: "Meeting ID", value: "420 133 9480" },
+      { label: "SMS (Філадельфія)", value: "+1 267 902 9217", href: "sms:+12679029217" },
+      { label: "SMS (Сакраменто)", value: "+1 916 792 1654", href: "sms:+19167921654" },
+    ],
+  },
+  {
+    name: "Група АА «Свобода», м. Чикаго",
+    desc: "Проводить свої зустрічі щосереди.",
+    lines: [
+      { label: "Адреса", value: "5000 N Cumberland Ave, Chicago, IL 60656, США" },
+    ],
+  },
   {
     name: "Ал-Анон Україна",
     desc: "Всеукраїнський Центр Обслуговування Родинних груп Ал-Анон в Україні.",
@@ -108,14 +79,6 @@ const EXTRA_CONTACTS = [
       { label: "Сайт", value: "www.al-anon.org.ua", href: "https://www.al-anon.org.ua" },
       { label: "Телефон", value: "+38 095 838 29 33 (9:00–19:00)", href: "tel:+380958382933" },
       { label: "Email", value: "ukralanon@gmail.com", href: "mailto:ukralanon@gmail.com" },
-    ],
-  },
-  {
-    name: "Українська група АА (США та Канада)",
-    desc: "Зустрічі щопонеділка та щосереди о 20:00 (EST, Нью-Йорк), онлайн. Viber-чат — приєднатися через SMS.",
-    lines: [
-      { label: "SMS (Філадельфія)", value: "+1 267 902 9217", href: "sms:+12679029217" },
-      { label: "SMS (Сакраменто)", value: "+1 916 792 1654", href: "sms:+19167921654" },
     ],
   },
   {
@@ -130,13 +93,89 @@ const EXTRA_CONTACTS = [
   },
 ];
 
+const ONLINE_GROUPS: {
+  name: string;
+  desc: string;
+  lines: { label: string; value: string; href?: string }[];
+}[] = [
+  {
+    name: "Швидка допомога АА",
+    desc: "Група створена командою україномовної групи АА «День незалежності» для швидкої допомоги та підтримки. Мета — комунікація для надання допомоги та підтримки.",
+    lines: [{ label: "Telegram", value: "t.me/aa_idchat", href: "https://t.me/aa_idchat" }],
+  },
+  {
+    name: "Група АА «День незалежності» 🇺🇦",
+    desc: "Зібрання проходять кожного дня 20:00–21:00 за Києвом.",
+    lines: [
+      { label: "Telegram", value: "t.me/aaindependencedaychat", href: "https://t.me/aaindependencedaychat" },
+      { label: "YouTube", value: "@aaindependenceday", href: "https://youtube.com/@aaindependenceday" },
+      { label: "Сайт", value: "aa-id.com.ua", href: "https://aa-id.com.ua" },
+    ],
+  },
+  {
+    name: "Група АА «Все Просто»",
+    desc: "Основна мета — допомогти іншим алкоголікам, які все ще страждають. Зібрання щодня о 21:30, у п'ятницю та вихідні об 11:00.",
+    lines: [
+      { label: "Telegram", value: "t.me/AA_VseProsto", href: "https://t.me/AA_VseProsto" },
+      { label: "Сайт", value: "aa-vseprosto.org.ua", href: "https://aa-vseprosto.org.ua/" },
+      { label: "Пошук спонсорів", value: "t.me/Aasponsors", href: "https://t.me/Aasponsors" },
+      { label: "10 крок", value: "t.me/step10vseprosto", href: "https://t.me/step10vseprosto" },
+      { label: "Вільне спілкування", value: "t.me/Vilne_spilkuvannya", href: "https://t.me/Vilne_spilkuvannya" },
+      { label: "11 крок (7:00 та 23:00)", value: "t.me/AA_VseProsto_11_krok", href: "https://t.me/AA_VseProsto_11_krok" },
+    ],
+  },
+  {
+    name: "ВААУ — Військові Анонімні Алкоголіки",
+    desc: "Збори для військових та ветеранів України у безпечному колі: вівторок 20:00, четвер 20:00, неділя 18:00, субота 10:00.",
+    lines: [
+      { label: "Telegram", value: "приєднатися", href: "https://t.me/+4_ieUfB-lp4wNmRi" },
+      { label: "Гаряча лінія", value: "095-817-91-61", href: "tel:+380958179161" },
+      { label: "Гаряча лінія", value: "096-196-21-29", href: "tel:+380961962129" },
+    ],
+  },
+  {
+    name: "Жіноча група АА «Вільна»",
+    desc: "Запрошує всіх жінок, у яких можливо є проблеми з алкоголем. Збори кожного дня о 20:00.",
+    lines: [{ label: "Telegram", value: "приєднатися", href: "https://t.me/+GYUUjgTXpGJiMjFi" }],
+  },
+  {
+    name: "Група АА «Промінь»",
+    desc: "Щоденні вечірні зібрання о 21:00 та в неділю о 12:00 за київським часом.",
+    lines: [
+      { label: "Telegram", value: "t.me/prominorgaa", href: "https://t.me/prominorgaa" },
+      { label: "YouTube", value: "@aapromin", href: "https://www.youtube.com/@aapromin" },
+    ],
+  },
+  {
+    name: "Група АА «МИ»",
+    desc: "Збори щодня о 13:00 за Києвом. Щоп'ятниці о 19:00 — спікерський виступ.",
+    lines: [
+      { label: "Сайт", value: "we-aa.org.ua", href: "https://we-aa.org.ua/" },
+      { label: "YouTube", value: "@weaa13", href: "https://www.youtube.com/@weaa13" },
+      { label: "Telegram", value: "t.me/weaa13", href: "https://t.me/weaa13" },
+    ],
+  },
+  {
+    name: "Закрита чоловіча група АА «Клан»",
+    desc: "Гасло: «Ми є частиною рішення, а не частиною проблеми.» Розклад за Києвом: понеділок 20:00, середа 20:00, субота 10:00.",
+    lines: [{ label: "Telegram", value: "t.me/mgklanaa", href: "https://t.me/mgklanaa" }],
+  },
+  {
+    name: "Українськомовна група АА США та Канади",
+    desc: "Зібрання у ZOOM щопонеділка та щосереди о 20:00 за Нью-Йорком. Щоб доєднатися — зголосіться у Viber-чат на номер +1 916 792 1654.",
+    lines: [{ label: "Сайт", value: "aa.lviv.ua/ssha-ta-kanada", href: "https://aa.lviv.ua/ssha-ta-kanada/" }],
+  },
+];
+
+
 function Nav() {
   const links = [
     ["#about", "Про АА"],
     ["#faq", "Питання"],
     ["#quiz", "Тест"],
     ["#chat", "Запитати"],
-    ["#directory", "Групи"],
+    ["#directory", "Контакти"],
+    ["#online", "Онлайн"],
   ];
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
@@ -200,7 +239,7 @@ function About() {
     { t: "Рівність", d: "Немає керівників чи експертів — усі рівні, усі одужують поряд." },
   ];
   return (
-    <section id="about" className="relative border-t border-border/60 bg-linen py-24">
+    <section id="about" className="relative border-t border-border/60 bg-linen py-12">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-14 md:grid-cols-[1fr_1.2fr]">
           <div>
@@ -240,7 +279,7 @@ function About() {
 
 function Faq() {
   return (
-    <section id="faq" className="border-t border-border/60 bg-sage/40 py-24">
+    <section id="faq" className="border-t border-border/60 bg-sage/40 py-12">
       <div className="mx-auto max-w-4xl px-6">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 03 · питання</p>
@@ -322,7 +361,7 @@ function Chat() {
   }
 
   return (
-    <section id="chat" className="border-t border-border/60 py-24">
+    <section id="chat" className="border-t border-border/60 py-12">
       <div className="mx-auto max-w-3xl px-6">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 05 · розмова</p>
@@ -393,93 +432,90 @@ function Chat() {
   );
 }
 
+function ContactCard({
+  c,
+}: {
+  c: { name: string; nameHref?: string; desc: string; lines: { label: string; value: string; href?: string }[] };
+}) {
+  return (
+    <div className="flex flex-col rounded-2xl bg-sage/60 p-6 transition hover:bg-sage">
+      <h4 className="font-display text-lg text-forest">
+        {c.nameHref ? (
+          <a
+            href={c.nameHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-forest/30 underline-offset-4 hover:decoration-forest"
+          >
+            {c.name}
+          </a>
+        ) : (
+          c.name
+        )}
+      </h4>
+      <p className="mt-2 text-sm leading-relaxed text-moss">{c.desc}</p>
+      <ul className="mt-4 space-y-1.5">
+        {c.lines.map((l, i) => (
+          <li key={i} className="font-mono text-[13px] break-words text-moss">
+            <span className="text-forest/60">{l.label}: </span>
+            {l.href ? (
+              <a
+                href={l.href}
+                target={l.href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="underline decoration-forest/30 underline-offset-2 hover:text-forest"
+              >
+                {l.value}
+              </a>
+            ) : (
+              <span>{l.value}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function Directory() {
   return (
-    <section id="directory" className="border-t border-border/60 bg-linen py-24">
+    <section id="directory" className="border-t border-border/60 bg-linen py-12">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 06 · довідник</p>
-            <h2 className="mt-4 font-display text-4xl text-forest md:text-5xl">Групи АА</h2>
-          </div>
-          <p className="max-w-md text-sm text-muted-foreground">
-            Оберіть регіон, щоб побачити перелік груп: адреси, час зустрічей і контактні телефони.
-          </p>
-        </div>
-
-        <Accordion type="multiple" className="mt-10 space-y-3">
-          {DIRECTORY_REGIONS.map((r) => (
-            <AccordionItem
-              key={r.region}
-              value={r.region}
-              className="overflow-hidden rounded-2xl border border-border bg-card"
-            >
-              <AccordionTrigger className="px-5 py-4 text-left font-display text-lg text-forest hover:no-underline md:px-6">
-                <span className="flex flex-1 items-baseline justify-between gap-4 pr-3">
-                  <span>{r.region}</span>
-                  <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                    {r.rows.length} груп
-                  </span>
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="p-0">
-                <div className="hidden grid-cols-[1.1fr_1.6fr_1.1fr_1.2fr] gap-4 border-t border-border bg-sage/50 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-forest md:grid md:px-6">
-                  <span>Група</span>
-                  <span>Адреса</span>
-                  <span>Час зустрічей</span>
-                  <span>Контакт</span>
-                </div>
-                {r.rows.map((row, i) => (
-                  <div
-                    key={i}
-                    className="grid grid-cols-1 gap-1 border-t border-border px-5 py-4 md:grid-cols-[1.1fr_1.6fr_1.1fr_1.2fr] md:gap-4 md:px-6 md:py-3.5"
-                  >
-                    <span className="font-display text-forest">{row.name}</span>
-                    <span className="font-mono text-[13px] text-moss">{row.addr}</span>
-                    <span className="font-mono text-[13px] text-moss">{row.time}</span>
-                    <span className="font-mono text-[13px] text-moss">{row.contact}</span>
-                  </div>
-                ))}
-              </AccordionContent>
-            </AccordionItem>
+        <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Додаткові контакти</p>
+        <h2 className="mt-3 font-display text-3xl text-forest md:text-4xl">
+          Реальні контакти підтримки
+        </h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {EXTRA_CONTACTS.map((c) => (
+            <ContactCard key={c.name} c={c} />
           ))}
-        </Accordion>
-
-        <p className="mt-6 text-xs text-muted-foreground">
-          Джерела: aa.kiev.ua, aa.org.ua/groups, aa-zakhid.org.ua. Дані можуть змінюватись — перед візитом рекомендуємо уточнити.
-        </p>
-
-        <div className="mt-12">
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Додаткові контакти</p>
-          <h3 className="mt-3 font-display text-2xl text-forest md:text-3xl">
-            Реальні контакти підтримки
-          </h3>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {EXTRA_CONTACTS.map((c) => (
-              <div
-                key={c.name}
-                className="flex flex-col rounded-2xl bg-sage/60 p-6 transition hover:bg-sage"
-              >
-                <h4 className="font-display text-lg text-forest">{c.name}</h4>
-                <p className="mt-2 text-sm leading-relaxed text-moss">{c.desc}</p>
-                <ul className="mt-4 space-y-1.5">
-                  {c.lines.map((l, i) => (
-                    <li key={i} className="font-mono text-[13px] text-moss">
-                      <span className="text-forest/60">{l.label}: </span>
-                      <a href={l.href} className="underline decoration-forest/30 underline-offset-2 hover:text-forest">
-                        {l.value}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
   );
 }
+
+function OnlineGroups() {
+  return (
+    <section id="online" className="border-t border-border/60 bg-sage/40 py-12">
+      <div className="mx-auto max-w-6xl px-6">
+        <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Онлайн · час Київ</p>
+        <h2 className="mt-3 font-display text-3xl text-forest md:text-4xl">
+          Група АА он-лайн (час Київ)
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+          Українськомовні групи АА он-лайн — із посиланнями на чати, сайти та відеозустрічі.
+        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {ONLINE_GROUPS.map((g) => (
+            <ContactCard key={g.name} c={g} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
 function Quiz() {
   const [answers, setAnswers] = useState<(boolean | null)[]>(
@@ -516,7 +552,7 @@ function Quiz() {
   }
 
   return (
-    <section id="quiz" className="border-t border-border/60 py-24">
+    <section id="quiz" className="border-t border-border/60 py-12">
       <div className="mx-auto max-w-3xl px-6">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 04 · роздуми</p>
@@ -754,7 +790,7 @@ function Quiz() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border/60 bg-forest py-14 text-linen">
+    <footer className="border-t border-border/60 bg-forest py-8 text-linen">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
           <div>
@@ -790,6 +826,7 @@ function Home() {
         <Quiz />
         <Chat />
         <Directory />
+        <OnlineGroups />
       </main>
       <Footer />
     </div>
