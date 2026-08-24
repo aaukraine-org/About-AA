@@ -12,66 +12,6 @@ export const Route = createFileRoute("/")({
 });
 
 
-const DIRECTORY_REGIONS: {
-  region: string;
-  rows: { name: string; addr: string; time: string; contact: string }[];
-}[] = [
-  {
-    region: "Київ",
-    rows: [
-      { name: "Лівобережка", addr: "бульвар Перова, 1-б (Костел, м. Дарниця)", time: "Пн–Нд 18:00", contact: "+38 099 782-30-31" },
-      { name: "Апельсин", addr: "пров. Деміївський, 5-А (Соціотерапія, м. Голосіївська)", time: "Пн–Нд 19:00; Сб, Нд додатково 13:00", contact: "+38 095 774-30-89" },
-      { name: "Десна", addr: "вул. М. Закревського, 29а (ЖЕД 305, Троєщина)", time: "Пн–Нд 19:00", contact: "+38 068 372-68-78" },
-      { name: "Либідь", addr: "вул. Велика Китаївська, 83 (м. Деміївська)", time: "Пн, Ср 19:00", contact: "+38 095 273-85-24" },
-      { name: "Оболонь", addr: "вул. Героїв полку «Азов», 27/23", time: "Пн–Нд 19:00", contact: "+38 096 631-13-93" },
-      { name: "Фенікс", addr: "Печерський узвіз, 19 (м. Кловська)", time: "Пн–Нд 19:00", contact: "+38 098 300-01-01" },
-      { name: "Михайлівська", addr: "вул. Трьохсвятительська, 4-Б", time: "Вт, Чт 19:00; Сб 10:00; Нд 9:00", contact: "+38 097 186-58-50" },
-      { name: "Житомирська", addr: "вул. Чорнобильська, 2 (Храм)", time: "Пн, Ср, Пт 19:00", contact: "+38 093 694-92-88" },
-      { name: "Дім На Горі", addr: "вул. Карпатської Січі, 2А", time: "Вт, Пт 17:00", contact: "+38 095 774-30-89" },
-      { name: "Опора", addr: "вул. Каменярів, 68 (притулок)", time: "Ср 19:00", contact: "+38 095 095-2000" },
-      { name: "Ти не одна (жіноча)", addr: "Печерський узвіз, 19", time: "Сб 16:00", contact: "+38 098 300-01-01" },
-      { name: "На районі (чоловіча)", addr: "вул. Сержа Лифаря, 20 (Троєщина)", time: "Сб 16:00", contact: "+38 097 162-58-08" },
-    ],
-  },
-  {
-    region: "Львів",
-    rows: [
-      { name: "Криниця", addr: "пл. Соборна, 3 (Церква Св. Андрія)", time: "Сб 18:30", contact: "+38 067 944-21-86" },
-      { name: "Світло", addr: "вул. Симоненка, 5 (храм Св. Володимира і Ольги)", time: "Пн, Ср, Пт 19:00", contact: "+38 067 420-01-13" },
-      { name: "Човник", addr: "вул. Озеркевича, 4 (шпиталь Шептицького)", time: "Нд 17:30", contact: "+38 098 253-57-58, +38 093 929-26-32, +38 066 988-43-35" },
-      { name: "Сихів", addr: "пр. Червоної Калини, 70 (церква Різдва Богородиці)", time: "Ср 18:30", contact: "+38 067 947-72-77" },
-      { name: "На Привокзальній", addr: "пл. Кропивницького, 1 (церква св. Єлизавети)", time: "Нд 15:30", contact: "+38 098 449-00-69" },
-      { name: "Вежа", addr: "вул. Винниченка, 22 (храм Св. Арх. Михаїла)", time: "Вт 19:30", contact: "+38 063 068-69-71 (Юра)" },
-      { name: "Вогник", addr: "вул. Ужгородська, 8а (костел Івана Хрестителя)", time: "Ср 18:30", contact: "+38 066 725-58-02" },
-      { name: "Свобода", addr: "вул. Городоцька, 321 (Церква Воскресіння)", time: "Вт 18:30", contact: "+38 097 038-74-91" },
-      { name: "Переможець", addr: "пл. Св. Юра, 5", time: "Сб 18:00", contact: "+38 097 297-64-25" },
-      { name: "Самі свої", addr: "вул. Театральна, 11 (хр. Св. Петра і Павла)", time: "Вт 18:30", contact: "немає даних" },
-      { name: "Кроки", addr: "вул. Франка, 56–58 (Церква Непорочного Зачаття)", time: "Сб 16:30", contact: "+38 067 944-21-86" },
-      { name: "Бочка", addr: "вул. Винниченка, 32 (Палац єпископів)", time: "Чт 18:30", contact: "+38 098 199-99-95" },
-    ],
-  },
-  {
-    region: "Інші регіони",
-    rows: [
-      { name: "Рубікон (Чернігів)", addr: "вул. Реміснича, 49 (ДОСААФ)", time: "Пн–Нд 18:00", contact: "+38 073 429-89-78" },
-      { name: "У Броварах (Київська обл.)", addr: "вул. Симона Петлюри, 34", time: "Пн, Ср, Пт 20:00", contact: "+38 050 071-90-05" },
-      { name: "Сходинки (Бородянка)", addr: "вул. Польова, 11", time: "час уточнювати", contact: "+38 097 969-00-98 (Олександр)" },
-      { name: "Ми (Черкаси)", addr: "вул. Верхня Горова, 178 (БФ «ВАМ»)", time: "Чт 17:30; Сб 12:00", contact: "+38 096 027-56-10" },
-      { name: "Надія (Стрий)", addr: "вул. Успенська (Храм Успенія)", time: "Ср 18:00; Нд 15:00", contact: "+38 073 134-31-73" },
-      { name: "Надія (Самбір)", addr: "вул. Франка (Церква Покрови)", time: "Сб 16:00", contact: "+38 096 465-14-99" },
-      { name: "Едем (Дрогобич)", addr: "вул. Трускавецька, 2 (Катедральний Собор)", time: "Пн, Чт 17:45", contact: "+38 097 338-43-44" },
-      { name: "Гаряча лінія Полтава", addr: "немає адреси", time: "немає розкладу", contact: "+38 095 498-63-31, +38 096 187-11-83" },
-    ],
-  },
-  {
-    region: "Онлайн-групи",
-    rows: [
-      { name: "Промінь", addr: "Онлайн", time: "Щодня 21:00–22:00; Нд 12:00–13:00", contact: "+38 093 744-10-11 (Христина)" },
-      { name: "Все Просто", addr: "Онлайн", time: "Щодня 21:30 (Нд — спікерські виступи)", contact: "+38 063 738-10-93 (Сергій)" },
-      { name: "Вільна (жіноча)", addr: "Онлайн", time: "Щодня 20:00", contact: "немає даних" },
-    ],
-  },
-];
 
 const FAQ = [
   { q: "Чи АА — це релігійна організація?", a: "Ні. АА не пов'язана з жодною конфесією, партією чи установою. У програмі йдеться про «силу більшу за нас» — кожен розуміє це по-своєму: хтось як Бога, хтось як спільноту, природу чи власне сумління." },
@@ -234,7 +174,8 @@ function Nav() {
     ["#faq", "Питання"],
     ["#quiz", "Тест"],
     ["#chat", "Запитати"],
-    ["#directory", "Групи"],
+    ["#directory", "Контакти"],
+    ["#online", "Онлайн"],
   ];
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
@@ -298,7 +239,7 @@ function About() {
     { t: "Рівність", d: "Немає керівників чи експертів — усі рівні, усі одужують поряд." },
   ];
   return (
-    <section id="about" className="relative border-t border-border/60 bg-linen py-24">
+    <section id="about" className="relative border-t border-border/60 bg-linen py-12">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-14 md:grid-cols-[1fr_1.2fr]">
           <div>
@@ -338,7 +279,7 @@ function About() {
 
 function Faq() {
   return (
-    <section id="faq" className="border-t border-border/60 bg-sage/40 py-24">
+    <section id="faq" className="border-t border-border/60 bg-sage/40 py-12">
       <div className="mx-auto max-w-4xl px-6">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 03 · питання</p>
@@ -420,7 +361,7 @@ function Chat() {
   }
 
   return (
-    <section id="chat" className="border-t border-border/60 py-24">
+    <section id="chat" className="border-t border-border/60 py-12">
       <div className="mx-auto max-w-3xl px-6">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 05 · розмова</p>
@@ -611,7 +552,7 @@ function Quiz() {
   }
 
   return (
-    <section id="quiz" className="border-t border-border/60 py-24">
+    <section id="quiz" className="border-t border-border/60 py-12">
       <div className="mx-auto max-w-3xl px-6">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 04 · роздуми</p>
@@ -849,7 +790,7 @@ function Quiz() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border/60 bg-forest py-14 text-linen">
+    <footer className="border-t border-border/60 bg-forest py-8 text-linen">
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
           <div>
@@ -885,6 +826,7 @@ function Home() {
         <Quiz />
         <Chat />
         <Directory />
+        <OnlineGroups />
       </main>
       <Footer />
     </div>
