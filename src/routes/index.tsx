@@ -491,93 +491,90 @@ function Chat() {
   );
 }
 
+function ContactCard({
+  c,
+}: {
+  c: { name: string; nameHref?: string; desc: string; lines: { label: string; value: string; href?: string }[] };
+}) {
+  return (
+    <div className="flex flex-col rounded-2xl bg-sage/60 p-6 transition hover:bg-sage">
+      <h4 className="font-display text-lg text-forest">
+        {c.nameHref ? (
+          <a
+            href={c.nameHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-forest/30 underline-offset-4 hover:decoration-forest"
+          >
+            {c.name}
+          </a>
+        ) : (
+          c.name
+        )}
+      </h4>
+      <p className="mt-2 text-sm leading-relaxed text-moss">{c.desc}</p>
+      <ul className="mt-4 space-y-1.5">
+        {c.lines.map((l, i) => (
+          <li key={i} className="font-mono text-[13px] break-words text-moss">
+            <span className="text-forest/60">{l.label}: </span>
+            {l.href ? (
+              <a
+                href={l.href}
+                target={l.href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="underline decoration-forest/30 underline-offset-2 hover:text-forest"
+              >
+                {l.value}
+              </a>
+            ) : (
+              <span>{l.value}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function Directory() {
   return (
-    <section id="directory" className="border-t border-border/60 bg-linen py-24">
+    <section id="directory" className="border-t border-border/60 bg-linen py-12">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 06 · довідник</p>
-            <h2 className="mt-4 font-display text-4xl text-forest md:text-5xl">Групи АА</h2>
-          </div>
-          <p className="max-w-md text-sm text-muted-foreground">
-            Оберіть регіон, щоб побачити перелік груп: адреси, час зустрічей і контактні телефони.
-          </p>
-        </div>
-
-        <Accordion type="multiple" className="mt-10 space-y-3">
-          {DIRECTORY_REGIONS.map((r) => (
-            <AccordionItem
-              key={r.region}
-              value={r.region}
-              className="overflow-hidden rounded-2xl border border-border bg-card"
-            >
-              <AccordionTrigger className="px-5 py-4 text-left font-display text-lg text-forest hover:no-underline md:px-6">
-                <span className="flex flex-1 items-baseline justify-between gap-4 pr-3">
-                  <span>{r.region}</span>
-                  <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
-                    {r.rows.length} груп
-                  </span>
-                </span>
-              </AccordionTrigger>
-              <AccordionContent className="p-0">
-                <div className="hidden grid-cols-[1.1fr_1.6fr_1.1fr_1.2fr] gap-4 border-t border-border bg-sage/50 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.18em] text-forest md:grid md:px-6">
-                  <span>Група</span>
-                  <span>Адреса</span>
-                  <span>Час зустрічей</span>
-                  <span>Контакт</span>
-                </div>
-                {r.rows.map((row, i) => (
-                  <div
-                    key={i}
-                    className="grid grid-cols-1 gap-1 border-t border-border px-5 py-4 md:grid-cols-[1.1fr_1.6fr_1.1fr_1.2fr] md:gap-4 md:px-6 md:py-3.5"
-                  >
-                    <span className="font-display text-forest">{row.name}</span>
-                    <span className="font-mono text-[13px] text-moss">{row.addr}</span>
-                    <span className="font-mono text-[13px] text-moss">{row.time}</span>
-                    <span className="font-mono text-[13px] text-moss">{row.contact}</span>
-                  </div>
-                ))}
-              </AccordionContent>
-            </AccordionItem>
+        <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Додаткові контакти</p>
+        <h2 className="mt-3 font-display text-3xl text-forest md:text-4xl">
+          Реальні контакти підтримки
+        </h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {EXTRA_CONTACTS.map((c) => (
+            <ContactCard key={c.name} c={c} />
           ))}
-        </Accordion>
-
-        <p className="mt-6 text-xs text-muted-foreground">
-          Джерела: aa.kiev.ua, aa.org.ua/groups, aa-zakhid.org.ua. Дані можуть змінюватись — перед візитом рекомендуємо уточнити.
-        </p>
-
-        <div className="mt-12">
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Додаткові контакти</p>
-          <h3 className="mt-3 font-display text-2xl text-forest md:text-3xl">
-            Реальні контакти підтримки
-          </h3>
-          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {EXTRA_CONTACTS.map((c) => (
-              <div
-                key={c.name}
-                className="flex flex-col rounded-2xl bg-sage/60 p-6 transition hover:bg-sage"
-              >
-                <h4 className="font-display text-lg text-forest">{c.name}</h4>
-                <p className="mt-2 text-sm leading-relaxed text-moss">{c.desc}</p>
-                <ul className="mt-4 space-y-1.5">
-                  {c.lines.map((l, i) => (
-                    <li key={i} className="font-mono text-[13px] text-moss">
-                      <span className="text-forest/60">{l.label}: </span>
-                      <a href={l.href} className="underline decoration-forest/30 underline-offset-2 hover:text-forest">
-                        {l.value}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
   );
 }
+
+function OnlineGroups() {
+  return (
+    <section id="online" className="border-t border-border/60 bg-sage/40 py-12">
+      <div className="mx-auto max-w-6xl px-6">
+        <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Онлайн · час Київ</p>
+        <h2 className="mt-3 font-display text-3xl text-forest md:text-4xl">
+          Група АА он-лайн (час Київ)
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+          Українськомовні групи АА он-лайн — із посиланнями на чати, сайти та відеозустрічі.
+        </p>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {ONLINE_GROUPS.map((g) => (
+            <ContactCard key={g.name} c={g} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 
 function Quiz() {
   const [answers, setAnswers] = useState<(boolean | null)[]>(
