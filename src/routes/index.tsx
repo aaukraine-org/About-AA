@@ -100,7 +100,38 @@ const QUIZ_QUESTIONS = [
   "Чи з'являлось у Вас коли-небудь відчуття, що якби Ви не пили, то Ваше життя було б кращим?",
 ];
 
-const EXTRA_CONTACTS = [
+const EXTRA_CONTACTS: {
+  name: string;
+  nameHref?: string;
+  desc: string;
+  lines: { label: string; value: string; href?: string }[];
+}[] = [
+  {
+    name: "Український Центр Обслуговування груп АА",
+    nameHref: "https://aa.org.ua/contacts/",
+    desc: "36023, м. Полтава, вул. Героїв АТО, 116/1",
+    lines: [
+      { label: "Email", value: "aa.ua.gso@gmail.com", href: "mailto:aa.ua.gso@gmail.com" },
+      { label: "Сайт", value: "aa.org.ua/contacts", href: "https://aa.org.ua/contacts/" },
+    ],
+  },
+  {
+    name: "Українська група АА (США та Канада)",
+    desc: "Зустрічі відбуваються в мережі ZOOM у понеділок та середу о 20:00 за часом Нью-Йорка. Також є Viber-чат для спілкування — щоб доєднатися, надішліть SMS на +1 916 792 1654.",
+    lines: [
+      { label: "ZOOM", value: "us06web.zoom.us/j/4201339480", href: "https://us06web.zoom.us/j/4201339480?pwd=vlF69iVIZlTbbKxcSHFuaUibJqnpTt.1" },
+      { label: "Meeting ID", value: "420 133 9480" },
+      { label: "SMS (Філадельфія)", value: "+1 267 902 9217", href: "sms:+12679029217" },
+      { label: "SMS (Сакраменто)", value: "+1 916 792 1654", href: "sms:+19167921654" },
+    ],
+  },
+  {
+    name: "Група АА «Свобода», м. Чикаго",
+    desc: "Проводить свої зустрічі щосереди.",
+    lines: [
+      { label: "Адреса", value: "5000 N Cumberland Ave, Chicago, IL 60656, США" },
+    ],
+  },
   {
     name: "Ал-Анон Україна",
     desc: "Всеукраїнський Центр Обслуговування Родинних груп Ал-Анон в Україні.",
@@ -108,14 +139,6 @@ const EXTRA_CONTACTS = [
       { label: "Сайт", value: "www.al-anon.org.ua", href: "https://www.al-anon.org.ua" },
       { label: "Телефон", value: "+38 095 838 29 33 (9:00–19:00)", href: "tel:+380958382933" },
       { label: "Email", value: "ukralanon@gmail.com", href: "mailto:ukralanon@gmail.com" },
-    ],
-  },
-  {
-    name: "Українська група АА (США та Канада)",
-    desc: "Зустрічі щопонеділка та щосереди о 20:00 (EST, Нью-Йорк), онлайн. Viber-чат — приєднатися через SMS.",
-    lines: [
-      { label: "SMS (Філадельфія)", value: "+1 267 902 9217", href: "sms:+12679029217" },
-      { label: "SMS (Сакраменто)", value: "+1 916 792 1654", href: "sms:+19167921654" },
     ],
   },
   {
@@ -129,6 +152,81 @@ const EXTRA_CONTACTS = [
     ],
   },
 ];
+
+const ONLINE_GROUPS: {
+  name: string;
+  desc: string;
+  lines: { label: string; value: string; href?: string }[];
+}[] = [
+  {
+    name: "Швидка допомога АА",
+    desc: "Група створена командою україномовної групи АА «День незалежності» для швидкої допомоги та підтримки. Мета — комунікація для надання допомоги та підтримки.",
+    lines: [{ label: "Telegram", value: "t.me/aa_idchat", href: "https://t.me/aa_idchat" }],
+  },
+  {
+    name: "Група АА «День незалежності» 🇺🇦",
+    desc: "Зібрання проходять кожного дня 20:00–21:00 за Києвом.",
+    lines: [
+      { label: "Telegram", value: "t.me/aaindependencedaychat", href: "https://t.me/aaindependencedaychat" },
+      { label: "YouTube", value: "@aaindependenceday", href: "https://youtube.com/@aaindependenceday" },
+      { label: "Сайт", value: "aa-id.com.ua", href: "https://aa-id.com.ua" },
+    ],
+  },
+  {
+    name: "Група АА «Все Просто»",
+    desc: "Основна мета — допомогти іншим алкоголікам, які все ще страждають. Зібрання щодня о 21:30, у п'ятницю та вихідні об 11:00.",
+    lines: [
+      { label: "Telegram", value: "t.me/AA_VseProsto", href: "https://t.me/AA_VseProsto" },
+      { label: "Сайт", value: "aa-vseprosto.org.ua", href: "https://aa-vseprosto.org.ua/" },
+      { label: "Пошук спонсорів", value: "t.me/Aasponsors", href: "https://t.me/Aasponsors" },
+      { label: "10 крок", value: "t.me/step10vseprosto", href: "https://t.me/step10vseprosto" },
+      { label: "Вільне спілкування", value: "t.me/Vilne_spilkuvannya", href: "https://t.me/Vilne_spilkuvannya" },
+      { label: "11 крок (7:00 та 23:00)", value: "t.me/AA_VseProsto_11_krok", href: "https://t.me/AA_VseProsto_11_krok" },
+    ],
+  },
+  {
+    name: "ВААУ — Військові Анонімні Алкоголіки",
+    desc: "Збори для військових та ветеранів України у безпечному колі: вівторок 20:00, четвер 20:00, неділя 18:00, субота 10:00.",
+    lines: [
+      { label: "Telegram", value: "приєднатися", href: "https://t.me/+4_ieUfB-lp4wNmRi" },
+      { label: "Гаряча лінія", value: "095-817-91-61", href: "tel:+380958179161" },
+      { label: "Гаряча лінія", value: "096-196-21-29", href: "tel:+380961962129" },
+    ],
+  },
+  {
+    name: "Жіноча група АА «Вільна»",
+    desc: "Запрошує всіх жінок, у яких можливо є проблеми з алкоголем. Збори кожного дня о 20:00.",
+    lines: [{ label: "Telegram", value: "приєднатися", href: "https://t.me/+GYUUjgTXpGJiMjFi" }],
+  },
+  {
+    name: "Група АА «Промінь»",
+    desc: "Щоденні вечірні зібрання о 21:00 та в неділю о 12:00 за київським часом.",
+    lines: [
+      { label: "Telegram", value: "t.me/prominorgaa", href: "https://t.me/prominorgaa" },
+      { label: "YouTube", value: "@aapromin", href: "https://www.youtube.com/@aapromin" },
+    ],
+  },
+  {
+    name: "Група АА «МИ»",
+    desc: "Збори щодня о 13:00 за Києвом. Щоп'ятниці о 19:00 — спікерський виступ.",
+    lines: [
+      { label: "Сайт", value: "we-aa.org.ua", href: "https://we-aa.org.ua/" },
+      { label: "YouTube", value: "@weaa13", href: "https://www.youtube.com/@weaa13" },
+      { label: "Telegram", value: "t.me/weaa13", href: "https://t.me/weaa13" },
+    ],
+  },
+  {
+    name: "Закрита чоловіча група АА «Клан»",
+    desc: "Гасло: «Ми є частиною рішення, а не частиною проблеми.» Розклад за Києвом: понеділок 20:00, середа 20:00, субота 10:00.",
+    lines: [{ label: "Telegram", value: "t.me/mgklanaa", href: "https://t.me/mgklanaa" }],
+  },
+  {
+    name: "Українськомовна група АА США та Канади",
+    desc: "Зібрання у ZOOM щопонеділка та щосереди о 20:00 за Нью-Йорком. Щоб доєднатися — зголосіться у Viber-чат на номер +1 916 792 1654.",
+    lines: [{ label: "Сайт", value: "aa.lviv.ua/ssha-ta-kanada", href: "https://aa.lviv.ua/ssha-ta-kanada/" }],
+  },
+];
+
 
 function Nav() {
   const links = [
