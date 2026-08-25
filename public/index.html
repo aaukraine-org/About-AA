@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Коротко про АА — Анонімні Алкоголіки</title>
-  <meta name="description" content="Інформаційний ресурс про Анонімних Алкоголіків та програму одужання. Конфіденційно, без осуду, без страху." />
+  <meta name="description" content="Інформаційний ресурс україномовної групи АА у США та Канаді. Про алкоголізм та Анонімних Алкоголіків — конфіденційно та самостійно, без осуду, без страху." />
   <meta property="og:title" content="Коротко про АА" />
-  <meta property="og:description" content="Інформаційний ресурс про Анонімних Алкоголіків та програму одужання." />
+  <meta property="og:description" content="Інформаційний ресурс україномовної групи АА у США та Канаді. Про алкоголізм та Анонімних Алкоголіків — конфіденційно та самостійно, без осуду, без страху." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,7 +26,6 @@
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -46,9 +45,7 @@
 
     a { color: inherit; }
 
-    .font-mono {
-      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
-    }
+    .font-mono { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace; }
 
     .label {
       font-family: "IBM Plex Mono", ui-monospace, monospace;
@@ -62,7 +59,7 @@
       width: 100%;
       max-width: 72rem;
       margin: 0 auto;
-      padding: 0 1.25rem;
+      padding: 0 1.5rem;
     }
 
     header {
@@ -78,7 +75,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1rem 1.25rem;
+      padding: 1rem 1.5rem;
       max-width: 72rem;
       margin: 0 auto;
     }
@@ -88,8 +85,8 @@
       font-size: 1.125rem;
       color: var(--forest);
       text-decoration: none;
+      white-space: nowrap;
     }
-
     .logo span { color: var(--gold); }
 
     .nav-links {
@@ -101,7 +98,6 @@
       font-size: 0.875rem;
       color: var(--moss);
     }
-
     .nav-links a { text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--forest); }
 
@@ -114,29 +110,21 @@
       color: var(--forest);
       text-decoration: none;
       transition: all 0.2s;
+      white-space: nowrap;
     }
     .nav-cta:hover { background: var(--forest); color: var(--linen); }
 
-    .hero {
-      text-align: center;
-      padding: 4rem 0 5rem;
-    }
-
+    .hero { text-align: center; padding: 2.5rem 0 3rem; }
     .hero h1 {
-      font-size: clamp(1.6rem, 5vw, 3.5rem);
+      font-size: clamp(1.25rem, 4.5vw, 3.5rem);
       white-space: nowrap;
       color: var(--forest);
-      margin-top: 1.25rem;
+      margin-top: 1.5rem;
     }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--moss);
-    }
-
+    .hero h1 em { font-style: italic; color: var(--moss); }
     .hero p {
       max-width: 28rem;
-      margin: 1.75rem auto 0;
+      margin: 2rem auto 0;
       font-size: 1.125rem;
       color: var(--moss);
     }
@@ -152,36 +140,21 @@
       cursor: pointer;
       border: none;
     }
-
-    .btn-primary {
-      background: var(--forest);
-      color: var(--linen);
-    }
+    .btn-primary { background: var(--forest); color: var(--linen); }
     .btn-primary:hover { background: var(--moss); }
-
-    .btn-outline {
-      border: 1px solid var(--forest);
-      color: var(--forest);
-      background: transparent;
-    }
+    .btn-outline { border: 1px solid var(--forest); color: var(--forest); background: transparent; }
     .btn-outline:hover { background: var(--forest); color: var(--linen); }
-
     .btn-sm { padding: 0.55rem 1.1rem; font-size: 0.8rem; }
 
-    section { padding: 5rem 0; }
+    section { padding: 3rem 0; }
     section + section { border-top: 1px solid rgba(30, 43, 34, 0.08); }
 
-    .section-header { margin-bottom: 2.5rem; }
+    .section-header { margin-bottom: 2rem; }
     .section-header h2 { font-size: clamp(2rem, 4vw, 3rem); margin-top: 0.75rem; color: var(--forest); }
     .section-header.center { text-align: center; }
-    .section-header.center p { max-width: 28rem; margin: 1rem auto 0; color: var(--moss); }
+    .section-header.center p { max-width: 32rem; margin: 1rem auto 0; color: var(--moss); }
 
-    .about-grid {
-      display: grid;
-      gap: 2.5rem;
-      grid-template-columns: 1fr;
-    }
-
+    .about-grid { display: grid; gap: 2.5rem; grid-template-columns: 1fr; }
     .about-text { font-size: 1.05rem; color: var(--moss); }
     .about-text p + p { margin-top: 1rem; }
 
@@ -191,7 +164,6 @@
       grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
       margin-top: 3rem;
     }
-
     .card {
       background: color-mix(in oklch, var(--sage) 60%, transparent);
       border-radius: var(--radius);
@@ -200,12 +172,27 @@
     }
     .card:hover { background: var(--sage); }
     .card h3 { font-size: 1.25rem; color: var(--forest); }
+    .card h3 a { text-decoration: underline; text-decoration-color: rgba(30,43,34,0.3); text-underline-offset: 4px; }
+    .card h3 a:hover { text-decoration-color: var(--forest); }
     .card p { margin: 0.75rem 0 0; font-size: 0.9rem; color: var(--moss); line-height: 1.55; }
 
-    details {
-      border-bottom: 1px solid rgba(30, 43, 34, 0.1);
+    .contact-list { margin: 1rem 0 0; padding: 0; list-style: none; }
+    .contact-list li {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.8rem;
+      color: var(--moss);
+      margin-bottom: 0.4rem;
+      word-break: break-word;
     }
+    .contact-list .lbl { color: var(--forest); opacity: 0.6; }
+    .contact-list a {
+      text-decoration: underline;
+      text-decoration-color: rgba(30,43,34,0.3);
+      text-underline-offset: 2px;
+    }
+    .contact-list a:hover { color: var(--forest); }
 
+    details { border-bottom: 1px solid rgba(30, 43, 34, 0.1); }
     summary {
       list-style: none;
       padding: 1.15rem 0;
@@ -225,13 +212,7 @@
       font-size: 1.2rem;
     }
     details[open] summary::after { content: "−"; }
-
-    .faq-answer {
-      padding: 0 0 1.25rem 0;
-      font-size: 0.95rem;
-      line-height: 1.65;
-      color: var(--moss);
-    }
+    .faq-answer { padding: 0 0 1.25rem 0; font-size: 0.95rem; line-height: 1.65; color: var(--moss); }
 
     .quiz-question {
       background: var(--card);
@@ -240,28 +221,13 @@
       padding: 1.25rem;
       margin-bottom: 0.75rem;
     }
-
-    .quiz-row {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
+    .quiz-row { display: flex; flex-direction: column; gap: 1rem; }
     @media (min-width: 640px) {
       .quiz-row { flex-direction: row; align-items: flex-start; justify-content: space-between; }
     }
-
-    .quiz-num {
-      font-family: "Fraunces", serif;
-      font-size: 1.25rem;
-      color: var(--gold);
-      min-width: 2rem;
-    }
-
-    .quiz-text { flex: 1; font-size: 0.95rem; color: var(--forest); }
-
+    .quiz-num { font-family: "Fraunces", serif; font-size: 1.25rem; color: var(--gold); min-width: 2rem; }
+    .quiz-text { flex: 1; font-size: 0.95rem; color: var(--forest); margin: 0; }
     .quiz-btns { display: flex; gap: 0.5rem; flex-shrink: 0; }
-
     .quiz-btn {
       min-width: 4.25rem;
       border-radius: 999px;
@@ -274,20 +240,9 @@
       transition: all 0.2s;
     }
     .quiz-btn:hover { border-color: var(--forest); background: rgba(30, 43, 34, 0.04); }
-    .quiz-btn.active {
-      background: var(--forest);
-      color: var(--linen);
-      border-color: var(--forest);
-    }
+    .quiz-btn.active { background: var(--forest); color: var(--linen); border-color: var(--forest); }
 
-    .quiz-footer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-      margin-top: 1.5rem;
-    }
-
+    .quiz-footer { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; margin-top: 1.5rem; }
     .quiz-result {
       margin-top: 2rem;
       background: color-mix(in oklch, var(--sage) 40%, transparent);
@@ -297,52 +252,38 @@
     }
 
     .modal-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 100;
+      position: fixed; inset: 0; z-index: 100;
       display: none;
-      align-items: center;
-      justify-content: center;
+      align-items: center; justify-content: center;
       background: rgba(30, 43, 34, 0.7);
       backdrop-filter: blur(4px);
       padding: 1rem;
     }
-
     .modal-overlay.open { display: flex; }
-
     .modal {
       background: var(--linen);
       border-radius: var(--radius);
-      max-width: 42rem;
-      width: 100%;
-      max-height: 85vh;
-      overflow-y: auto;
+      max-width: 42rem; width: 100%;
+      max-height: 85vh; overflow-y: auto;
       padding: 1.75rem;
       position: relative;
       box-shadow: 0 20px 50px rgba(0,0,0,0.2);
     }
-
     .modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
+      position: absolute; top: 1rem; right: 1rem;
       border: 1px solid rgba(30, 43, 34, 0.25);
       background: transparent;
       border-radius: 999px;
       padding: 0.25rem 0.7rem;
-      cursor: pointer;
-      color: var(--forest);
+      cursor: pointer; color: var(--forest);
     }
-
     .modal h3 { font-size: 1.5rem; }
     .modal-body { font-size: 0.95rem; line-height: 1.65; color: var(--forest); margin-top: 1rem; }
     .modal-body p { margin-bottom: 0.75rem; }
     .modal-body blockquote {
-      margin: 0.75rem 0;
-      padding-left: 1rem;
+      margin: 0.75rem 0; padding-left: 1rem;
       border-left: 2px solid var(--gold);
-      font-style: italic;
-      color: var(--moss);
+      font-style: italic; color: var(--moss);
     }
 
     .chat-note {
@@ -354,116 +295,23 @@
       color: var(--moss);
     }
 
-    .directory-intro {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: flex-end;
-      margin-bottom: 1.5rem;
-    }
-    .directory-intro p { max-width: 24rem; font-size: 0.85rem; color: var(--muted); margin: 0; }
-
-    .region {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      margin-bottom: 0.75rem;
-    }
-
-    .region summary {
-      padding: 1rem 1.25rem;
-      border-bottom: 1px solid transparent;
-    }
-    .region[open] summary { border-bottom-color: var(--border); }
-
-    .region-title {
-      display: flex;
-      flex: 1;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 1rem;
-      padding-right: 1rem;
-    }
-
-    .region-count {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--muted);
-    }
-
-    .table-head {
-      display: none;
-      grid-template-columns: 1.1fr 1.6fr 1.1fr 1.2fr;
-      gap: 1rem;
-      background: color-mix(in oklch, var(--sage) 50%, transparent);
-      padding: 0.75rem 1.25rem;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.65rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--forest);
-    }
-
-    .group-row {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0.25rem;
-      padding: 1rem 1.25rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .group-name { font-family: "Fraunces", serif; color: var(--forest); }
-    .group-mono { font-family: "IBM Plex Mono", monospace; font-size: 0.8rem; color: var(--moss); }
-
-    @media (min-width: 768px) {
-      .nav-links { display: flex; }
-      .about-grid { grid-template-columns: 1fr 1.2fr; }
-      .table-head { display: grid; }
-      .group-row {
-        grid-template-columns: 1.1fr 1.6fr 1.1fr 1.2fr;
-        gap: 1rem;
-        align-items: center;
-      }
-    }
-
-    .sources {
-      margin-top: 1rem;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    .extra-contacts {
-      margin-top: 3rem;
-    }
+    .section-head-row { margin-bottom: 1.5rem; }
+    .section-head-row .label { display: block; }
+    .section-head-row h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); margin-top: 0.75rem; color: var(--forest); }
+    .section-head-row p { max-width: 36rem; margin-top: 0.75rem; font-size: 0.875rem; color: var(--muted); }
 
     footer {
       background: var(--forest);
       color: var(--linen);
-      padding: 3.5rem 0 2.5rem;
+      padding: 2rem 0 2.5rem;
     }
-
-    .footer-grid {
-      display: grid;
-      gap: 1.5rem;
-      grid-template-columns: 1fr;
-    }
-
+    .footer-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
     @media (min-width: 768px) {
+      .nav-links { display: flex; }
+      .about-grid { grid-template-columns: 1fr 1.2fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; align-items: start; justify-content: space-between; }
     }
-
-    .footer-note {
-      max-width: 28rem;
-      font-size: 0.85rem;
-      line-height: 1.6;
-      color: var(--sage);
-      margin: 0;
-    }
-
+    .footer-note { max-width: 28rem; font-size: 0.85rem; line-height: 1.6; color: var(--sage); margin: 0; }
     .copyright {
       margin-top: 2.5rem;
       font-family: "IBM Plex Mono", monospace;
@@ -483,7 +331,8 @@
         <li><a href="#faq">Питання</a></li>
         <li><a href="#quiz">Тест</a></li>
         <li><a href="#chat">Запитати</a></li>
-        <li><a href="#directory">Групи</a></li>
+        <li><a href="#directory">Контакти</a></li>
+        <li><a href="#online">Онлайн</a></li>
       </ul>
       <a class="nav-cta" href="#directory">Знайти групу</a>
     </nav>
@@ -492,12 +341,9 @@
   <main>
     <section class="hero" id="top">
       <div class="container">
-        <p class="label">Інформаційний ресурс · українською</p>
+        <p class="label">Інформаційний ресурс україномовної групи АА у США та Канаді</p>
         <h1>Коротко <em>про АА</em></h1>
         <p>Про алкоголізм та Анонімних Алкоголіків — конфіденційно та самостійно, без осуду, без страху...</p>
-        <div style="margin-top: 2rem;">
-          <a class="btn btn-outline" href="#directory">Знайти групу поруч</a>
-        </div>
       </div>
     </section>
 
@@ -517,26 +363,26 @@
         <div class="cards">
           <div class="card">
             <h3>Анонімність</h3>
-            <p>У колі — лише ім'я. Почуте на зустрічі залишається на зустрічі.</p>
+            <p>Ми використовуємо лише ім'я. Почуте на зустрічі залишається на зустрічі.</p>
           </div>
           <div class="card">
             <h3>Без оцінки</h3>
-            <p>Ніхто не судить і не порівнює. Кожен говорить лише про свій досвід.</p>
+            <p>Ніхто не судить і не порівнює. Кожен говорить лише про свій досвід виходу з алкогольної залежностві.</p>
           </div>
           <div class="card">
             <h3>Самофінансування</h3>
-            <p>Тільки добровільні пожертви учасників. Жодних членських внесків.</p>
+            <p>При потребі оплатити ZOOM кімнату чи інші видатки — лише добровільні датки учасників. Жодних членських внесків.</p>
           </div>
           <div class="card">
             <h3>Рівність</h3>
-            <p>Немає керівників чи експертів — усі рівні, усі одужують поряд.</p>
+            <p>Немає керівників чи експертів — усі рівні, усі одужують поруч.</p>
           </div>
         </div>
       </div>
     </section>
 
     <section id="faq" style="background: color-mix(in oklch, var(--sage) 40%, transparent);">
-      <div class="container">
+      <div class="container" style="max-width: 48rem;">
         <div class="section-header center">
           <p class="label">/ 03 · питання</p>
           <h2>Що люди питають найчастіше</h2>
@@ -582,7 +428,7 @@
     </section>
 
     <section id="quiz">
-      <div class="container">
+      <div class="container" style="max-width: 48rem;">
         <div class="section-header center">
           <p class="label">/ 04 · роздуми</p>
           <h2>Наскільки серйозна проблема?</h2>
@@ -590,78 +436,18 @@
         </div>
 
         <div id="quiz-list">
-          <div class="quiz-question" data-index="0">
-            <div class="quiz-row">
-              <div style="display: flex; gap: 1rem;"><span class="quiz-num">01</span><p class="quiz-text">Чи бувало, що Ви вирішували не пити тиждень або більше, але Вас вистачало тільки на день-два?</p></div>
-              <div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div>
-            </div>
-          </div>
-          <div class="quiz-question" data-index="1">
-            <div class="quiz-row">
-              <div style="display: flex; gap: 1rem;"><span class="quiz-num">02</span><p class="quiz-text">Чи хотілося Вам, щоб оточуючі перестали говорити Вам про Ваше пияцтво і про те, що Вам треба робити?</p></div>
-              <div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div>
-            </div>
-          </div>
-          <div class="quiz-question" data-index="2">
-            <div class="quiz-row">
-              <div style="display: flex; gap: 1rem;"><span class="quiz-num">03</span><p class="quiz-text">Чи намагалися Ви переходити з одного виду випивки на інший в надії, що це допоможе Вам не напитися?</p></div>
-              <div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div>
-            </div>
-          </div>
-          <div class="quiz-question" data-index="3">
-            <div class="quiz-row">
-              <div style="display: flex; gap: 1rem;"><span class="quiz-num">04</span><p class="quiz-text">Чи доводилось Вам протягом останнього року випивати вранці, щоб мати можливість почати новий день?</p></div>
-              <div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div>
-            </div>
-          </div>
-          <div class="quiz-question" data-index="4">
-            <div class="quiz-row">
-              <div style="display: flex; gap: 1rem;"><span class="quiz-num">05</span><p class="quiz-text">Чи заздрите Ви тим, хто може пити без неприємних наслідків?</p></div>
-              <div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div>
-            </div>
-          </div>
-          <div class="quiz-question" data-index="5">
-            <div class="quiz-row">
-              <div style="display: flex; gap: 1rem;"><span class="quiz-num">06</span><p class="quiz-text">Чи траплялися у Вас протягом останнього року проблеми через випивку?</p></div>
-              <div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div>
-            </div>
-          </div>
-          <div class="quiz-question" data-index="6">
-            <div class="quiz-row">
-              <div style="display: flex; gap: 1rem;"><span class="quiz-num">07</span><p class="quiz-text">Чи виникали у Вас через випивку прикрощі вдома?</p></div>
-              <div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div>
-            </div>
-          </div>
-          <div class="quiz-question" data-index="7">
-            <div class="quiz-row">
-              <div style="display: flex; gap: 1rem;"><span class="quiz-num">08</span><p class="quiz-text">Чи траплялось так, що, випиваючи в компанії, Ви прагнули перехопити додаткову чарку, тому що Вам не вистачало?</p></div>
-              <div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div>
-            </div>
-          </div>
-          <div class="quiz-question" data-index="8">
-            <div class="quiz-row">
-              <div style="display: flex; gap: 1rem;"><span class="quiz-num">09</span><p class="quiz-text">Чи говорите Ви собі, що можете перестати пити в будь-який момент, як тільки захочете, хоча часто напиваєтесь і тоді, коли зовсім не збирались цього робити?</p></div>
-              <div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div>
-            </div>
-          </div>
-          <div class="quiz-question" data-index="9">
-            <div class="quiz-row">
-              <div style="display: flex; gap: 1rem;"><span class="quiz-num">10</span><p class="quiz-text">Чи прогулювали Ви роботу або заняття через випивку?</p></div>
-              <div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div>
-            </div>
-          </div>
-          <div class="quiz-question" data-index="10">
-            <div class="quiz-row">
-              <div style="display: flex; gap: 1rem;"><span class="quiz-num">11</span><p class="quiz-text">Чи бувають у Вас провали пам'яті?</p></div>
-              <div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div>
-            </div>
-          </div>
-          <div class="quiz-question" data-index="11">
-            <div class="quiz-row">
-              <div style="display: flex; gap: 1rem;"><span class="quiz-num">12</span><p class="quiz-text">Чи з'являлось у Вас коли-небудь відчуття, що якби Ви не пили, то Ваше життя було б кращим?</p></div>
-              <div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div>
-            </div>
-          </div>
+          <div class="quiz-question" data-index="0"><div class="quiz-row"><div style="display: flex; gap: 1rem;"><span class="quiz-num">01</span><p class="quiz-text">Чи бувало, що Ви вирішували не пити тиждень або більше, але Вас вистачало тільки на день-два?</p></div><div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div></div></div>
+          <div class="quiz-question" data-index="1"><div class="quiz-row"><div style="display: flex; gap: 1rem;"><span class="quiz-num">02</span><p class="quiz-text">Чи хотілося Вам, щоб оточуючі перестали говорити Вам про Ваше пияцтво і про те, що Вам треба робити?</p></div><div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div></div></div>
+          <div class="quiz-question" data-index="2"><div class="quiz-row"><div style="display: flex; gap: 1rem;"><span class="quiz-num">03</span><p class="quiz-text">Чи намагалися Ви переходити з одного виду випивки на інший в надії, що це допоможе Вам не напитися?</p></div><div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div></div></div>
+          <div class="quiz-question" data-index="3"><div class="quiz-row"><div style="display: flex; gap: 1rem;"><span class="quiz-num">04</span><p class="quiz-text">Чи доводилось Вам протягом останнього року випивати вранці, щоб мати можливість почати новий день?</p></div><div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div></div></div>
+          <div class="quiz-question" data-index="4"><div class="quiz-row"><div style="display: flex; gap: 1rem;"><span class="quiz-num">05</span><p class="quiz-text">Чи заздрите Ви тим, хто може пити без неприємних наслідків?</p></div><div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div></div></div>
+          <div class="quiz-question" data-index="5"><div class="quiz-row"><div style="display: flex; gap: 1rem;"><span class="quiz-num">06</span><p class="quiz-text">Чи траплялися у Вас протягом останнього року проблеми через випивку?</p></div><div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div></div></div>
+          <div class="quiz-question" data-index="6"><div class="quiz-row"><div style="display: flex; gap: 1rem;"><span class="quiz-num">07</span><p class="quiz-text">Чи виникали у Вас через випивку прикрощі вдома?</p></div><div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div></div></div>
+          <div class="quiz-question" data-index="7"><div class="quiz-row"><div style="display: flex; gap: 1rem;"><span class="quiz-num">08</span><p class="quiz-text">Чи траплялось так, що, випиваючи в компанії, Ви прагнули перехопити додаткову чарку, тому що Вам не вистачало?</p></div><div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div></div></div>
+          <div class="quiz-question" data-index="8"><div class="quiz-row"><div style="display: flex; gap: 1rem;"><span class="quiz-num">09</span><p class="quiz-text">Чи говорите Ви собі, що можете перестати пити в будь-який момент, як тільки захочете, хоча часто напиваєтесь і тоді, коли зовсім не збирались цього робити?</p></div><div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div></div></div>
+          <div class="quiz-question" data-index="9"><div class="quiz-row"><div style="display: flex; gap: 1rem;"><span class="quiz-num">10</span><p class="quiz-text">Чи прогулювали Ви роботу або заняття через випивку?</p></div><div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div></div></div>
+          <div class="quiz-question" data-index="10"><div class="quiz-row"><div style="display: flex; gap: 1rem;"><span class="quiz-num">11</span><p class="quiz-text">Чи бувають у Вас провали пам'яті?</p></div><div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div></div></div>
+          <div class="quiz-question" data-index="11"><div class="quiz-row"><div style="display: flex; gap: 1rem;"><span class="quiz-num">12</span><p class="quiz-text">Чи з'являлось у Вас коли-небудь відчуття, що якби Ви не пили, то Ваше життя було б кращим?</p></div><div class="quiz-btns"><button class="quiz-btn" data-value="yes">Так</button><button class="quiz-btn" data-value="no">Ні</button></div></div></div>
         </div>
 
         <div class="quiz-footer">
@@ -685,136 +471,138 @@
     </section>
 
     <section id="chat">
-      <div class="container">
+      <div class="container" style="max-width: 48rem;">
         <div class="section-header center">
           <p class="label">/ 05 · розмова</p>
           <h2>Запитати напряму</h2>
           <p>Коротка загальна інформація про АА та 12 Кроків. Без діагнозів і медичних порад.</p>
         </div>
         <div class="chat-note">
-          <p><strong>Це статична копія сайту.</strong> Чат із AI-помічником доступний у живій версії проєкту. Тут ви можете переглянути довідник груп і контакти нижче.</p>
+          <p><strong>Це статична копія сайту.</strong> Чат із AI-помічником доступний у живій версії проєкту. Тут ви можете переглянути довідник контактів та онлайн-груп нижче.</p>
         </div>
       </div>
     </section>
 
     <section id="directory">
       <div class="container">
-        <div class="directory-intro">
-          <div class="section-header" style="margin-bottom: 0;">
-            <p class="label">/ 06 · довідник</p>
-            <h2>Групи АА</h2>
-          </div>
-          <p>Оберіть регіон, щоб побачити перелік груп: адреси, час зустрічей і контактні телефони.</p>
-        </div>
-
-        <details class="region" open>
-          <summary>
-            <span class="region-title">
-              <span>Київ</span>
-              <span class="region-count">12 груп</span>
-            </span>
-          </summary>
-          <div class="table-head"><span>Група</span><span>Адреса</span><span>Час зустрічей</span><span>Контакт</span></div>
-          <div class="group-row"><span class="group-name">Лівобережка</span><span class="group-mono">бульвар Перова, 1-б (Костел, м. Дарниця)</span><span class="group-mono">Пн–Нд 18:00</span><span class="group-mono">+38 099 782-30-31</span></div>
-          <div class="group-row"><span class="group-name">Апельсин</span><span class="group-mono">пров. Деміївський, 5-А (Соціотерапія, м. Голосіївська)</span><span class="group-mono">Пн–Нд 19:00; Сб, Нд додатково 13:00</span><span class="group-mono">+38 095 774-30-89</span></div>
-          <div class="group-row"><span class="group-name">Десна</span><span class="group-mono">вул. М. Закревського, 29а (ЖЕД 305, Троєщина)</span><span class="group-mono">Пн–Нд 19:00</span><span class="group-mono">+38 068 372-68-78</span></div>
-          <div class="group-row"><span class="group-name">Либідь</span><span class="group-mono">вул. Велика Китаївська, 83 (м. Деміївська)</span><span class="group-mono">Пн, Ср 19:00</span><span class="group-mono">+38 095 273-85-24</span></div>
-          <div class="group-row"><span class="group-name">Оболонь</span><span class="group-mono">вул. Героїв полку «Азов», 27/23</span><span class="group-mono">Пн–Нд 19:00</span><span class="group-mono">+38 096 631-13-93</span></div>
-          <div class="group-row"><span class="group-name">Фенікс</span><span class="group-mono">Печерський узвіз, 19 (м. Кловська)</span><span class="group-mono">Пн–Нд 19:00</span><span class="group-mono">+38 098 300-01-01</span></div>
-          <div class="group-row"><span class="group-name">Михайлівська</span><span class="group-mono">вул. Трьохсвятительська, 4-Б</span><span class="group-mono">Вт, Чт 19:00; Сб 10:00; Нд 9:00</span><span class="group-mono">+38 097 186-58-50</span></div>
-          <div class="group-row"><span class="group-name">Житомирська</span><span class="group-mono">вул. Чорнобильська, 2 (Храм)</span><span class="group-mono">Пн, Ср, Пт 19:00</span><span class="group-mono">+38 093 694-92-88</span></div>
-          <div class="group-row"><span class="group-name">Дім На Горі</span><span class="group-mono">вул. Карпатської Січі, 2А</span><span class="group-mono">Вт, Пт 17:00</span><span class="group-mono">+38 095 774-30-89</span></div>
-          <div class="group-row"><span class="group-name">Опора</span><span class="group-mono">вул. Каменярів, 68 (притулок)</span><span class="group-mono">Ср 19:00</span><span class="group-mono">+38 095 095-2000</span></div>
-          <div class="group-row"><span class="group-name">Ти не одна (жіноча)</span><span class="group-mono">Печерський узвіз, 19</span><span class="group-mono">Сб 16:00</span><span class="group-mono">+38 098 300-01-01</span></div>
-          <div class="group-row"><span class="group-name">На районі (чоловіча)</span><span class="group-mono">вул. Сержа Лифаря, 20 (Троєщина)</span><span class="group-mono">Сб 16:00</span><span class="group-mono">+38 097 162-58-08</span></div>
-        </details>
-
-        <details class="region">
-          <summary>
-            <span class="region-title">
-              <span>Львів</span>
-              <span class="region-count">12 груп</span>
-            </span>
-          </summary>
-          <div class="table-head"><span>Група</span><span>Адреса</span><span>Час зустрічей</span><span>Контакт</span></div>
-          <div class="group-row"><span class="group-name">Криниця</span><span class="group-mono">пл. Соборна, 3 (Церква Св. Андрія)</span><span class="group-mono">Сб 18:30</span><span class="group-mono">+38 067 944-21-86</span></div>
-          <div class="group-row"><span class="group-name">Світло</span><span class="group-mono">вул. Симоненка, 5 (храм Св. Володимира і Ольги)</span><span class="group-mono">Пн, Ср, Пт 19:00</span><span class="group-mono">+38 067 420-01-13</span></div>
-          <div class="group-row"><span class="group-name">Човник</span><span class="group-mono">вул. Озеркевича, 4 (шпиталь Шептицького)</span><span class="group-mono">Нд 17:30</span><span class="group-mono">+38 098 253-57-58, +38 093 929-26-32, +38 066 988-43-35</span></div>
-          <div class="group-row"><span class="group-name">Сихів</span><span class="group-mono">пр. Червоної Калини, 70 (церква Різдва Богородиці)</span><span class="group-mono">Ср 18:30</span><span class="group-mono">+38 067 947-72-77</span></div>
-          <div class="group-row"><span class="group-name">На Привокзальній</span><span class="group-mono">пл. Кропивницького, 1 (церква св. Єлизавети)</span><span class="group-mono">Нд 15:30</span><span class="group-mono">+38 098 449-00-69</span></div>
-          <div class="group-row"><span class="group-name">Вежа</span><span class="group-mono">вул. Винниченка, 22 (храм Св. Арх. Михаїла)</span><span class="group-mono">Вт 19:30</span><span class="group-mono">+38 063 068-69-71 (Юра)</span></div>
-          <div class="group-row"><span class="group-name">Вогник</span><span class="group-mono">вул. Ужгородська, 8а (костел Івана Хрестителя)</span><span class="group-mono">Ср 18:30</span><span class="group-mono">+38 066 725-58-02</span></div>
-          <div class="group-row"><span class="group-name">Свобода</span><span class="group-mono">вул. Городоцька, 321 (Церква Воскресіння)</span><span class="group-mono">Вт 18:30</span><span class="group-mono">+38 097 038-74-91</span></div>
-          <div class="group-row"><span class="group-name">Переможець</span><span class="group-mono">пл. Св. Юра, 5</span><span class="group-mono">Сб 18:00</span><span class="group-mono">+38 097 297-64-25</span></div>
-          <div class="group-row"><span class="group-name">Самі свої</span><span class="group-mono">вул. Театральна, 11 (хр. Св. Петра і Павла)</span><span class="group-mono">Вт 18:30</span><span class="group-mono">немає даних</span></div>
-          <div class="group-row"><span class="group-name">Кроки</span><span class="group-mono">вул. Франка, 56–58 (Церква Непорочного Зачаття)</span><span class="group-mono">Сб 16:30</span><span class="group-mono">+38 067 944-21-86</span></div>
-          <div class="group-row"><span class="group-name">Бочка</span><span class="group-mono">вул. Винниченка, 32 (Палац єпископів)</span><span class="group-mono">Чт 18:30</span><span class="group-mono">+38 098 199-99-95</span></div>
-        </details>
-
-        <details class="region">
-          <summary>
-            <span class="region-title">
-              <span>Інші регіони</span>
-              <span class="region-count">8 груп</span>
-            </span>
-          </summary>
-          <div class="table-head"><span>Група</span><span>Адреса</span><span>Час зустрічей</span><span>Контакт</span></div>
-          <div class="group-row"><span class="group-name">Рубікон (Чернігів)</span><span class="group-mono">вул. Реміснича, 49 (ДОСААФ)</span><span class="group-mono">Пн–Нд 18:00</span><span class="group-mono">+38 073 429-89-78</span></div>
-          <div class="group-row"><span class="group-name">У Броварах (Київська обл.)</span><span class="group-mono">вул. Симона Петлюри, 34</span><span class="group-mono">Пн, Ср, Пт 20:00</span><span class="group-mono">+38 050 071-90-05</span></div>
-          <div class="group-row"><span class="group-name">Сходинки (Бородянка)</span><span class="group-mono">вул. Польова, 11</span><span class="group-mono">час уточнювати</span><span class="group-mono">+38 097 969-00-98 (Олександр)</span></div>
-          <div class="group-row"><span class="group-name">Ми (Черкаси)</span><span class="group-mono">вул. Верхня Горова, 178 (БФ «ВАМ»)</span><span class="group-mono">Чт 17:30; Сб 12:00</span><span class="group-mono">+38 096 027-56-10</span></div>
-          <div class="group-row"><span class="group-name">Надія (Стрий)</span><span class="group-mono">вул. Успенська (Храм Успенія)</span><span class="group-mono">Ср 18:00; Нд 15:00</span><span class="group-mono">+38 073 134-31-73</span></div>
-          <div class="group-row"><span class="group-name">Надія (Самбір)</span><span class="group-mono">вул. Франка (Церква Покрови)</span><span class="group-mono">Сб 16:00</span><span class="group-mono">+38 096 465-14-99</span></div>
-          <div class="group-row"><span class="group-name">Едем (Дрогобич)</span><span class="group-mono">вул. Трускавецька, 2 (Катедральний Собор)</span><span class="group-mono">Пн, Чт 17:45</span><span class="group-mono">+38 097 338-43-44</span></div>
-          <div class="group-row"><span class="group-name">Гаряча лінія Полтава</span><span class="group-mono">немає адреси</span><span class="group-mono">немає розкладу</span><span class="group-mono">+38 095 498-63-31, +38 096 187-11-83</span></div>
-        </details>
-
-        <details class="region">
-          <summary>
-            <span class="region-title">
-              <span>Онлайн-групи</span>
-              <span class="region-count">3 групи</span>
-            </span>
-          </summary>
-          <div class="table-head"><span>Група</span><span>Адреса</span><span>Час зустрічей</span><span>Контакт</span></div>
-          <div class="group-row"><span class="group-name">Промінь</span><span class="group-mono">Онлайн</span><span class="group-mono">Щодня 21:00–22:00; Нд 12:00–13:00</span><span class="group-mono">+38 093 744-10-11 (Христина)</span></div>
-          <div class="group-row"><span class="group-name">Все Просто</span><span class="group-mono">Онлайн</span><span class="group-mono">Щодня 21:30 (Нд — спікерські виступи)</span><span class="group-mono">+38 063 738-10-93 (Сергій)</span></div>
-          <div class="group-row"><span class="group-name">Вільна (жіноча)</span><span class="group-mono">Онлайн</span><span class="group-mono">Щодня 20:00</span><span class="group-mono">немає даних</span></div>
-        </details>
-
-        <p class="sources">Джерела: aa.kiev.ua, aa.org.ua/groups, aa-zakhid.org.ua. Дані можуть змінюватись — перед візитом рекомендуємо уточнити.</p>
-
-        <div class="extra-contacts">
+        <div class="section-head-row">
           <p class="label">Додаткові контакти</p>
-          <h3 style="margin-top: 0.5rem; font-size: 1.75rem;">Реальні контакти підтримки</h3>
-          <div class="cards" style="margin-top: 1.5rem;">
-            <div class="card">
-              <h3>Ал-Анон Україна</h3>
-              <p>Всеукраїнський Центр Обслуговування Родинних груп Ал-Анон в Україні.</p>
-              <ul style="margin-top: 0.75rem; padding: 0; list-style: none; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--moss);">
-                <li><span style="color: var(--forest); opacity: 0.6;">Сайт:</span> <a href="https://www.al-anon.org.ua" style="color: inherit;">www.al-anon.org.ua</a></li>
-                <li><span style="color: var(--forest); opacity: 0.6;">Телефон:</span> <a href="tel:+380958382933" style="color: inherit;">+38 095 838 29 33 (9:00–19:00)</a></li>
-                <li><span style="color: var(--forest); opacity: 0.6;">Email:</span> <a href="mailto:ukralanon@gmail.com" style="color: inherit;">ukralanon@gmail.com</a></li>
-              </ul>
-            </div>
-            <div class="card">
-              <h3>Українська група АА (США та Канада)</h3>
-              <p>Зустрічі щопонеділка та щосереди о 20:00 (EST, Нью-Йорк), онлайн. Viber-чат — приєднатися через SMS.</p>
-              <ul style="margin-top: 0.75rem; padding: 0; list-style: none; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--moss);">
-                <li><span style="color: var(--forest); opacity: 0.6;">SMS (Філадельфія):</span> <a href="sms:+12679029217" style="color: inherit;">+1 267 902 9217</a></li>
-                <li><span style="color: var(--forest); opacity: 0.6;">SMS (Сакраменто):</span> <a href="sms:+19167921654" style="color: inherit;">+1 916 792 1654</a></li>
-              </ul>
-            </div>
-            <div class="card">
-              <h3>Дорослі Діти Алкоголіків</h3>
-              <p>Спільнота для дорослих, які виросли в родинах із залежністю.</p>
-              <ul style="margin-top: 0.75rem; padding: 0; list-style: none; font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--moss);">
-                <li><span style="color: var(--forest); opacity: 0.6;">Сайт:</span> <a href="https://www.dda.org.ua" style="color: inherit;">www.dda.org.ua</a></li>
-                <li><span style="color: var(--forest); opacity: 0.6;">Телефон:</span> <a href="tel:+380662185540" style="color: inherit;">+38 (066) 218 55 40</a></li>
-                <li><span style="color: var(--forest); opacity: 0.6;">Телефон:</span> <a href="tel:+380961623002" style="color: inherit;">+38 (096) 162 30 02</a></li>
-                <li><span style="color: var(--forest); opacity: 0.6;">Email:</span> <a href="mailto:dda.ukraina@gmail.com" style="color: inherit;">dda.ukraina@gmail.com</a></li>
-              </ul>
-            </div>
+          <h2>Реальні контакти підтримки</h2>
+        </div>
+        <div class="cards" style="margin-top: 1.5rem;">
+          <div class="card">
+            <h3><a href="https://aa.org.ua/contacts/" target="_blank" rel="noopener noreferrer">Український Центр Обслуговування груп АА</a></h3>
+            <p>36023, м. Полтава, вул. Героїв АТО, 116/1</p>
+            <ul class="contact-list">
+              <li><span class="lbl">Email:</span> <a href="mailto:aa.ua.gso@gmail.com">aa.ua.gso@gmail.com</a></li>
+              <li><span class="lbl">Сайт:</span> <a href="https://aa.org.ua/contacts/" target="_blank" rel="noopener noreferrer">aa.org.ua/contacts</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Українська група АА (США та Канада)</h3>
+            <p>Зустрічі відбуваються в мережі ZOOM у понеділок та середу о 20:00 за часом Нью-Йорка. Також є Viber-чат для спілкування — щоб доєднатися, надішліть SMS на +1 916 792 1654.</p>
+            <ul class="contact-list">
+              <li><span class="lbl">ZOOM:</span> <a href="https://us06web.zoom.us/j/4201339480?pwd=vlF69iVIZlTbbKxcSHFuaUibJqnpTt.1" target="_blank" rel="noopener noreferrer">us06web.zoom.us/j/4201339480</a></li>
+              <li><span class="lbl">Meeting ID:</span> 420 133 9480</li>
+              <li><span class="lbl">SMS (Філадельфія):</span> <a href="sms:+12679029217">+1 267 902 9217</a></li>
+              <li><span class="lbl">SMS (Сакраменто):</span> <a href="sms:+19167921654">+1 916 792 1654</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Група АА «Свобода», м. Чикаго</h3>
+            <p>Проводить свої зустрічі щосереди.</p>
+            <ul class="contact-list">
+              <li><span class="lbl">Адреса:</span> 5000 N Cumberland Ave, Chicago, IL 60656, США</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Ал-Анон Україна</h3>
+            <p>Всеукраїнський Центр Обслуговування Родинних груп Ал-Анон в Україні.</p>
+            <ul class="contact-list">
+              <li><span class="lbl">Сайт:</span> <a href="https://www.al-anon.org.ua" target="_blank" rel="noopener noreferrer">www.al-anon.org.ua</a></li>
+              <li><span class="lbl">Телефон:</span> <a href="tel:+380958382933">+38 095 838 29 33 (9:00–19:00)</a></li>
+              <li><span class="lbl">Email:</span> <a href="mailto:ukralanon@gmail.com">ukralanon@gmail.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="online" style="background: color-mix(in oklch, var(--sage) 40%, transparent);">
+      <div class="container">
+        <div class="section-head-row">
+          <p class="label">Онлайн · час Київ</p>
+          <h2>Група АА он-лайн (час Київ)</h2>
+          <p>Українськомовні групи АА он-лайн — із посиланнями на чати, сайти та відеозустрічі.</p>
+        </div>
+        <div class="cards" style="margin-top: 1.5rem;">
+          <div class="card">
+            <h3>Швидка допомога АА</h3>
+            <p>Група створена командою україномовної групи АА «День незалежності» для швидкої допомоги та підтримки. Мета — комунікація для надання допомоги та підтримки.</p>
+            <ul class="contact-list">
+              <li><span class="lbl">Telegram:</span> <a href="https://t.me/aa_idchat" target="_blank" rel="noopener noreferrer">t.me/aa_idchat</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Група АА «День незалежності» 🇺🇦</h3>
+            <p>Зібрання проходять кожного дня 20:00–21:00 за Києвом.</p>
+            <ul class="contact-list">
+              <li><span class="lbl">Telegram:</span> <a href="https://t.me/aaindependencedaychat" target="_blank" rel="noopener noreferrer">t.me/aaindependencedaychat</a></li>
+              <li><span class="lbl">YouTube:</span> <a href="https://youtube.com/@aaindependenceday" target="_blank" rel="noopener noreferrer">@aaindependenceday</a></li>
+              <li><span class="lbl">Сайт:</span> <a href="https://aa-id.com.ua" target="_blank" rel="noopener noreferrer">aa-id.com.ua</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Група АА «Все Просто»</h3>
+            <p>Основна мета — допомогти іншим алкоголікам, які все ще страждають. Зібрання щодня о 21:30, у п'ятницю та вихідні об 11:00.</p>
+            <ul class="contact-list">
+              <li><span class="lbl">Telegram:</span> <a href="https://t.me/AA_VseProsto" target="_blank" rel="noopener noreferrer">t.me/AA_VseProsto</a></li>
+              <li><span class="lbl">Сайт:</span> <a href="https://aa-vseprosto.org.ua/" target="_blank" rel="noopener noreferrer">aa-vseprosto.org.ua</a></li>
+              <li><span class="lbl">Пошук спонсорів:</span> <a href="https://t.me/Aasponsors" target="_blank" rel="noopener noreferrer">t.me/Aasponsors</a></li>
+              <li><span class="lbl">10 крок:</span> <a href="https://t.me/step10vseprosto" target="_blank" rel="noopener noreferrer">t.me/step10vseprosto</a></li>
+              <li><span class="lbl">Вільне спілкування:</span> <a href="https://t.me/Vilne_spilkuvannya" target="_blank" rel="noopener noreferrer">t.me/Vilne_spilkuvannya</a></li>
+              <li><span class="lbl">11 крок (7:00 та 23:00):</span> <a href="https://t.me/AA_VseProsto_11_krok" target="_blank" rel="noopener noreferrer">t.me/AA_VseProsto_11_krok</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>ВААУ — Військові Анонімні Алкоголіки</h3>
+            <p>Збори для військових та ветеранів України у безпечному колі: вівторок 20:00, четвер 20:00, неділя 18:00, субота 10:00.</p>
+            <ul class="contact-list">
+              <li><span class="lbl">Telegram:</span> <a href="https://t.me/+4_ieUfB-lp4wNmRi" target="_blank" rel="noopener noreferrer">приєднатися</a></li>
+              <li><span class="lbl">Гаряча лінія:</span> <a href="tel:+380958179161">095-817-91-61</a></li>
+              <li><span class="lbl">Гаряча лінія:</span> <a href="tel:+380961962129">096-196-21-29</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Жіноча група АА «Вільна»</h3>
+            <p>Запрошує всіх жінок, у яких можливо є проблеми з алкоголем. Збори кожного дня о 20:00.</p>
+            <ul class="contact-list">
+              <li><span class="lbl">Telegram:</span> <a href="https://t.me/+GYUUjgTXpGJiMjFi" target="_blank" rel="noopener noreferrer">приєднатися</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Група АА «Промінь»</h3>
+            <p>Щоденні вечірні зібрання о 21:00 та в неділю о 12:00 за київським часом.</p>
+            <ul class="contact-list">
+              <li><span class="lbl">Telegram:</span> <a href="https://t.me/prominorgaa" target="_blank" rel="noopener noreferrer">t.me/prominorgaa</a></li>
+              <li><span class="lbl">YouTube:</span> <a href="https://www.youtube.com/@aapromin" target="_blank" rel="noopener noreferrer">@aapromin</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Група АА «МИ»</h3>
+            <p>Збори щодня о 13:00 за Києвом. Щоп'ятниці о 19:00 — спікерський виступ.</p>
+            <ul class="contact-list">
+              <li><span class="lbl">Сайт:</span> <a href="https://we-aa.org.ua/" target="_blank" rel="noopener noreferrer">we-aa.org.ua</a></li>
+              <li><span class="lbl">YouTube:</span> <a href="https://www.youtube.com/@weaa13" target="_blank" rel="noopener noreferrer">@weaa13</a></li>
+              <li><span class="lbl">Telegram:</span> <a href="https://t.me/weaa13" target="_blank" rel="noopener noreferrer">t.me/weaa13</a></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Закрита чоловіча група АА «Клан»</h3>
+            <p>Гасло: «Ми є частиною рішення, а не частиною проблеми.» Розклад за Києвом: понеділок 20:00, середа 20:00, субота 10:00.</p>
+            <ul class="contact-list">
+              <li><span class="lbl">Telegram:</span> <a href="https://t.me/mgklanaa" target="_blank" rel="noopener noreferrer">t.me/mgklanaa</a></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -912,10 +700,7 @@
       updateState();
     });
 
-    function closeModal() {
-      modal.classList.remove('open');
-    }
-
+    function closeModal() { modal.classList.remove('open'); }
     modalClose.addEventListener('click', closeModal);
     modalCloseBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
