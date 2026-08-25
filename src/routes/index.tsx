@@ -81,16 +81,6 @@ const EXTRA_CONTACTS: {
       { label: "Email", value: "ukralanon@gmail.com", href: "mailto:ukralanon@gmail.com" },
     ],
   },
-  {
-    name: "Дорослі Діти Алкоголіків",
-    desc: "Спільнота для дорослих, які виросли в родинах із залежністю.",
-    lines: [
-      { label: "Сайт", value: "www.dda.org.ua", href: "https://www.dda.org.ua" },
-      { label: "Телефон", value: "+38 (066) 218 55 40", href: "tel:+380662185540" },
-      { label: "Телефон", value: "+38 (096) 162 30 02", href: "tel:+380961623002" },
-      { label: "Email", value: "dda.ukraina@gmail.com", href: "mailto:dda.ukraina@gmail.com" },
-    ],
-  },
 ];
 
 const ONLINE_GROUPS: {
@@ -160,11 +150,6 @@ const ONLINE_GROUPS: {
     desc: "Гасло: «Ми є частиною рішення, а не частиною проблеми.» Розклад за Києвом: понеділок 20:00, середа 20:00, субота 10:00.",
     lines: [{ label: "Telegram", value: "t.me/mgklanaa", href: "https://t.me/mgklanaa" }],
   },
-  {
-    name: "Українськомовна група АА США та Канади",
-    desc: "Зібрання у ZOOM щопонеділка та щосереди о 20:00 за Нью-Йорком. Щоб доєднатися — зголосіться у Viber-чат на номер +1 916 792 1654.",
-    lines: [{ label: "Сайт", value: "aa.lviv.ua/ssha-ta-kanada", href: "https://aa.lviv.ua/ssha-ta-kanada/" }],
-  },
 ];
 
 
@@ -208,8 +193,8 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="mx-auto max-w-4xl px-6 pb-24 pt-20 text-center md:pb-32 md:pt-32">
-        <p className="mb-6 font-mono text-xs uppercase tracking-[0.28em] text-moss">
-          Інформаційний ресурс · українською
+        <p className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-moss">
+          Інформаційний ресурс україномовної групи АА у США та Канаді
         </p>
         <h1 className="whitespace-nowrap font-display text-[clamp(1.25rem,4.5vw,3.5rem)] leading-tight text-forest">
           Коротко <span className="italic text-moss">про АА</span>
