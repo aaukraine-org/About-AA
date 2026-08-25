@@ -192,7 +192,7 @@ function Nav() {
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
-      <div className="mx-auto max-w-4xl px-6 pb-24 pt-20 text-center md:pb-32 md:pt-32">
+      <div className="mx-auto max-w-4xl px-6 pb-12 pt-10 text-center md:pb-16 md:pt-16">
         <p className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-moss">
           Інформаційний ресурс україномовної групи АА у США та Канаді
         </p>
@@ -203,14 +203,6 @@ function Hero() {
           Про алкоголізм та Анонімних Алкоголіків — конфіденційно та
           самостійно, без осуду, без страху...
         </p>
-        <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href="#directory"
-            className="rounded-full border border-forest px-7 py-3 text-sm font-medium text-forest transition hover:bg-forest hover:text-linen"
-          >
-            Знайти групу поруч
-          </a>
-        </div>
       </div>
     </section>
   );
