@@ -191,7 +191,7 @@ function Hero() {
           Інформаційний ресурс україномовної групи АА у США та Канаді
         </p>
         <h1 className="whitespace-nowrap font-display text-[clamp(1.25rem,4.5vw,3.5rem)] leading-tight text-forest">
-          Коротко <span className="italic text-moss">про АА</span>
+          Коротко про АА
         </h1>
         <p className="mx-auto mt-8 max-w-xl text-lg text-moss">
           Про алкоголізм та Анонімних Алкоголіків — конфіденційно та
