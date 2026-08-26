@@ -177,12 +177,6 @@ function Nav() {
             </li>
           ))}
         </ul>
-        <a
-          href="#directory"
-          className="rounded-full border border-forest px-4 py-1.5 text-xs font-medium text-forest transition hover:bg-forest hover:text-linen"
-        >
-          Знайти групу
-        </a>
       </nav>
     </header>
   );
