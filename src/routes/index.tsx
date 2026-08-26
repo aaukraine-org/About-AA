@@ -47,15 +47,6 @@ const EXTRA_CONTACTS: {
   lines: { label: string; value: string; href?: string }[];
 }[] = [
   {
-    name: "Український Центр Обслуговування груп АА",
-    nameHref: "https://aa.org.ua/contacts/",
-    desc: "36023, м. Полтава, вул. Героїв АТО, 116/1",
-    lines: [
-      { label: "Email", value: "aa.ua.gso@gmail.com", href: "mailto:aa.ua.gso@gmail.com" },
-      { label: "Сайт", value: "aa.org.ua/contacts", href: "https://aa.org.ua/contacts/" },
-    ],
-  },
-  {
     name: "Українська група АА (США та Канада)",
     desc: "Зустрічі відбуваються в мережі ZOOM у понеділок та середу о 20:00 за часом Нью-Йорка. Також є Viber-чат для спілкування — щоб доєднатися, надішліть SMS на +1 916 792 1654.",
     lines: [
@@ -79,6 +70,15 @@ const EXTRA_CONTACTS: {
       { label: "Сайт", value: "www.al-anon.org.ua", href: "https://www.al-anon.org.ua" },
       { label: "Телефон", value: "+38 095 838 29 33 (9:00–19:00)", href: "tel:+380958382933" },
       { label: "Email", value: "ukralanon@gmail.com", href: "mailto:ukralanon@gmail.com" },
+    ],
+  },
+  {
+    name: "Український Центр Обслуговування груп АА",
+    nameHref: "https://aa.org.ua/contacts/",
+    desc: "36023, м. Полтава, вул. Героїв АТО, 116/1",
+    lines: [
+      { label: "Email", value: "aa.ua.gso@gmail.com", href: "mailto:aa.ua.gso@gmail.com" },
+      { label: "Сайт", value: "aa.org.ua/contacts", href: "https://aa.org.ua/contacts/" },
     ],
   },
 ];
