@@ -166,7 +166,7 @@ function Nav() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#top" className="font-display text-lg text-forest">
-          <span className="text-gold">·</span> Коротко про АА
+          Коротко про АА
         </a>
         <ul className="hidden gap-7 text-sm text-moss md:flex">
           {links.map(([href, label]) => (
@@ -187,7 +187,7 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="mx-auto max-w-4xl px-6 pb-12 pt-10 text-center md:pb-16 md:pt-16">
-        <p className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-moss">
+        <p className="mb-6 font-mono text-sm uppercase tracking-[0.2em] text-forest/80">
           Інформаційний ресурс україномовної групи АА у США та Канаді
         </p>
         <h1 className="whitespace-nowrap font-display text-[clamp(1.25rem,4.5vw,3.5rem)] leading-tight text-forest">
