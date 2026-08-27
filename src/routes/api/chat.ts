@@ -8,24 +8,34 @@ export const Route = createFileRoute("/api/chat")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-              const upstream = await fetch("https://dgidvdfktpympowyhucp.supabase.co/functions/v1/aa-chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ messages }),
-      });
+        let body: { messages?: Msg[] };
+        try {
+          body = (await request.json()) as { messages?: Msg[] };
+        } catch {
+          return new Response("Invalid JSON", { status: 400 });
+        }
+        const messages = Array.isArray(body.messages) ? body.messages : [];
 
-      if (!upstream.ok) {
-        const text = await upstream.text();
-        return new Response(text || "AI error", { status: upstream.status });
-      }
-      const data = (await upstream.json()) as {
-        content?: { type?: string; text?: string }[];
-      };
-      const content = data.content?.[0]?.text ?? "";
-      return new Response(JSON.stringify({ content }), {
-        headers: { "Content-Type": "application/json" },
-      });
+        const upstream = await fetch("https://dgidvdfktpympowyhucp.supabase.co/functions/v1/aa-chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ messages }),
+        });
+
+        if (!upstream.ok) {
+          const text = await upstream.text();
+          return new Response(text || "AI error", { status: upstream.status });
+        }
+        const data = (await upstream.json()) as {
+          content?: { type?: string; text?: string }[];
+        };
+        const content = data.content?.[0]?.text ?? "";
+        return new Response(JSON.stringify({ content }), {
+          headers: { "Content-Type": "application/json" },
+        });
+      },
+    },
   },
 });
