@@ -4,6 +4,8 @@ type Msg = { role: "user" | "assistant" | "system"; content: string };
 
 const SYSTEM_PROMPT = `Ти — інформаційний помічник про АА (Анонімних Алкоголіків) та програму 12 Кроків. Відповідай українською, коротко і тепло. Даєш тільки загальну інформацію, НЕ ставиш діагнози, НЕ даєш медичних порад. Якщо людина описує кризу, суїцидальні думки або думки про самоушкодження — м'яко направ до довідника груп на цьому сайті або до фахівця (лікаря, психотерапевта, лінії довіри), без порад щодо способів заподіяння шкоди. Не цитуй дослівно захищений авторським правом офіційний текст АА — переказуй сенс власними словами. Тон — спокійний, без осуду, без стигматизації.`;
 
+const SUPABASE_ANON_KEY = "sb_publishable_N2e1WXjhJLyxFq0e75mZDA_CYacpW6P";
+
 export const Route = createFileRoute("/api/chat")({
   server: {
     handlers: {
@@ -20,6 +22,8 @@ export const Route = createFileRoute("/api/chat")({
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "apikey": SUPABASE_ANON_KEY,
+            "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
           },
           body: JSON.stringify({ messages }),
         });
