@@ -187,7 +187,7 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="mx-auto max-w-4xl px-6 pb-12 pt-10 text-center md:pb-16 md:pt-16">
-        <p className="mb-6 font-mono text-sm uppercase tracking-[0.2em] text-forest/80">
+        <p className="mb-6 font-display text-lg font-bold text-forest">
           Інформаційний ресурс україномовної групи АА у США та Канаді
         </p>
         <h1 className="whitespace-nowrap font-display text-[clamp(1.25rem,4.5vw,3.5rem)] leading-tight text-forest">
