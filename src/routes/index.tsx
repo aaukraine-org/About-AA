@@ -74,7 +74,7 @@ const EXTRA_CONTACTS: {
   },
   {
     name: "Український Центр Обслуговування груп АА",
-    nameHref: "https://aa.org.ua/contacts/",
+    nameHref: "https://aa.org.ua/",
     desc: "36023, м. Полтава, вул. Героїв АТО, 116/1",
     lines: [
       { label: "Email", value: "aa.ua.gso@gmail.com", href: "mailto:aa.ua.gso@gmail.com" },
