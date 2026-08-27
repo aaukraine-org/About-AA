@@ -166,7 +166,7 @@ function Nav() {
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#top" className="font-display text-lg text-forest">
-          <span className="text-gold">·</span> Коротко про АА
+          Коротко про АА
         </a>
         <ul className="hidden gap-7 text-sm text-moss md:flex">
           {links.map(([href, label]) => (
