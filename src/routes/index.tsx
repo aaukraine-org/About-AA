@@ -61,7 +61,7 @@ const EXTRA_CONTACTS: {
     desc: "Проводить свої зустрічі щосереди.",
     lines: [
       { label: "Адреса", value: "5000 N Cumberland Ave, Chicago, IL 60656, США" },
-      { label: "SMS, value: "+1 347 768 486", href: "sms:+1347768486" },
+      { label: "SMS", value: "+1 347 768 4886", href: "sms:+13477684886" },
     ],
   },
   {
