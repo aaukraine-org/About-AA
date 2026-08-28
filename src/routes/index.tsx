@@ -755,7 +755,7 @@ function Quiz() {
                 Довідник груп
               </a>
               <a
-                href="https://aa.org.ua/group"
+                href="#chat"
                 onClick={() => setShowModal(false)}
                 className="rounded-full border border-forest px-6 py-2.5 text-sm text-forest transition hover:bg-forest hover:text-linen"
               >
