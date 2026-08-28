@@ -471,7 +471,7 @@ function OnlineGroups() {
   return (
     <section id="online" className="border-t border-border/60 bg-sage/40 py-12">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Онлайн · в Україні</p>
+        <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Онлайн</p>
         <h2 className="mt-3 font-display text-3xl text-forest md:text-4xl">
           Група АА он-лайн (час Київ)
         </h2>
