@@ -189,14 +189,14 @@ function Hero() {
     <section id="top" className="relative overflow-hidden">
       <div className="mx-auto max-w-4xl px-6 pb-12 pt-10 text-center md:pb-16 md:pt-16">
         <p className="mb-6 font-display text-lg font-bold text-forest">
-          Інформаційний ресурс україномовної групи АА у США та Канаді
+          Інформаційний ресурс україномовної групи АА у США та Канади
         </p>
         <h1 className="whitespace-nowrap font-display text-[clamp(1.25rem,4.5vw,3.5rem)] leading-tight text-forest">
           Коротко про АА
         </h1>
         <p className="mx-auto mt-8 max-w-xl text-lg text-moss">
-          Про алкоголізм та Анонімних Алкоголіків — конфіденційно та
-          самостійно, без осуду, без страху...
+          Про алкоголізм та Анонімних Алкоголіків 
+          — конфіденційно та самостійно, без чужих очей та без страху...
         </p>
       </div>
     </section>
@@ -206,9 +206,9 @@ function Hero() {
 function About() {
   const cards = [
     { t: "Анонімність", d: "Ми використовуємо лише ім'я. Почуте на зустрічі залишається на зустрічі." },
-    { t: "Без оцінки", d: "Ніхто не судить і не порівнює. Кожен говорить лише про свій досвід виходу з алкогольної залежностві." },
-    { t: "Самофінансування", d: "При потребі оплатити ZOOM кімнату чи інші видатки — лише добровільні датки учасників. Жодних членських внесків." },
-    { t: "Рівність", d: "Немає керівників чи експертів — усі рівні, усі одужують поряд." },
+    { t: "Без оцінки", d: "Ніхто не осуджує і не порівнює. Кожен говорить лише про свій досвід виходу з алкогольної залежностві." },
+    { t: "Самофінансування", d: "При потребі оплатити ZOOM кімнату чи інші видатки — лише добровільні датки учасників АА. Жодних членських внесків." },
+    { t: "Рівність", d: "Немає керівників чи експертів — усі рівні, перед хворобою усі рівні." },
   ];
   return (
     <section id="about" className="relative border-t border-border/60 bg-linen py-12">
@@ -286,7 +286,7 @@ function Chat() {
     {
       role: "assistant",
       content:
-        "Вітаю. Тут можна поставити загальне питання про АА чи 12 Кроків — коротко відповім. Розмова не зберігається на сервері.",
+        "Вітаю. Я тут для того щоб була змога задати запитання про АА чи "12 Кроків АА" — коротко відповім. Розмова не зберігається.",
     },
   ]);
   const [input, setInput] = useState("");
@@ -341,8 +341,7 @@ function Chat() {
             Запитати напряму
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-moss">
-            Коротка загальна інформація про АА та 12 Кроків. Без діагнозів
-            і медичних порад.
+            Коротка загальна інформація про АА та 12 Кроків. Без діагнозів і медичних порад.
           </p>
         </div>
 
@@ -382,7 +381,7 @@ function Chat() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Напишіть питання…"
+              placeholder="у цьому рядку - напишіть своє запитання…"
               disabled={loading}
               className="flex-1 rounded-full border border-border bg-card px-4 py-2.5 text-sm text-forest outline-none placeholder:text-muted-foreground focus:border-forest"
             />
@@ -476,7 +475,7 @@ function OnlineGroups() {
           Група АА он-лайн (час Київ)
         </h2>
         <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
-          Українськомовні групи АА он-лайн — із посиланнями на чати, сайти та відеозустрічі.
+          Українськомовні групи АА он-лайн — із посиланнями на чати груп, сайти та відеозустрічі.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {ONLINE_GROUPS.map((g) => (
@@ -532,8 +531,7 @@ function Quiz() {
             Наскільки серйозна проблема?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-moss">
-            12 спокійних питань — тільки для вас. Відповіді нікуди не надсилаються
-            і залишаються у вашому браузері.
+            12 запитань — тільки для вас. Відповіді нікуди не надсилаються - це лише бачите ви !
           </p>
         </div>
 
@@ -737,7 +735,7 @@ function Quiz() {
                 Довідник груп
               </a>
               <a
-                href="#chat"
+                href="https://aa.org.ua/group"
                 onClick={() => setShowModal(false)}
                 className="rounded-full border border-forest px-6 py-2.5 text-sm text-forest transition hover:bg-forest hover:text-linen"
               >
