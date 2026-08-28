@@ -158,7 +158,7 @@ const ONLINE_GROUPS: {
 function Nav() {
   const links = [
     ["#about", "Про АА"],
-    ["#faq", "Питання"],
+    ["#faq", "Відповіді"],
     ["#quiz", "Тест"],
     ["#chat", "Є питання?"],
     ["#directory", "Контакти"],
