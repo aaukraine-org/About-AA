@@ -499,6 +499,7 @@ function Quiz() {
   const answeredCount = answers.filter((a) => a !== null).length;
   const yesCount = answers.filter((a) => a === true).length;
   const allAnswered = answeredCount === QUIZ_QUESTIONS.length;
+  const isAffected = yesCount >= 4;
 
   function setAnswer(i: number, value: boolean) {
     setAnswers((prev) => {
