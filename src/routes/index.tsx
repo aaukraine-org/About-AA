@@ -80,6 +80,7 @@ const EXTRA_CONTACTS: {
     lines: [
       { label: "Email", value: "aa.ua.gso@gmail.com", href: "mailto:aa.ua.gso@gmail.com" },
       { label: "Сайт", value: "aa.org.ua/contacts", href: "https://aa.org.ua/contacts/" },
+      { label: "Групи АА в Україні", value: "aa.org.ua/group", href: "https://aa.org.ua/contacts/" },
     ],
   },
 ];
@@ -117,7 +118,7 @@ const ONLINE_GROUPS: {
   },
   {
     name: "ВААУ — Військові Анонімні Алкоголіки",
-    desc: "Збори для військових та ветеранів України у безпечному колі: вівторок 20:00, четвер 20:00, неділя 18:00, субота 10:00.",
+    desc: "Зібрання для військових та ветеранів України у безпечному колі: вівторок 20:00, четвер 20:00, неділя 18:00, субота 10:00.",
     lines: [
       { label: "Telegram", value: "приєднатися", href: "https://t.me/+4_ieUfB-lp4wNmRi" },
       { label: "Гаряча лінія", value: "095-817-91-61", href: "tel:+380958179161" },
@@ -454,7 +455,7 @@ function Directory() {
       <div className="mx-auto max-w-6xl px-6">
         <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Додаткові контакти</p>
         <h2 className="mt-3 font-display text-3xl text-forest md:text-4xl">
-          Реальні контакти підтримки
+          Куди звертатися - інформація доповнюється
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {EXTRA_CONTACTS.map((c) => (
@@ -470,7 +471,7 @@ function OnlineGroups() {
   return (
     <section id="online" className="border-t border-border/60 bg-sage/40 py-12">
       <div className="mx-auto max-w-6xl px-6">
-        <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Онлайн · час Київ</p>
+        <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Онлайн · в Україні</p>
         <h2 className="mt-3 font-display text-3xl text-forest md:text-4xl">
           Група АА он-лайн (час Київ)
         </h2>
