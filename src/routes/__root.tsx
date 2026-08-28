@@ -74,7 +74,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 const SITE_TITLE = "Коротко про АА";
 const SITE_DESC =
-  "Спокійний інформаційний ресурс українською про Анонімних Алкоголіків, програму 12 Кроків, відповіді на поширені запитання та довідник груп.";
+  "Інформаційний ресурс українською про Анонімних Алкоголіків, програму 12 Кроків, відповіді на поширені запитання та довідник груп.";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
