@@ -1,0 +1,14 @@
+# Cloudflare Workers Static Assets читає цей файл так само, як Cloudflare Pages.
+# Без нього favicon/robots/sitemap віддавались без явного Cache-Control (звідси
+# Lighthouse-попередження "Use efficient cache lifetimes"). Файли в public/ не
+# мають хешу в імені, тому TTL обираємо помірний (не immutable) — щоб оновлення
+# favicon.ico чи sitemap.xml долетіло до користувачів за розумний час.
+
+/favicon.ico
+  Cache-Control: public, max-age=604800
+
+/robots.txt
+  Cache-Control: public, max-age=86400
+
+/sitemap.xml
+  Cache-Control: public, max-age=86400
