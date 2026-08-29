@@ -72,6 +72,14 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+// Підключаємо асинхронно (через скрипт нижче в RootShell), а не через звичайний
+// <link rel="stylesheet">, бо блокуючий Google Fonts stylesheet — головна причина
+// Lighthouse-попередження "Render-blocking requests" (~1.7с втрати на слабких мережах).
+// Додано вагу 700 — вона реально використовується (font-bold в UI), а раніше не
+// вантажилась, тому жирний текст рендерився браузерним псевдо-bold.
+const GOOGLE_FONTS_HREF =
+  "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap";
+
 const SITE_TITLE = "Коротко про АА";
 const SITE_DESC =
   "Інформаційний ресурс українською про Анонімних Алкоголіків, програму 12 Кроків, відповіді на поширені запитання та довідник груп.";
@@ -101,10 +109,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap",
-      },
     ],
   }),
   shellComponent: RootShell,
@@ -118,6 +122,18 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="uk">
       <head>
         <HeadContent />
+        {/* Асинхронне підключення Google Fonts: не блокує рендер, на відміну від
+            звичайного <link rel="stylesheet">. noscript — фолбек, якщо JS вимкнено. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href=${JSON.stringify(
+              GOOGLE_FONTS_HREF,
+            )};document.head.appendChild(l);})();`,
+          }}
+        />
+        <noscript>
+          <link rel="stylesheet" href={GOOGLE_FONTS_HREF} />
+        </noscript>
       </head>
       <body>
         {children}
