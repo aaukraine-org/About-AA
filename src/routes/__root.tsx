@@ -72,11 +72,12 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
-// Підключаємо асинхронно (через скрипт нижче в RootShell), а не через звичайний
-// <link rel="stylesheet">, бо блокуючий Google Fonts stylesheet — головна причина
-// Lighthouse-попередження "Render-blocking requests" (~1.7с втрати на слабких мережах).
-// Додано вагу 700 — вона реально використовується (font-bold в UI), а раніше не
-// вантажилась, тому жирний текст рендерився браузерним псевдо-bold.
+// Підключаємо асинхронно (preload + media="print", який скрипт нижче перемикає
+// на "all" щойно стиль завантажився) — а не звичайним блокуючим
+// <link rel="stylesheet">, який був головною причиною Lighthouse-попередження
+// "Render-blocking requests" (~1.7с втрати на слабких мережах). <noscript> у
+// RootShell — фолбек, якщо JS вимкнено. Один URL, один запит — навмисно без
+// дублювання. Вага 700 включена, бо реально використовується (font-bold в UI).
 const GOOGLE_FONTS_HREF =
   "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap";
 
@@ -112,11 +113,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "preload",
         as: "style",
-        href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap",
+        href: GOOGLE_FONTS_HREF,
       },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap",
+        href: GOOGLE_FONTS_HREF,
         media: "print",
         id: "gfonts",
       } as unknown as React.DetailedHTMLProps<React.LinkHTMLAttributes<HTMLLinkElement>, HTMLLinkElement>,
@@ -139,15 +140,10 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="uk">
       <head>
         <HeadContent />
-        {/* Асинхронне підключення Google Fonts: не блокує рендер, на відміну від
-            звичайного <link rel="stylesheet">. noscript — фолбек, якщо JS вимкнено. */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){var l=document.createElement('link');l.rel='stylesheet';l.href=${JSON.stringify(
-              GOOGLE_FONTS_HREF,
-            )};document.head.appendChild(l);})();`,
-          }}
-        />
+        {/* Асинхронне підключення шрифтів уже налаштоване вище через
+            head().links (preload + media="print") і head().scripts
+            (перемикач media на "all"). Тут лишається тільки фолбек
+            для користувачів із вимкненим JS. */}
         <noscript>
           <link rel="stylesheet" href={GOOGLE_FONTS_HREF} />
         </noscript>
