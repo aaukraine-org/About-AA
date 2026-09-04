@@ -1,108 +1,492 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { AA_KNOWLEDGE_BASE, AA_GUARDRAILS, AA_CRISIS_PROTOCOL } from "@/lib/aa-knowledge-base";
-
-type Msg = { role: "user" | "assistant" | "system"; content: string };
-
-// Стисла версія правил — для швидкого орієнтування. Повні правила
-// (guardrails, кризовий протокол) і довідковий контент підвантажуються
-// нижче з src/lib/aa-knowledge-base.ts і йдуть у system-промпт автоматично.
-const SYSTEM_PROMPT = `Ти — інформаційний помічник про АА (Анонімних Алкоголіків) та програму 12 Кроків. Відповідай українською, коротко і тепло. Даєш тільки загальну інформацію, НЕ ставиш діагнози, НЕ даєш медичних порад. Якщо людина описує кризу, суїцидальні думки або думки про самоушкодження — м'яко направ до довідника груп на цьому сайті або до фахівця (лікаря, психотерапевта, лінії довіри), без порад щодо способів заподіяння шкоди. Не цитуй дослівно захищений авторським правом офіційний текст АА — переказуй сенс власними словами. Тон — спокійний, без осуду, без стигматизації.
-
-Формат відповіді: чат-віджет на сайті НЕ рендерить Markdown — виводить текст буквально. Тому НЕ використовуй зірочки для жирного/курсиву (**текст**, *текст*), НЕ використовуй markdown-заголовки (#, ##) чи markdown-посилання [текст](url). Пиши звичайним текстом; якщо треба виділити посилання чи слово — бери його в дужки, наприклад: (https://aaukraine.org/#directory), без жодних зірочок.`;
-
-// Anthropic API — напряму, без проміжного Supabase. Ключ читається з
-// змінної середовища ANTHROPIC_API_KEY (Cloudflare Pages → Settings →
-// Environment variables → додати як Secret). НІКОЛИ не хардкодити ключ
-// тут — цей репозиторій публічний.
-const MODEL = "claude-haiku-4-5-20251001";
-const MAX_TOKENS = 1024;
-// Скільки останніх повідомлень історії передавати в модель (обмеження
-// вартості/довжини запиту — цього достатньо для короткого FAQ-діалогу).
-const MAX_HISTORY_MESSAGES = 20;
-
-function buildSystemPrompt(): string {
-  return [
-    SYSTEM_PROMPT,
-    "",
-    "### Обов'язкові правила (дотримуйся їх завжди, без винятків):",
-    AA_GUARDRAILS,
-    "",
-    "### Протокол дій у кризовій ситуації:",
-    AA_CRISIS_PROTOCOL,
-    "",
-    "### Довідковий контент для відповідей (переказ суті, не дослівна цитата):",
-    AA_KNOWLEDGE_BASE,
-  ].join("\n");
-}
-
-export const Route = createFileRoute("/api/chat")({
-  server: {
-    handlers: {
-      POST: async ({ request }) => {
-        const apiKey = process.env.ANTHROPIC_API_KEY;
-        if (!apiKey) {
-          console.error("ANTHROPIC_API_KEY не задано в змінних середовища Cloudflare Pages");
-          return new Response(
-            JSON.stringify({ content: "Чат тимчасово недоступний. Спробуйте пізніше." }),
-            { status: 500, headers: { "Content-Type": "application/json" } },
-          );
-        }
-
-        let body: { messages?: Msg[] };
-        try {
-          body = (await request.json()) as { messages?: Msg[] };
-        } catch {
-          return new Response("Invalid JSON", { status: 400 });
-        }
-
-        const history = Array.isArray(body.messages) ? body.messages : [];
-        const messages = history
-          .filter((m): m is Msg & { role: "user" | "assistant" } => m.role === "user" || m.role === "assistant")
-          .slice(-MAX_HISTORY_MESSAGES)
-          .map((m) => ({ role: m.role, content: m.content }));
-
-        if (messages.length === 0) {
-          return new Response(JSON.stringify({ content: "" }), {
-            headers: { "Content-Type": "application/json" },
-          });
-        }
-
-        let upstream: Response;
-        try {
-          upstream = await fetch("https://api.anthropic.com/v1/messages", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "x-api-key": apiKey,
-              "anthropic-version": "2023-06-01",
-            },
-            body: JSON.stringify({
-              model: MODEL,
-              max_tokens: MAX_TOKENS,
-              system: buildSystemPrompt(),
-              messages,
-            }),
-          });
-        } catch (error) {
-          console.error("Не вдалось звʼязатися з Anthropic API:", error);
-          return new Response("AI error", { status: 502 });
-        }
-
-        if (!upstream.ok) {
-          const text = await upstream.text();
-          console.error("Anthropic API повернув помилку:", upstream.status, text);
-          return new Response(text || "AI error", { status: upstream.status });
-        }
-
-        const data = (await upstream.json()) as {
-          content?: { type?: string; text?: string }[];
-        };
-        const content = data.content?.find((block) => block.type === "text")?.text ?? "";
-
-        return new Response(JSON.stringify({ content }), {
-          headers: { "Content-Type": "application/json" },
-        });
-      },
-    },
+{
+  "meta": {
+    "project": "aaukraine.org",
+    "purpose": "Довідкова база знань для інформаційного чат-помічника про АА та Програму 12 Кроків (backend: Supabase Edge Function aa-chat)",
+    "language": "uk",
+    "last_reviewed": "2026-09-04",
+    "sources": [
+      "https://aa.org.ua/pro-nas/",
+      "https://aa.org.ua/12-krokiv-i-12-tradytsiy/",
+      "https://aa.org.ua/zhurnalistam-pro-anonimnist/",
+      "https://aa.lviv.ua/newcomers/",
+      "https://aa.lviv.ua/holovna/pro-aa/",
+      "https://aa.lviv.ua/prohrama-12-krokiv-aa/",
+      "https://aa.lviv.ua/tradytsii-aa/",
+      "https://lifelineukraine.com/",
+      "https://howareu.com/hot-lines",
+      "https://aa.org.ua/groups/",
+      "https://aa.org.ua/literatura/",
+      "https://aa.org.ua/special/",
+      "https://aa.lviv.ua/for-priest/",
+      "https://aa.lviv.ua/ya-sviashchenyk-alkoholik-ta-nevrotyk/"
+    ],
+    "notes": [
+      "Весь текст 12 Кроків і 12 Традицій навмисно ПЕРЕКАЗАНО власними словами, а не процитовано дослівно — офіційні формулювання АА захищені авторським правом (World Services, Inc.), і system-промпт бота прямо забороняє дослівне цитування.",
+      "Записи з bot_usage='guardrail' не є контентом для відповідей — це правила, які обмежують бота від вигадування конкретики (розклад, адреси, телефони, посилання на Zoom).",
+      "Перед продакшеном рекомендується: (1) звірити формулювання FAQ з носієм/учасником спільноти АА, (2) за потреби — узгодити текст з АА Україна щодо коректності переказу.",
+      "Посилання на довідник груп (раніше — плейсхолдер {{GROUP_DIRECTORY_URL}}) замінено на реальні якорі сторінки: https://aaukraine.org/#directory (основний довідник — Україна, США/Канада, Ал-Анон) і https://aaukraine.org/#online (українськомовні онлайн-групи з розкладом і посиланнями на Telegram/Zoom/YouTube)."
+    ]
   },
-});
+  "entries": [
+    {
+      "id": "about-001",
+      "category": "about_aa",
+      "title": "Що таке АА",
+      "content": "АА (Анонімні Алкоголіки) — це спільнота чоловіків і жінок, які діляться власним досвідом подолання алкогольної залежності, щоб підтримати одне одного і допомогти новим учасникам залишатися тверезими. Єдина умова участі — власне бажання кинути пити. Товариство не пов'язане з жодною релігією, політичною силою, установою чи рухом; не бере участі в громадських дискусіях і не підтримує та не критикує жодні зовнішні організації.",
+      "tags": ["загальне", "визначення"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/pro-nas/"],
+      "language": "uk"
+    },
+    {
+      "id": "about-002",
+      "category": "about_aa",
+      "title": "Як проходять зустрічі (загально)",
+      "content": "Групи АА проводять регулярні зустрічі, на яких учасники по черзі говорять про свій досвід життя з алкогольною залежністю та шлях до тверезості. Формат може відрізнятися від групи до групи (обговорення теми, читання й обговорення кроку, зустрічі для новачків тощо). АА не є медичним лікуванням і не замінює терапію чи консультацію лікаря — це підтримка «рівний рівному».",
+      "tags": ["зустрічі", "формат"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/pro-nas/"],
+      "language": "uk"
+    },
+    {
+      "id": "about-003",
+      "category": "about_aa",
+      "title": "Вартість участі",
+      "content": "Участь у АА безкоштовна. Групи не стягують вступних чи постійних членських внесків, а утримуються виключно за рахунок добровільних пожертв самих учасників.",
+      "tags": ["вартість", "внески"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/pro-nas/"],
+      "language": "uk"
+    },
+    {
+      "id": "about-004",
+      "category": "about_aa",
+      "title": "Хто може приєднатися",
+      "content": "Приєднатися може будь-хто, хто відчуває, що алкоголь є проблемою в його житті, і має бажання це змінити. Вік, стать, релігія, соціальний статус значення не мають — жодних інших умов членства немає.",
+      "tags": ["членство", "хто може приєднатись"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/pro-nas/", "https://aa.lviv.ua/newcomers/"],
+      "language": "uk"
+    },
+    {
+      "id": "about-005",
+      "category": "about_aa",
+      "title": "Коротка історія АА",
+      "content": "Рух АА виник у 1935 році в США: двоє людей, які самі боролися з алкогольною залежністю, почали підтримувати одне одного, а згодом і інших. Сьогодні спільноти АА діють у багатьох країнах світу, включно з Україною.",
+      "tags": ["історія"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/pro-nas/"],
+      "language": "uk"
+    },
+    {
+      "id": "steps-000",
+      "category": "twelve_steps",
+      "title": "12 Кроків — загальна ідея (переказ, не дослівна цитата)",
+      "content": "«12 Кроків» — це послідовність принципів, яку пропонує програма АА як шлях до тверезості й особистих змін. Нижче — переказ суті кожного кроку власними словами (не офіційне дослівне формулювання, яке захищене авторським правом АА World Services).",
+      "tags": ["12 кроків", "вступ"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/"],
+      "language": "uk"
+    },
+    {
+      "id": "steps-001",
+      "category": "twelve_steps",
+      "title": "Крок 1 — суть",
+      "content": "Чесне визнання того, що людина не здатна самотужки контролювати вживання алкоголю і що це вийшло з-під контролю в її житті.",
+      "tags": ["12 кроків", "крок 1"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/"],
+      "language": "uk"
+    },
+    {
+      "id": "steps-002",
+      "category": "twelve_steps",
+      "title": "Крок 2 — суть",
+      "content": "Прийняття думки, що існує сила поза власними ресурсами людини (кожен розуміє її по-своєму), здатна допомогти повернути внутрішню рівновагу і здоровий глузд.",
+      "tags": ["12 кроків", "крок 2"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/"],
+      "language": "uk"
+    },
+    {
+      "id": "steps-003",
+      "category": "twelve_steps",
+      "title": "Крок 3 — суть",
+      "content": "Рішення довіритися цій вищій силі (як кожен її для себе розуміє — це може бути Бог, спільнота, власні цінності тощо) і перестати намагатися контролювати геть усе самотужки.",
+      "tags": ["12 кроків", "крок 3"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/"],
+      "language": "uk"
+    },
+    {
+      "id": "steps-004",
+      "category": "twelve_steps",
+      "title": "Крок 4 — суть",
+      "content": "Чесний і докладний аналіз власного життя, характеру та вчинків — своєрідна особиста «інвентаризація» без самообману.",
+      "tags": ["12 кроків", "крок 4"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/"],
+      "language": "uk"
+    },
+    {
+      "id": "steps-005",
+      "category": "twelve_steps",
+      "title": "Крок 5 — суть",
+      "content": "Відвертість щодо власних помилок — перед собою, вищою силою (у власному розумінні) і ще однією людиною, якій довіряєш.",
+      "tags": ["12 кроків", "крок 5"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/"],
+      "language": "uk"
+    },
+    {
+      "id": "steps-006",
+      "category": "twelve_steps",
+      "title": "Крок 6 — суть",
+      "content": "Внутрішня готовність відпустити ці недоліки характеру, а не миттєво їх «виправити».",
+      "tags": ["12 кроків", "крок 6"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/"],
+      "language": "uk"
+    },
+    {
+      "id": "steps-007",
+      "category": "twelve_steps",
+      "title": "Крок 7 — суть",
+      "content": "Прохання про допомогу в позбавленні цих недоліків — зі щирістю і без гордині.",
+      "tags": ["12 кроків", "крок 7"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/"],
+      "language": "uk"
+    },
+    {
+      "id": "steps-008",
+      "category": "twelve_steps",
+      "title": "Крок 8 — суть",
+      "content": "Складання переліку людей, яким була завдана шкода через залежність, і формування готовності цю шкоду виправити.",
+      "tags": ["12 кроків", "крок 8"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/"],
+      "language": "uk"
+    },
+    {
+      "id": "steps-009",
+      "category": "twelve_steps",
+      "title": "Крок 9 — суть",
+      "content": "Практичні кроки з відшкодування завданої шкоди там, де це можливо, — окрім випадків, коли це може нашкодити цій чи іншим людям.",
+      "tags": ["12 кроків", "крок 9"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/"],
+      "language": "uk"
+    },
+    {
+      "id": "steps-010",
+      "category": "twelve_steps",
+      "title": "Крок 10 — суть",
+      "content": "Формування звички регулярно й чесно оцінювати себе та вчасно визнавати власні помилки, а не накопичувати їх.",
+      "tags": ["12 кроків", "крок 10"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/"],
+      "language": "uk"
+    },
+    {
+      "id": "steps-011",
+      "category": "twelve_steps",
+      "title": "Крок 11 — суть",
+      "content": "Практики на кшталт молитви, медитації чи роздумів (залежно від власних переконань людини), що допомагають підтримувати внутрішню рівновагу і зв'язок із власними цінностями чи вищою силою.",
+      "tags": ["12 кроків", "крок 11"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/"],
+      "language": "uk"
+    },
+    {
+      "id": "steps-012",
+      "category": "twelve_steps",
+      "title": "Крок 12 — суть",
+      "content": "Готовність ділитися своїм досвідом і підтримувати інших людей, які досі борються із залежністю, а також застосовувати ці принципи в повсякденному житті.",
+      "tags": ["12 кроків", "крок 12"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/"],
+      "language": "uk"
+    },
+    {
+      "id": "traditions-000",
+      "category": "twelve_traditions",
+      "title": "12 Традицій — загальна ідея (переказ)",
+      "content": "«12 Традицій» — це принципи, за якими живуть і самоорганізовуються групи АА, а не правила для окремих людей. Нижче — узагальнений переказ їх суті власними словами (не дослівна цитата офіційного тексту).",
+      "tags": ["12 традицій", "вступ"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/", "https://aa.lviv.ua/tradytsii-aa/"],
+      "language": "uk"
+    },
+    {
+      "id": "traditions-summary",
+      "category": "twelve_traditions",
+      "title": "Ключові принципи 12 Традицій (узагальнено)",
+      "content": "Єдність спільноти важливіша за особисті інтереси. Рішення в групах ухвалюються колективно («групова свідомість»), без одноосібних керівників. Єдина умова членства — бажання кинути пити. Кожна група самостійна у власних справах, якщо це не шкодить іншим групам чи АА загалом. Головна мета кожної групи — допомагати людям, які досі страждають від алкогольної залежності. АА не пов'язує своє ім'я з іншими організаціями чи проєктами, щоб уникнути конфлікту інтересів. Групи утримують себе самостійно, за рахунок власних пожертв, без зовнішнього фінансування чи спонсорства. АА залишається непрофесійною, волонтерською спільнотою (хоча службові структури можуть наймати технічний персонал). Жорсткої ієрархії немає — лише прості робочі структури для координації. АА не займає позиції щодо політичних, релігійних чи інших зовнішніх суспільних питань. Публічна присутність АА базується на особистому прикладі, а не на рекламі; в медіа зберігається особиста анонімність учасників. Анонімність — духовна основа руху: принципи важливіші за особисті амбіції чи статус.",
+      "tags": ["12 традицій"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/12-krokiv-i-12-tradytsiy/", "https://aa.lviv.ua/tradytsii-aa/"],
+      "language": "uk"
+    },
+    {
+      "id": "anon-001",
+      "category": "anonymity",
+      "title": "Навіщо потрібна анонімність",
+      "content": "Анонімність захищає приватність учасників — особливо новачків, яким може бути страшно, що оточення дізнається про їхню залежність. Це один із базових принципів АА, закріплений у Традиціях.",
+      "tags": ["анонімність"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/zhurnalistam-pro-anonimnist/"],
+      "language": "uk"
+    },
+    {
+      "id": "anon-002",
+      "category": "anonymity",
+      "title": "Як анонімність працює на практиці",
+      "content": "На публічному рівні (медіа, соцмережі) учасники не розкривають прізвищ і облич одне одного — зазвичай використовують лише ім'я. Те, хто відвідує зустрічі та що там обговорюється, залишається в межах групи («що сказано в групі — залишається в групі»). Кожна людина сама вирішує, чи розкривати власну участь у АА іншим людям поза спільнотою.",
+      "tags": ["анонімність", "конфіденційність"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/zhurnalistam-pro-anonimnist/"],
+      "language": "uk"
+    },
+    {
+      "id": "faq-001",
+      "category": "faq",
+      "title": "Чи АА — релігійна організація?",
+      "content": "Ні. АА не пов'язана з жодною релігією, конфесією чи вченням. Поняття «вища сила» кожен розуміє по-своєму — у програмі беруть участь як віряни, так і атеїсти й агностики.",
+      "tags": ["faq", "релігія"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/pro-nas/", "https://aa.org.ua/12-krokiv-i-12-tradytsiy/"],
+      "language": "uk"
+    },
+    {
+      "id": "faq-002",
+      "category": "faq",
+      "title": "Чи потрібно платити за участь?",
+      "content": "Ні, участь у зустрічах АА безкоштовна. Групи існують на добровільні пожертви самих учасників, без вступних чи членських внесків.",
+      "tags": ["faq", "вартість"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/pro-nas/"],
+      "language": "uk"
+    },
+    {
+      "id": "faq-003",
+      "category": "faq",
+      "title": "Що відбувається на зустрічі?",
+      "content": "Учасники по черзі діляться особистим досвідом, труднощами і тим, що допомагає їм залишатися тверезими. Формат залежить від групи. Ніхто нікого не засуджує й не оцінює — це базовий принцип атмосфери зустрічей.",
+      "tags": ["faq", "зустрічі"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/pro-nas/"],
+      "language": "uk"
+    },
+    {
+      "id": "faq-004",
+      "category": "faq",
+      "title": "Чи це конфіденційно?",
+      "content": "Так. Анонімність — один із базових принципів АА: особисту інформацію про участь інших людей у групі не розголошують.",
+      "tags": ["faq", "анонімність"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/zhurnalistam-pro-anonimnist/"],
+      "language": "uk"
+    },
+    {
+      "id": "faq-005",
+      "category": "faq",
+      "title": "Чи АА замінює лікування або психотерапію?",
+      "content": "Ні. АА — це підтримка «рівний рівному» на основі особистого досвіду, а не медична чи психотерапевтична допомога. Якщо є медичні або психологічні потреби (наприклад, детоксикація, супутні стани), варто окремо звернутися до лікаря або фахівця з психічного здоров'я.",
+      "tags": ["faq", "медицина", "межі допомоги"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/pro-nas/"],
+      "language": "uk"
+    },
+    {
+      "id": "faq-006",
+      "category": "faq",
+      "title": "Що робити, якщо людина ще не готова повністю кинути пити?",
+      "content": "Прийти на зустріч можна навіть просто послухати. Єдина умова участі в АА — це бажання щось змінити, а не негайний результат чи стовідсоткова готовність.",
+      "tags": ["faq", "новачки"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.lviv.ua/newcomers/"],
+      "language": "uk"
+    },
+    {
+      "id": "faq-007",
+      "category": "faq",
+      "title": "Чи можуть прийти родичі чи близькі людини із залежністю?",
+      "content": "У світі АА існує окрема підтримка саме для родичів і близьких людей із алкогольною залежністю (за принципом, подібним до груп Ал-Анон). Для актуальних контактів і найближчих груп такої підтримки варто звернутися до довідника на сайті aaukraine.org.",
+      "tags": ["faq", "родичі", "ал-анон"],
+      "bot_usage": "direct_answer",
+      "source_urls": [],
+      "language": "uk"
+    },
+    {
+      "id": "faq-008",
+      "category": "faq",
+      "title": "Як дізнатися розклад і місце найближчої зустрічі?",
+      "content": "Ця інформація змінюється і залежить від конкретної групи, тому її треба шукати в актуальному довіднику груп на сайті: https://aaukraine.org/#directory (основний довідник) і https://aaukraine.org/#online (онлайн-групи), а не в загальних відповідях бота.",
+      "tags": ["faq", "розклад", "довідник"],
+      "bot_usage": "direct_answer",
+      "source_urls": [],
+      "language": "uk"
+    },
+    {
+      "id": "guardrail-001",
+      "category": "guardrail",
+      "title": "Не вигадувати розклад зустрічей",
+      "content": "Бот НЕ повинен називати конкретні дні й час зустрічей жодної групи. У відповіді — чесно сказати, що ця інформація є в довіднику груп на сайті, дати посилання https://aaukraine.org/#directory (або https://aaukraine.org/#online для онлайн-груп) і порадити звернутися туди.",
+      "tags": ["guardrail", "розклад"],
+      "bot_usage": "guardrail",
+      "source_urls": [],
+      "language": "uk"
+    },
+    {
+      "id": "guardrail-002",
+      "category": "guardrail",
+      "title": "Не вигадувати адреси груп",
+      "content": "Бот НЕ повинен називати конкретні адреси чи локації зустрічей. Направляти у довідник груп на сайті.",
+      "tags": ["guardrail", "адреси"],
+      "bot_usage": "guardrail",
+      "source_urls": [],
+      "language": "uk"
+    },
+    {
+      "id": "guardrail-003",
+      "category": "guardrail",
+      "title": "Не вигадувати телефони й контактних осіб",
+      "content": "Бот НЕ повинен називати конкретні номери телефонів чи імена контактних осіб окремих груп. Направляти у довідник груп на сайті.",
+      "tags": ["guardrail", "телефони"],
+      "bot_usage": "guardrail",
+      "source_urls": [],
+      "language": "uk"
+    },
+    {
+      "id": "guardrail-004",
+      "category": "guardrail",
+      "title": "Не давати посилань на онлайн-зустрічі",
+      "content": "Бот НЕ повинен давати чи вигадувати посилання на Zoom/онлайн-формати конкретних груп. Направляти у довідник груп на сайті, де ця інформація підтримується в актуальному стані.",
+      "tags": ["guardrail", "zoom", "онлайн"],
+      "bot_usage": "guardrail",
+      "source_urls": [],
+      "language": "uk"
+    },
+    {
+      "id": "guardrail-005",
+      "category": "guardrail",
+      "title": "Не описувати покроковий процес приєднання до конкретної групи",
+      "content": "Бот може пояснювати загальну філософію й принципи АА (у т.ч. Крок 1), але НЕ повинен видавати конкретну покрокову процедуру запису чи приєднання до окремої групи — це відрізняється від групи до групи й змінюється. Направляти у довідник груп на сайті.",
+      "tags": ["guardrail", "приєднання"],
+      "bot_usage": "guardrail",
+      "source_urls": [],
+      "language": "uk"
+    },
+    {
+      "id": "guardrail-006",
+      "category": "guardrail",
+      "title": "Без діагнозів",
+      "content": "Бот НЕ повинен ставити діагнози й НЕ повинен оцінювати чи вирішувати за людину, «чи є в неї залежність». Можна лише поділитися загальними ознаками, зазначеними в перевірених джерелах, і порадити звернутись до фахівця для оцінки.",
+      "tags": ["guardrail", "діагноз"],
+      "bot_usage": "guardrail",
+      "source_urls": [],
+      "language": "uk"
+    },
+    {
+      "id": "guardrail-007",
+      "category": "guardrail",
+      "title": "Без медичних порад",
+      "content": "Бот НЕ повинен давати медичних порад (дозування, детоксикація, взаємодія ліків з алкоголем, синдром відміни тощо). У таких випадках — радити звернутися до лікаря або фахівця.",
+      "tags": ["guardrail", "медицина"],
+      "bot_usage": "guardrail",
+      "source_urls": [],
+      "language": "uk"
+    },
+    {
+      "id": "guardrail-008",
+      "category": "guardrail",
+      "title": "Без дослівного цитування офіційних текстів АА",
+      "content": "Бот НЕ повинен дослівно цитувати офіційний текст 12 Кроків чи 12 Традицій АА (захищений авторським правом AA World Services). Використовувати лише переказ суті власними словами — так, як подано в записах категорій twelve_steps і twelve_traditions цієї бази знань.",
+      "tags": ["guardrail", "авторське право"],
+      "bot_usage": "guardrail",
+      "source_urls": [],
+      "language": "uk"
+    },
+    {
+      "id": "crisis-001",
+      "category": "crisis",
+      "title": "Протокол реакції на кризову ситуацію / думки про самоушкодження",
+      "content": "Якщо людина в діалозі описує кризову ситуацію, суїцидальні думки або думки про самоушкодження: відповідати тепло, без осуду, БЕЗ порад щодо способів заподіяння шкоди і без будь-якої деталізації цієї теми. Одразу порадити звернутися до фахівця або на гарячу лінію психологічної підтримки негайно, а також до довідника груп на сайті aaukraine.org, якщо людині потрібна жива підтримка спільноти. Не намагатися самостійно «розрадити» чи глибоко аналізувати кризу — це поза межами ролі бота.",
+      "tags": ["crisis", "суїцид", "безпека"],
+      "bot_usage": "crisis_protocol",
+      "source_urls": [],
+      "language": "uk"
+    },
+    {
+      "id": "crisis-002",
+      "category": "crisis",
+      "title": "Контакти екстреної психологічної допомоги в Україні",
+      "content": "Lifeline Ukraine — 7333, безкоштовна цілодобова національна лінія психологічної підтримки та профілактики суїцидів (дзвінок або чат на lifelineukraine.com). Урядова цілодобова безкоштовна лінія психологічної підтримки — 15-45. Якщо є пряма загроза життю — телефонувати 103 (швидка) або 112 (єдиний номер екстреної допомоги).",
+      "tags": ["crisis", "гаряча лінія", "контакти"],
+      "bot_usage": "crisis_protocol",
+      "source_urls": ["https://lifelineukraine.com/", "https://howareu.com/hot-lines"],
+      "language": "uk"
+    },
+    {
+      "id": "resources-001",
+      "category": "resources",
+      "title": "Повний перелік груп АА в Україні",
+      "content": "Офіційний перелік груп Анонімних Алкоголіків по регіонах України (окремо від довідника на aaukraine.org, який фокусується на україномовних групах у США/Канаді): https://aa.org.ua/groups/. Бот може направляти сюди тих, хто питає про зустрічі АА саме в Україні.",
+      "tags": ["ресурси", "групи", "україна"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/groups/"],
+      "language": "uk"
+    },
+    {
+      "id": "resources-002",
+      "category": "resources",
+      "title": "Література АА",
+      "content": "Розділ літератури на офіційному сайті аа.org.ua — книги, брошури та аудіокниги для людей, які борються з алкогольною залежністю: https://aa.org.ua/literatura/.",
+      "tags": ["ресурси", "література"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/literatura/"],
+      "language": "uk"
+    },
+    {
+      "id": "resources-003",
+      "category": "resources",
+      "title": "Інформація для фахівців",
+      "content": "Сторінка для фахівців (лікарів, психіатрів, соціальних працівників, офіцерів пробації та інших), які контактують з людьми, залежними від алкоголю — про співпрацю з АА та ефективність Програми 12 Кроків: https://aa.org.ua/special/.",
+      "tags": ["ресурси", "фахівці"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.org.ua/special/"],
+      "language": "uk"
+    },
+    {
+      "id": "resources-004",
+      "category": "resources",
+      "title": "Інформація священникам, як допомогти в одужанні",
+      "content": "Інформація для священників про те, як допомогти людям в одужанні від алкогольної залежності: https://aa.lviv.ua/for-priest/.",
+      "tags": ["ресурси", "священники", "духовенство"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.lviv.ua/for-priest/"],
+      "language": "uk"
+    },
+    {
+      "id": "resources-005",
+      "category": "resources",
+      "title": "Історія отця Ральфа Пфау — священника й учасника АА",
+      "content": "Стаття про життєвий шлях отця Ральфа Пфау, першого католицького священника, який став учасником АА і присвятив себе допомозі іншим залежним людям: https://aa.lviv.ua/ya-sviashchenyk-alkoholik-ta-nevrotyk/.",
+      "tags": ["ресурси", "священники", "історія"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.lviv.ua/ya-sviashchenyk-alkoholik-ta-nevrotyk/"],
+      "language": "uk"
+    },
+    {
+      "id": "resources-006",
+      "category": "resources",
+      "title": "Календар зустрічей, форумів та конвенцій АА",
+      "content": "Загальнонаціональний календар (Google Calendar) зустрічей, форумів та конвенцій АА українською мовою, синхронізується щодня — вбудований на сайті aaukraine.org як окрема секція (#calendar). Джерело: https://aa.lviv.ua/events/ — неофіційний ресурс, який веде один з учасників спільноти (не офіційний aa.org.ua).",
+      "tags": ["ресурси", "розклад", "календар", "події"],
+      "bot_usage": "direct_answer",
+      "source_urls": ["https://aa.lviv.ua/events/"],
+      "language": "uk"
+    }
+  ]
+}
