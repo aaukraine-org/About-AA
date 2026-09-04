@@ -167,7 +167,7 @@ function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="font-display text-sm text-forest">
+        <a href="#top" className="font-display text-sm font-bold text-forest underline underline-offset-4">
           Коротко про АА
         </a>
         <ul className="hidden gap-7 text-xs text-moss md:flex">
@@ -282,6 +282,54 @@ function Faq() {
   );
 }
 
+// Перетворює звичайні http(s)-посилання у тексті на клікабельні <a>-теги
+// (бот віддає посилання як звичайний текст, напр. "(https://...)" —
+// цей рендер перетворює саму адресу на гіперпосилання, дужки/крапки
+// навколо лишаються звичайним текстом).
+function linkifyText(text: string): React.ReactNode[] {
+  const urlRegex = /(https?:\/\/[^\s()]+)/g;
+  const trailingPunctRegex = /[.,;:!?]+$/;
+  const nodes: React.ReactNode[] = [];
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+  let key = 0;
+
+  while ((match = urlRegex.exec(text)) !== null) {
+    const start = match.index;
+    let url = match[0];
+
+    const trailingMatch = url.match(trailingPunctRegex);
+    let trail = "";
+    if (trailingMatch) {
+      trail = trailingMatch[0];
+      url = url.slice(0, url.length - trail.length);
+    }
+
+    if (start > lastIndex) {
+      nodes.push(<span key={key++}>{text.slice(lastIndex, start)}</span>);
+    }
+    nodes.push(
+      <a
+        key={key++}
+        href={url}
+        target="_blank"
+        rel="noreferrer"
+        className="underline break-all"
+      >
+        {url}
+      </a>,
+    );
+    if (trail) nodes.push(<span key={key++}>{trail}</span>);
+
+    lastIndex = start + match[0].length;
+  }
+
+  if (lastIndex < text.length) {
+    nodes.push(<span key={key++}>{text.slice(lastIndex)}</span>);
+  }
+  return nodes;
+}
+
 function Chat() {
   const [messages, setMessages] = useState<{ role: "user" | "assistant"; content: string }[]>([
     {
@@ -363,7 +411,7 @@ function Chat() {
                       : "max-w-[80%] whitespace-pre-wrap text-[12px] leading-relaxed text-forest"
                   }
                 >
-                  {m.content}
+                  {linkifyText(m.content)}
                 </div>
               </div>
             ))}
