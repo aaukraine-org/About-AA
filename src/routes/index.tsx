@@ -167,10 +167,10 @@ function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="font-display text-lg text-forest">
+        <a href="#top" className="font-display text-sm text-forest">
           Коротко про АА
         </a>
-        <ul className="hidden gap-7 text-sm text-moss md:flex">
+        <ul className="hidden gap-7 text-xs text-moss md:flex">
           {links.map(([href, label]) => (
             <li key={href}>
               <a href={href} className="transition hover:text-forest">
@@ -189,13 +189,13 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
       <div className="mx-auto max-w-4xl px-6 pb-12 pt-10 text-center md:pb-16 md:pt-16">
-        <p className="mb-6 font-display text-lg font-bold text-forest">
+        <p className="mb-6 font-display text-sm font-bold text-forest">
           Інформаційний ресурс україномовної групи АА у США та Канади
         </p>
-        <h1 className="whitespace-nowrap font-display text-[clamp(1.25rem,4.5vw,3.5rem)] leading-tight text-forest">
+        <h1 className="whitespace-nowrap font-display text-[clamp(0.8rem,3vw,2.25rem)] leading-tight text-forest">
           Коротко про АА
         </h1>
-        <p className="mx-auto mt-8 max-w-xl text-lg text-moss">
+        <p className="mx-auto mt-8 max-w-xl text-sm text-moss">
           Про алкоголізм та Анонімних Алкоголіків 
           — конфіденційно, без осуду, без страху...
         </p>
@@ -217,9 +217,9 @@ function About() {
         <div className="grid gap-14 md:grid-cols-[1fr_1.2fr]">
           <div>
             <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 01 · спільнота</p>
-            <h2 className="mt-4 font-display text-4xl text-forest md:text-5xl">Що таке АА</h2>
+            <h2 className="mt-4 font-display text-2xl text-forest md:text-3xl">Що таке АА</h2>
           </div>
-          <div className="space-y-5 text-lg leading-relaxed text-moss">
+          <div className="space-y-5 text-sm leading-relaxed text-moss">
             <p>
               Анонімні Алкоголіки — це спільнота людей, які діляться між собою досвідом,
               силою й надією, щоби разом одужувати від залежності від алкоголю.
@@ -239,8 +239,8 @@ function About() {
               key={c.t}
               className="rounded-2xl bg-sage/60 p-6 transition hover:bg-sage"
             >
-              <h3 className="font-display text-xl text-forest">{c.t}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-moss">{c.d}</p>
+              <h3 className="font-display text-base text-forest">{c.t}</h3>
+              <p className="mt-3 text-xs leading-relaxed text-moss">{c.d}</p>
             </div>
           ))}
         </div>
@@ -256,7 +256,7 @@ function Faq() {
       <div className="mx-auto max-w-4xl px-6">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 03 · питання</p>
-          <h2 className="mt-4 font-display text-4xl text-forest md:text-5xl">
+          <h2 className="mt-4 font-display text-2xl text-forest md:text-3xl">
             Що люди питають найчастіше
           </h2>
         </div>
@@ -268,10 +268,10 @@ function Faq() {
               value={`item-${i}`}
               className="border-b border-forest/15"
             >
-              <AccordionTrigger className="py-5 text-left font-display text-lg text-forest hover:no-underline">
+              <AccordionTrigger className="py-5 text-left font-display text-sm text-forest hover:no-underline">
                 {item.q}
               </AccordionTrigger>
-              <AccordionContent className="pb-5 pr-6 text-[15px] leading-relaxed text-moss">
+              <AccordionContent className="pb-5 pr-6 text-[12px] leading-relaxed text-moss">
                 {item.a}
               </AccordionContent>
             </AccordionItem>
@@ -338,7 +338,7 @@ function Chat() {
       <div className="mx-auto max-w-3xl px-6">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 05 · розмова</p>
-          <h2 className="mt-4 font-display text-4xl text-forest md:text-5xl">
+          <h2 className="mt-4 font-display text-2xl text-forest md:text-3xl">
             Запитати напряму
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-moss">
@@ -359,8 +359,8 @@ function Chat() {
                 <div
                   className={
                     m.role === "user"
-                      ? "max-w-[80%] rounded-2xl rounded-br-sm bg-forest px-4 py-2.5 text-sm text-linen"
-                      : "max-w-[80%] whitespace-pre-wrap text-[15px] leading-relaxed text-forest"
+                      ? "max-w-[80%] rounded-2xl rounded-br-sm bg-forest px-4 py-2.5 text-xs text-linen"
+                      : "max-w-[80%] whitespace-pre-wrap text-[12px] leading-relaxed text-forest"
                   }
                 >
                   {m.content}
@@ -384,12 +384,12 @@ function Chat() {
               onChange={(e) => setInput(e.target.value)}
               placeholder="у цьому рядку - напишіть своє запитання…"
               disabled={loading}
-              className="flex-1 rounded-full border border-border bg-card px-4 py-2.5 text-sm text-forest outline-none placeholder:text-muted-foreground focus:border-forest"
+              className="flex-1 rounded-full border border-border bg-card px-4 py-2.5 text-xs text-forest outline-none placeholder:text-muted-foreground focus:border-forest"
             />
             <button
               type="submit"
               disabled={loading || !input.trim()}
-              className="rounded-full bg-forest px-5 py-2.5 text-sm font-medium text-linen transition hover:bg-moss disabled:opacity-50"
+              className="rounded-full bg-forest px-5 py-2.5 text-xs font-medium text-linen transition hover:bg-moss disabled:opacity-50"
             >
               Надіслати
             </button>
@@ -411,7 +411,7 @@ function ContactCard({
 }) {
   return (
     <div className="flex flex-col rounded-2xl bg-sage/60 p-6 transition hover:bg-sage">
-      <h4 className="font-display text-lg text-forest">
+      <h4 className="font-display text-sm text-forest">
         {c.nameHref ? (
           <a
             href={c.nameHref}
@@ -425,10 +425,10 @@ function ContactCard({
           c.name
         )}
       </h4>
-      <p className="mt-2 text-sm leading-relaxed text-moss">{c.desc}</p>
+      <p className="mt-2 text-xs leading-relaxed text-moss">{c.desc}</p>
       <ul className="mt-4 space-y-1.5">
         {c.lines.map((l, i) => (
-          <li key={i} className="font-mono text-[13px] break-words text-moss">
+          <li key={i} className="font-mono text-[11px] break-words text-moss">
             <span className="text-forest/60">{l.label}: </span>
             {l.href ? (
               <a
@@ -454,7 +454,7 @@ function Directory() {
     <section id="directory" className="border-t border-border/60 bg-linen py-12">
       <div className="mx-auto max-w-6xl px-6">
         <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Додаткові контакти</p>
-        <h2 className="mt-3 font-display text-3xl text-forest md:text-4xl">
+        <h2 className="mt-3 font-display text-xl text-forest md:text-2xl">
           Куди звертатися - інформація доповнюється
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -472,10 +472,10 @@ function OnlineGroups() {
     <section id="online" className="border-t border-border/60 bg-sage/40 py-12">
       <div className="mx-auto max-w-6xl px-6">
         <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Онлайн</p>
-        <h2 className="mt-3 font-display text-3xl text-forest md:text-4xl">
+        <h2 className="mt-3 font-display text-xl text-forest md:text-2xl">
           Група АА он-лайн (час Київ)
         </h2>
-        <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+        <p className="mt-3 max-w-2xl text-xs text-muted-foreground">
           Українськомовні групи АА он-лайн — із посиланнями на чати груп, сайти та відеозустрічі.
         </p>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -494,10 +494,10 @@ function EventsCalendar() {
     <section id="calendar" className="border-t border-border/60 bg-linen py-12">
       <div className="mx-auto max-w-6xl px-6">
         <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Календар</p>
-        <h2 className="mt-3 font-display text-3xl text-forest md:text-4xl">
+        <h2 className="mt-3 font-display text-xl text-forest md:text-2xl">
           Розклад зустрічей, форумів та конвенцій АА
         </h2>
-        <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+        <p className="mt-3 max-w-2xl text-xs text-muted-foreground">
           Загальнонаціональний календар зустрічей, форумів та конвенцій АА українською мовою — синхронізується щодня. Це неофіційний ресурс, який веде один з учасників спільноти (не офіційний сайт aa.org.ua).
         </p>
         <div className="mt-6 w-full overflow-hidden rounded-2xl border border-border">
@@ -568,7 +568,7 @@ function Quiz() {
       <div className="mx-auto max-w-3xl px-6">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 04 · роздуми</p>
-          <h2 className="mt-4 font-display text-4xl text-forest md:text-5xl">
+          <h2 className="mt-4 font-display text-2xl text-forest md:text-3xl">
             Наскільки серйозна проблема?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-moss">
@@ -587,8 +587,8 @@ function Quiz() {
               >
                 <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between md:gap-6">
                   <div className="flex items-baseline gap-4">
-                    <span className="font-display text-xl text-gold">{n}</span>
-                    <p className="text-[15px] leading-relaxed text-forest">{q}</p>
+                    <span className="font-display text-base text-gold">{n}</span>
+                    <p className="text-[12px] leading-relaxed text-forest">{q}</p>
                   </div>
                   <div className="flex shrink-0 gap-2 md:pt-1">
                     {[
@@ -603,8 +603,8 @@ function Quiz() {
                           onClick={() => setAnswer(i, opt.val)}
                           className={
                             active
-                              ? "min-w-[68px] rounded-full bg-forest px-4 py-2 text-sm font-medium text-linen transition"
-                              : "min-w-[68px] rounded-full border border-forest/40 px-4 py-2 text-sm text-forest transition hover:border-forest hover:bg-forest/5"
+                              ? "min-w-[68px] rounded-full bg-forest px-4 py-2 text-xs font-medium text-linen transition"
+                              : "min-w-[68px] rounded-full border border-forest/40 px-4 py-2 text-xs text-forest transition hover:border-forest hover:bg-forest/5"
                           }
                           aria-pressed={active}
                         >
@@ -628,7 +628,7 @@ function Quiz() {
               type="button"
               onClick={reveal}
               disabled={!allAnswered}
-              className="rounded-full bg-forest px-7 py-3 text-sm font-medium text-linen transition hover:bg-moss disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-full bg-forest px-7 py-3 text-xs font-medium text-linen transition hover:bg-moss disabled:cursor-not-allowed disabled:opacity-40"
             >
               Показати результат
             </button>
@@ -636,7 +636,7 @@ function Quiz() {
               <button
                 type="button"
                 onClick={reset}
-                className="rounded-full border border-forest/40 px-7 py-3 text-sm text-forest transition hover:border-forest"
+                className="rounded-full border border-forest/40 px-7 py-3 text-xs text-forest transition hover:border-forest"
               >
                 Почати спочатку
               </button>
@@ -652,10 +652,10 @@ function Quiz() {
             <p className="font-mono text-xs uppercase tracking-[0.24em] text-gold">
               Ваших «Так»: {yesCount} з {QUIZ_QUESTIONS.length}
             </p>
-            <p className="mt-4 font-display text-2xl leading-snug text-forest md:text-3xl">
+            <p className="mt-4 font-display text-lg leading-snug text-forest md:text-xl">
               Тільки ви можете вирішити, чи є для вас сенс у цих відповідях.
             </p>
-            <p className="mt-4 text-[15px] leading-relaxed text-moss">
+            <p className="mt-4 text-[12px] leading-relaxed text-moss">
               АА нічого не вказує і не змушує — просто ділиться досвідом тих,
               хто через це вже пройшов. Якщо відчуваєте, що варто поговорити —
               довідник груп і чат нижче завжди відкриті.
@@ -663,13 +663,13 @@ function Quiz() {
             <div className="mt-6 flex flex-wrap gap-3">
               <a
                 href="#directory"
-                className="rounded-full bg-forest px-6 py-2.5 text-sm font-medium text-linen transition hover:bg-moss"
+                className="rounded-full bg-forest px-6 py-2.5 text-xs font-medium text-linen transition hover:bg-moss"
               >
                 Довідник груп
               </a>
               <a
                 href="#chat"
-                className="rounded-full border border-forest px-6 py-2.5 text-sm text-forest transition hover:bg-forest hover:text-linen"
+                className="rounded-full border border-forest px-6 py-2.5 text-xs text-forest transition hover:bg-forest hover:text-linen"
               >
                 Поговорити в чаті
               </a>
@@ -694,7 +694,7 @@ function Quiz() {
               type="button"
               onClick={() => setShowModal(false)}
               aria-label="Закрити"
-              className="absolute right-4 top-4 rounded-full border border-forest/30 px-3 py-1 text-sm text-forest transition hover:bg-forest hover:text-linen"
+              className="absolute right-4 top-4 rounded-full border border-forest/30 px-3 py-1 text-xs text-forest transition hover:bg-forest hover:text-linen"
             >
               ✕
             </button>
@@ -703,12 +703,12 @@ function Quiz() {
             </p>
             <h3
               id="quiz-modal-title"
-              className="mt-3 font-display text-2xl leading-snug text-forest md:text-3xl"
+              className="mt-3 font-display text-lg leading-snug text-forest md:text-xl"
             >
               Отже, що у Вас вийшло?
             </h3>
 
-            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-forest/90">
+            <div className="mt-5 space-y-4 text-[12px] leading-relaxed text-forest/90">
               {isAffected ? (
                 <>
                   <p>
@@ -741,7 +741,7 @@ function Quiz() {
                     відрізняємося від більшості інших людей, які можуть
                     контролювати свою випивку.
                   </p>
-                  <p className="font-display text-xl text-forest">Будьмо чесними!</p>
+                  <p className="font-display text-base text-forest">Будьмо чесними!</p>
                   <p>
                     Лікарі стверджують, якщо виникає пов'язана з алкоголем
                     проблема, а Ви продовжуєте пити, то ця проблема може тільки
@@ -790,21 +790,21 @@ function Quiz() {
               <a
                 href="#directory"
                 onClick={() => setShowModal(false)}
-                className="rounded-full bg-forest px-6 py-2.5 text-sm font-medium text-linen transition hover:bg-moss"
+                className="rounded-full bg-forest px-6 py-2.5 text-xs font-medium text-linen transition hover:bg-moss"
               >
                 Довідник груп
               </a>
               <a
                 href="#chat"
                 onClick={() => setShowModal(false)}
-                className="rounded-full border border-forest px-6 py-2.5 text-sm text-forest transition hover:bg-forest hover:text-linen"
+                className="rounded-full border border-forest px-6 py-2.5 text-xs text-forest transition hover:bg-forest hover:text-linen"
               >
                 Поговорити в чаті
               </a>
               <button
                 type="button"
                 onClick={() => setShowModal(false)}
-                className="ml-auto rounded-full border border-forest/40 px-6 py-2.5 text-sm text-forest transition hover:border-forest"
+                className="ml-auto rounded-full border border-forest/40 px-6 py-2.5 text-xs text-forest transition hover:border-forest"
               >
                 Закрити
               </button>
@@ -824,12 +824,12 @@ function Footer() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
           <div>
-            <p className="font-display text-2xl">Коротко про АА</p>
+            <p className="font-display text-lg">Коротко про АА</p>
             <p className="mt-2 font-mono text-xs uppercase tracking-[0.24em] text-sage">
               Інформаційний ресурс
             </p>
           </div>
-          <p className="max-w-md text-sm leading-relaxed text-sage">
+          <p className="max-w-md text-xs leading-relaxed text-sage">
             Цей сайт має суто інформаційний характер. Він не є офіційним ресурсом
             АА, не надає медичних чи психологічних послуг і не замінює консультації
             фахівця. Якщо ви або близька людина в кризі — зверніться до лікаря
