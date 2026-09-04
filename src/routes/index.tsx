@@ -162,6 +162,7 @@ function Nav() {
     ["#chat", "Є питання?"],
     ["#directory", "Контакти"],
     ["#online", "Онлайн"],
+    ["#calendar", "Календар"],
   ];
   return (
     <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
@@ -487,6 +488,45 @@ function OnlineGroups() {
   );
 }
 
+
+function EventsCalendar() {
+  return (
+    <section id="calendar" className="border-t border-border/60 bg-linen py-12">
+      <div className="mx-auto max-w-6xl px-6">
+        <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Календар</p>
+        <h2 className="mt-3 font-display text-3xl text-forest md:text-4xl">
+          Розклад зустрічей, форумів та конвенцій АА
+        </h2>
+        <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
+          Загальнонаціональний календар зустрічей, форумів та конвенцій АА українською мовою — синхронізується щодня. Це неофіційний ресурс, який веде один з учасників спільноти (не офіційний сайт aa.org.ua).
+        </p>
+        <div className="mt-6 w-full overflow-hidden rounded-2xl border border-border">
+          <iframe
+            src="https://calendar.google.com/calendar/embed?height=600&wkst=2&ctz=Europe%2FKyiv&showPrint=0&mode=MONTH&src=de1a01983c7fa86c70825ca9be3b1580ab51de81a869e8e7fab59d17040e0ec0%40group.calendar.google.com"
+            style={{ border: 0 }}
+            width="100%"
+            height="600"
+            frameBorder={0}
+            scrolling="no"
+            loading="lazy"
+            title="Календар зустрічей, форумів та конвенцій АА"
+          />
+        </div>
+        <p className="mt-3 text-xs text-muted-foreground">
+          Джерело:{" "}
+          <a
+            href="https://aa.lviv.ua/events/"
+            target="_blank"
+            rel="noreferrer"
+            className="underline hover:text-forest"
+          >
+            aa.lviv.ua/events
+          </a>
+        </p>
+      </div>
+    </section>
+  );
+}
 
 function Quiz() {
   const [answers, setAnswers] = useState<(boolean | null)[]>(
@@ -817,6 +857,7 @@ function Home() {
         <Chat />
         <Directory />
         <OnlineGroups />
+        <EventsCalendar />
       </main>
       <Footer />
     </div>
