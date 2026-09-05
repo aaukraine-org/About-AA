@@ -212,7 +212,7 @@ function About() {
     { t: "Рівність", d: "Немає керівників чи експертів — усі рівні, перед хворобою усі рівні." },
   ];
   return (
-    <section id="about" className="relative border-t border-border/60 bg-linen py-12">
+    <section id="about" className="relative border-t border-border/60 bg-linen py-8 md:py-12">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-14 md:grid-cols-[1fr_1.2fr]">
           <div>
@@ -221,14 +221,19 @@ function About() {
           </div>
           <div className="space-y-5 text-sm leading-relaxed text-moss">
             <p>
-              Анонімні Алкоголіки — це спільнота людей, які діляться між собою досвідом,
-              силою й надією, щоби разом одужувати від залежності від алкоголю.
+              Анонімні Алкоголіки — це об'днання людей, які діляться між собою досвідом,
+              силою й надіями, щоби разом одужувати від алкоголізму.
             </p>
-            <p>
-              Єдина умова, щоб приєднатися — власне бажання перестати пити. АА не пов'язана
-              з жодною релігією, партією чи установою. Спільнота існує на добровільні
-              пожертви самих учасників — тут немає членських внесків і немає керівництва
+              <p>
+              Єдина умова, щоб приєднатися — власне бажання перестати пити.
+	</p> 
+	<p>
+	АА не пов'язана з жодною релігією, партією чи установою. 
+	</p>
+	<p>
+	Спільнота існує на добровільні пожертви самих учасників — тут немає членських внесків і немає керівництва
               у звичному сенсі.
+	</p>
             </p>
           </div>
         </div>
@@ -252,7 +257,7 @@ function About() {
 
 function Faq() {
   return (
-    <section id="faq" className="border-t border-border/60 bg-sage/40 py-12">
+    <section id="faq" className="border-t border-border/60 bg-sage/40 py-8 md:py-12">
       <div className="mx-auto max-w-4xl px-6">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 03 · питання</p>
@@ -335,7 +340,7 @@ function Chat() {
     {
       role: "assistant",
       content:
-        "Вітаю. Якщо є додаткові питання, - Я вбудований Асистент коротко відповім про АА та Програму 12 Кроків АА. Розмова не зберігається.",
+        "Вітаю. Якщо є додаткові питання, - Я вбудований Асистент, коротко відповім про АА та Програму 12 Кроків АА. Розмова не зберігається.",
     },
   ]);
   const [input, setInput] = useState("");
@@ -382,7 +387,7 @@ function Chat() {
   }
 
   return (
-    <section id="chat" className="border-t border-border/60 py-12">
+    <section id="chat" className="border-t border-border/60 py-8 md:py-12">
       <div className="mx-auto max-w-3xl px-6">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 05 · розмова</p>
@@ -499,7 +504,7 @@ function ContactCard({
 
 function Directory() {
   return (
-    <section id="directory" className="border-t border-border/60 bg-linen py-12">
+    <section id="directory" className="border-t border-border/60 bg-linen py-8 md:py-12">
       <div className="mx-auto max-w-6xl px-6">
         <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Додаткові контакти</p>
         <h2 className="mt-3 font-display text-xl text-forest md:text-2xl">
@@ -517,7 +522,7 @@ function Directory() {
 
 function OnlineGroups() {
   return (
-    <section id="online" className="border-t border-border/60 bg-sage/40 py-12">
+    <section id="online" className="border-t border-border/60 bg-sage/40 py-8 md:py-12">
       <div className="mx-auto max-w-6xl px-6">
         <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Онлайн</p>
         <h2 className="mt-3 font-display text-xl text-forest md:text-2xl">
@@ -539,7 +544,7 @@ function OnlineGroups() {
 
 function EventsCalendar() {
   return (
-    <section id="calendar" className="border-t border-border/60 bg-linen py-12">
+    <section id="calendar" className="border-t border-border/60 bg-linen py-8 md:py-12">
       <div className="mx-auto max-w-6xl px-6">
         <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Календар</p>
         <h2 className="mt-3 font-display text-xl text-forest md:text-2xl">
@@ -612,7 +617,7 @@ function Quiz() {
   }
 
   return (
-    <section id="quiz" className="border-t border-border/60 py-12">
+    <section id="quiz" className="border-t border-border/60 py-8 md:py-12">
       <div className="mx-auto max-w-3xl px-6">
         <div className="text-center">
           <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 04 · роздуми</p>
@@ -624,7 +629,7 @@ function Quiz() {
           </p>
         </div>
 
-        <ol className="mt-12 space-y-4">
+        <ol className="mt-12 space-y-2">
           {QUIZ_QUESTIONS.map((q, i) => {
             const n = String(i + 1).padStart(2, "0");
             const value = answers[i];
@@ -638,7 +643,7 @@ function Quiz() {
                     <span className="font-display text-base text-gold">{n}</span>
                     <p className="text-[12px] leading-relaxed text-forest">{q}</p>
                   </div>
-                  <div className="flex shrink-0 gap-2 md:pt-1">
+                  <div className="flex shrink-0 gap-1.5 md:pt-1">
                     {[
                       { label: "Так", val: true },
                       { label: "Ні", val: false },
@@ -868,9 +873,9 @@ function Quiz() {
 
 function Footer() {
   return (
-    <footer className="border-t border-border/60 bg-forest py-8 text-linen">
+    <footer className="border-t border-border/60 bg-forest py-6 text-linen">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="font-display text-lg">Коротко про АА</p>
             <p className="mt-2 font-mono text-xs uppercase tracking-[0.24em] text-sage">
@@ -884,7 +889,7 @@ function Footer() {
             або на лінію психологічної допомоги.
           </p>
         </div>
-        <p className="mt-10 font-mono text-[11px] uppercase tracking-[0.2em] text-sage/70">
+        <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.2em] text-sage/70">
           © {new Date().getFullYear()} · Зроблено з турботою
         </p>
       </div>
