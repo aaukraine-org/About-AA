@@ -3,6 +3,7 @@ export const NAV_LINKS: [string, string][] = [
   ["/#faq", "Відповіді"],
   ["/#quiz", "Тест"],
   ["/#chat", "Є питання?"],
+  ["/calculator", "Калькулятор"],
   ["/contacts", "Контакти"],
   ["/#calendar", "Календар"],
 ];
