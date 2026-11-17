@@ -63,10 +63,22 @@ export function Nav() {
   );
 }
 
+const BREVO_FORM_SRC = "ВСТАВТЕ_СЮДИ_SRC";
+
 export function Footer() {
   return (
     <footer className="border-t border-border/60 bg-forest py-6 text-linen">
       <div className="mx-auto max-w-6xl px-6">
+        <div className="mb-6">
+          <iframe
+            src={BREVO_FORM_SRC}
+            title="Підписка на розсилку АА"
+            width="100%"
+            height="430"
+            loading="lazy"
+            style={{ border: 0, display: "block", maxWidth: 540, margin: "0 auto" }}
+          />
+        </div>
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="font-display text-lg">Коротко про АА</p>
