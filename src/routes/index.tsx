@@ -1,30 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, useEffect } from "react";
 import { Nav, Footer } from "@/components/site-chrome";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 
 export const Route = createFileRoute("/")({
   component: Home,
 });
 
 
-
-const FAQ = [
-  { q: "Чи АА — це релігійна організація?", a: "Ні. АА не пов'язана з жодною конфесією, партією чи установою. У програмі йдеться про «силу більшу за нас» — кожен розуміє це по-своєму: хтось як Бога, хтось як спільноту, природу чи власне сумління." },
-  { q: "Чи потрібно платити?", a: "Ні, членських внесків немає. Товариство існує на добровільні пожертви самих учасників — зазвичай кілька гривень у «капелюх» на оренду приміщення й каву. Прийти й слухати можна безкоштовно." },
-  { q: "Що буде на першій зустрічі?", a: "Люди сідають у коло, хтось веде зустріч, читають короткі тексти, потім по черзі бажаючі коротко говорять про себе. Вас ніхто не змусить говорити — можна просто слухати. Виходити теж можна будь-коли." },
-  { q: "Як прийти на першу зустріч?", a: "Найпростіше — зателефонувати на вказані номери, які подані нижче на цьому сайті, і там підкажуть варіанти. Можна також просто прийти за адресою що подана на цьому сайті нижче." },
-  { q: "Чи це справді анонімно?", a: "Так. Прийнято називати лише ім'я (або й вигадане), ми не питаємо про ваше минуле, яким би не були ваші проблеми - серед нас є ті, хто пережив їх також. Анонімність — духовна основа спільноти." },
-  { q: "Чи є онлайн-зустрічі?", a: "Так, українських онлайн-груп зараз чимало — у Zoom і інших месенджерах. Це зручний спосіб спробувати долучитися до учасників Програми, не виходячи з дому." },
-  { q: "Що робити, якщо стався зрив?", a: "Найзручніше це прийти на зібрання і після завершення поговорити з тим, чия історія вам найбільше відгукнулася." },
-  { q: "Чи можуть прийти родичі?", a: "Для близьких людей залежних існує окрема спільнота — Ал-Анон. Там рідні діляться власним досвідом і вчаться піклуватися про себе, поки близька людина шукає свій шлях." },
-  { q: "Як зрозуміти, що варто прийти?", a: "Не потрібно ставити собі діагноз. Якщо алкоголь дедалі частіше з'являється у ваших думках або створює проблеми, які ви вже помітили, — цього достатньо, щоб просто послухати одну зустріч." },
-];
 
 const QUIZ_QUESTIONS = [
   "Чи бувало, що Ви вирішували не пити тиждень або більше, але Вас вистачало тільки на день-два?",
@@ -71,37 +53,6 @@ function Hero() {
   );
 }
 
-function Faq() {
-  return (
-    <section id="faq" className="border-t border-border/60 bg-sage/40 py-8 md:py-12">
-      <div className="mx-auto max-w-4xl px-6">
-        <div className="text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 03 · питання</p>
-          <h2 className="mt-4 font-display text-2xl text-forest md:text-3xl">
-            Що люди питають найчастіше
-          </h2>
-        </div>
-
-        <Accordion type="single" collapsible className="mt-12">
-          {FAQ.map((item, i) => (
-            <AccordionItem
-              key={i}
-              value={`item-${i}`}
-              className="border-b border-forest/15"
-            >
-              <AccordionTrigger className="py-5 text-left font-display text-sm text-forest hover:no-underline">
-                {item.q}
-              </AccordionTrigger>
-              <AccordionContent className="pb-5 pr-6 text-[12px] leading-relaxed text-moss">
-                {item.a}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </div>
-    </section>
-  );
-}
 
 // Перетворює звичайні http(s)-посилання у тексті на клікабельні <a>-теги
 // (бот віддає посилання як звичайний текст, напр. "(https://...)" —
@@ -206,8 +157,7 @@ function Chat() {
     <section id="chat" className="border-t border-border/60 py-8 md:py-12">
       <div className="mx-auto max-w-3xl px-6">
         <div className="text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 05 · розмова</p>
-          <h2 className="mt-4 font-display text-2xl text-forest md:text-3xl">
+          <h2 className="font-display text-2xl text-forest md:text-3xl">
             Запитати напряму
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-moss">
@@ -353,8 +303,7 @@ function Quiz() {
     <section id="quiz" className="border-t border-border/60 py-8 md:py-12">
       <div className="mx-auto max-w-3xl px-6">
         <div className="text-center">
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 04 · роздуми</p>
-          <h2 className="mt-4 font-display text-2xl text-forest md:text-3xl">
+          <h2 className="font-display text-2xl text-forest md:text-3xl">
             Наскільки серйозна проблема?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-moss">
@@ -611,7 +560,6 @@ function Home() {
       <Nav />
       <main>
         <Hero />
-        <Faq />
         <Quiz />
         <Chat />
         <EventsCalendar />
