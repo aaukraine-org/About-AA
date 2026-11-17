@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const NAV_LINKS: [string, string][] = [
-  ["/#about", "Про АА"],
+  ["/about", "Про АА"],
   ["/#faq", "Відповіді"],
   ["/#quiz", "Тест"],
   ["/#chat", "Є питання?"],

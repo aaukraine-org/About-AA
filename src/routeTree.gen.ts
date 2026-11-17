@@ -13,6 +13,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactsRouteImport } from './routes/contacts'
 import { Route as CalculatorRouteImport } from './routes/calculator'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -35,6 +36,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiChatRoute = ApiChatRouteImport.update({
   id: '/api/chat',
   path: '/api/chat',
@@ -43,6 +49,7 @@ const ApiChatRoute = ApiChatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/contacts': typeof ContactsRoute
   '/calculator': typeof CalculatorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/contacts': typeof ContactsRoute
   '/calculator': typeof CalculatorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/contacts': typeof ContactsRoute
   '/calculator': typeof CalculatorRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -65,14 +74,15 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contacts' | '/calculator' | '/sitemap.xml' | '/api/chat'
+  fullPaths: '/' | '/about' | '/contacts' | '/calculator' | '/sitemap.xml' | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contacts' | '/calculator' | '/sitemap.xml' | '/api/chat'
-  id: '__root__' | '/' | '/contacts' | '/calculator' | '/sitemap.xml' | '/api/chat'
+  to: '/' | '/about' | '/contacts' | '/calculator' | '/sitemap.xml' | '/api/chat'
+  id: '__root__' | '/' | '/about' | '/contacts' | '/calculator' | '/sitemap.xml' | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   ContactsRoute: typeof ContactsRoute
   CalculatorRoute: typeof CalculatorRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -102,6 +112,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -121,6 +138,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   ContactsRoute: ContactsRoute,
   CalculatorRoute: CalculatorRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
