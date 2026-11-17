@@ -139,7 +139,7 @@ function ContactCard({
   c: { name: string; nameHref?: string; desc: string; lines: { label: string; value: string; href?: string }[] };
 }) {
   return (
-    <div className="flex flex-col rounded-2xl bg-sage/60 p-6 transition hover:bg-sage">
+    <div className="flex flex-col rounded-2xl bg-sage/60 p-4 transition hover:bg-sage">
       <h4 className="font-display text-sm text-forest">
         {c.nameHref ? (
           <a
@@ -180,7 +180,7 @@ function ContactCard({
 
 function Directory() {
   return (
-    <section id="directory" className="border-t border-border/60 bg-linen py-8 md:py-12">
+    <section id="directory" className="border-t border-border/60 bg-linen py-5 md:py-7">
       <div className="mx-auto max-w-6xl px-6">
         <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Додаткові контакти</p>
         <h2 className="mt-3 font-display text-xl text-forest md:text-2xl">
@@ -198,7 +198,7 @@ function Directory() {
 
 function OnlineGroups() {
   return (
-    <section id="online" className="border-t border-border/60 bg-sage/40 py-8 md:py-12">
+    <section id="online" className="border-t border-border/60 bg-sage/40 py-5 md:py-7">
       <div className="mx-auto max-w-6xl px-6">
         <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Онлайн</p>
         <h2 className="mt-3 font-display text-xl text-forest md:text-2xl">

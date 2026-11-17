@@ -31,20 +31,20 @@ const QUIZ_QUESTIONS = [
 function Hero() {
   return (
     <section id="top" className="relative overflow-hidden">
-      <div className="mx-auto max-w-4xl px-6 pb-12 pt-10 text-center md:pb-16 md:pt-16">
-        <p className="mb-6 font-display text-sm font-bold text-forest">
+      <div className="mx-auto max-w-4xl px-6 pb-6 pt-6 text-center md:pb-8 md:pt-10">
+        <p className="mb-3 font-display text-sm font-bold text-forest">
           Інформаційний ресурс україномовної групи АА у США та Канади
         </p>
         <h1 className="whitespace-nowrap font-display text-[clamp(0.8rem,3vw,2.25rem)] leading-tight text-forest">
           Коротко про АА
         </h1>
-        <p className="mx-auto mt-8 max-w-xl text-sm text-moss">
+        <p className="mx-auto mt-4 max-w-xl text-sm text-moss">
           Про алкоголізм та Анонімних Алкоголіків 
           — конфіденційно, без осуду, без страху...
         </p>
         <a
           href="/about#subscribe"
-          className="mt-8 inline-flex items-center rounded-full bg-forest px-6 py-3 text-sm text-linen transition hover:bg-forest/90"
+          className="mt-5 inline-flex items-center rounded-full bg-forest px-6 py-3 text-sm text-linen transition hover:bg-forest/90"
         >
           Підписатися на розсилку
         </a>
@@ -154,21 +154,21 @@ function Chat() {
   }
 
   return (
-    <section id="chat" className="border-t border-border/60 py-8 md:py-12">
+    <section id="chat" className="border-t border-border/60 py-5 md:py-7">
       <div className="mx-auto max-w-3xl px-6">
         <div className="text-center">
           <h2 className="font-display text-2xl text-forest md:text-3xl">
             Запитати напряму
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-moss">
+          <p className="mx-auto mt-2 max-w-xl text-moss">
             Коротка загальна інформація про АА та 12 Кроків. Без діагнозів і медичних порад.
           </p>
         </div>
 
-        <div className="mt-10 overflow-hidden rounded-2xl border border-border bg-card">
+        <div className="mt-5 overflow-hidden rounded-2xl border border-border bg-card">
           <div
             ref={scrollRef}
-            className="max-h-[440px] min-h-[280px] space-y-4 overflow-y-auto px-5 py-6"
+            className="max-h-[440px] min-h-[280px] space-y-4 overflow-y-auto px-4 py-3"
           >
             {messages.map((m, i) => (
               <div
@@ -227,7 +227,7 @@ function Chat() {
 
 function EventsCalendar() {
   return (
-    <section id="calendar" className="border-t border-border/60 bg-linen py-8 md:py-12">
+    <section id="calendar" className="border-t border-border/60 bg-linen py-5 md:py-7">
       <div className="mx-auto max-w-6xl px-6">
         <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Календар</p>
         <h2 className="mt-3 font-display text-xl text-forest md:text-2xl">
@@ -300,25 +300,25 @@ function Quiz() {
   }
 
   return (
-    <section id="quiz" className="border-t border-border/60 py-8 md:py-12">
+    <section id="quiz" className="border-t border-border/60 py-5 md:py-7">
       <div className="mx-auto max-w-3xl px-6">
         <div className="text-center">
           <h2 className="font-display text-2xl text-forest md:text-3xl">
             Наскільки серйозна проблема?
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-moss">
+          <p className="mx-auto mt-2 max-w-xl text-moss">
             12 запитань — тільки для вас. Відповіді нікуди не надсилаються - це лише бачите ви !
           </p>
         </div>
 
-        <ol className="mt-12 space-y-2">
+        <ol className="mt-5 space-y-2">
           {QUIZ_QUESTIONS.map((q, i) => {
             const n = String(i + 1).padStart(2, "0");
             const value = answers[i];
             return (
               <li
                 key={i}
-                className="rounded-2xl border border-border bg-card p-5 md:p-6"
+                className="rounded-2xl border border-border bg-card px-4 py-3 md:px-5 md:py-3"
               >
                 <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between md:gap-6">
                   <div className="flex items-baseline gap-4">
@@ -354,7 +354,7 @@ function Quiz() {
           })}
         </ol>
 
-        <div className="mt-8 flex flex-col items-center gap-3">
+        <div className="mt-5 flex flex-col items-center gap-3">
           <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted-foreground">
             Відповіли: {answeredCount} / {QUIZ_QUESTIONS.length}
           </p>
@@ -382,7 +382,7 @@ function Quiz() {
         {showResult && (
           <div
             ref={resultRef}
-            className="mt-10 rounded-2xl border border-border bg-sage/40 p-7 md:p-9"
+            className="mt-10 rounded-2xl border border-border bg-sage/40 p-4 md:p-5"
           >
             <p className="font-mono text-xs uppercase tracking-[0.24em] text-gold">
               Ваших «Так»: {yesCount} з {QUIZ_QUESTIONS.length}

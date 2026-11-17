@@ -86,7 +86,7 @@ function nextMilestone(start: Date, now: Date, totalDays: number) {
 
 function Stat({ value, label }: { value: number | string; label: string }) {
   return (
-    <div className="rounded-2xl bg-sage/60 p-5 text-center">
+    <div className="rounded-2xl bg-sage/60 p-4 text-center">
       <p className="font-display text-2xl text-forest md:text-3xl">{value}</p>
       <p className="mt-1 text-xs text-moss">{label}</p>
     </div>
@@ -156,7 +156,7 @@ function Calculator() {
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
       <main>
-        <section className="border-t border-border/60 bg-linen py-8 md:py-12">
+        <section className="border-t border-border/60 bg-linen py-5 md:py-7">
           <div className="mx-auto max-w-3xl px-6">
             <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">Інструмент</p>
             <h1 className="mt-3 font-display text-2xl text-forest md:text-3xl">
@@ -167,7 +167,7 @@ function Calculator() {
               тверезі. Один день за раз — це вже результат.
             </p>
 
-            <div className="mt-8 rounded-2xl border border-border bg-card p-6">
+            <div className="mt-8 rounded-2xl border border-border bg-card p-4">
               <label htmlFor="sober-date" className="text-xs text-forest">
                 Дата початку тверезості
               </label>
@@ -205,14 +205,14 @@ function Calculator() {
             </div>
 
             {isFuture && (
-              <p className="mt-6 rounded-2xl bg-sage/60 p-5 text-sm text-forest">
+              <p className="mt-6 rounded-2xl bg-sage/60 p-4 text-sm text-forest">
                 Ця дата ще не настала. Оберіть сьогоднішню або попередню.
               </p>
             )}
 
             {result && (
               <div className="mt-8 space-y-6">
-                <div className="rounded-2xl bg-forest p-8 text-center text-linen">
+                <div className="rounded-2xl bg-forest p-5 text-center text-linen">
                   <p className="font-mono text-xs uppercase tracking-[0.24em] text-sage">
                     Ви тверезі
                   </p>
@@ -243,7 +243,7 @@ function Calculator() {
                   {plural(result.minutes, "хвилина", "хвилини", "хвилин")} без алкоголю.
                 </p>
 
-                <div className="rounded-2xl border border-border bg-card p-6 text-center">
+                <div className="rounded-2xl border border-border bg-card p-4 text-center">
                   <p className="font-mono text-xs uppercase tracking-[0.24em] text-gold">
                     Наступна позначка
                   </p>
@@ -256,7 +256,7 @@ function Calculator() {
               </div>
             )}
 
-            <div className="mt-10 rounded-2xl bg-sage/40 p-6 text-xs leading-relaxed text-moss">
+            <div className="mt-6 rounded-2xl bg-sage/40 p-4 text-xs leading-relaxed text-moss">
               <p className="font-display text-sm text-forest">Позначки тверезості</p>
               <p className="mt-2">
                 У спільноті прийнято відзначати 24 години, 30, 60 та 90 днів, пів року, рік і

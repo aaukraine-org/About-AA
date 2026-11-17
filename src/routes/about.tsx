@@ -28,7 +28,7 @@ function About() {
     { t: "Рівність", d: "Немає керівників чи експертів — усі рівні, перед хворобою усі рівні." },
   ];
   return (
-    <section id="about" className="relative border-t border-border/60 bg-linen py-8 md:py-12">
+    <section id="about" className="relative border-t border-border/60 bg-linen py-5 md:py-7">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-14 md:grid-cols-[1fr_1.2fr]">
           <div>
@@ -52,11 +52,11 @@ function About() {
           </div>
         </div>
 
-        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((c) => (
             <div
               key={c.t}
-              className="rounded-2xl bg-sage/60 p-6 transition hover:bg-sage"
+              className="rounded-2xl bg-sage/60 p-4 transition hover:bg-sage"
             >
               <h3 className="font-display text-base text-forest">{c.t}</h3>
               <p className="mt-3 text-xs leading-relaxed text-moss">{c.d}</p>
@@ -82,7 +82,7 @@ const FAQ = [
 
 function Faq() {
   return (
-    <section id="faq" className="scroll-mt-20 border-t border-border/60 bg-sage/40 py-8 md:py-12">
+    <section id="faq" className="scroll-mt-20 border-t border-border/60 bg-sage/40 py-5 md:py-7">
       <div className="mx-auto max-w-4xl px-6">
         <div className="text-center">
           <h2 className="font-display text-2xl text-forest md:text-3xl">
@@ -90,7 +90,7 @@ function Faq() {
           </h2>
         </div>
 
-        <Accordion type="single" collapsible className="mt-12">
+        <Accordion type="single" collapsible className="mt-4">
           {FAQ.map((item, i) => (
             <AccordionItem
               key={i}
@@ -113,7 +113,7 @@ function Faq() {
 
 function Subscribe() {
   return (
-    <section id="subscribe" className="scroll-mt-20 border-t border-border/60 bg-linen py-8 md:py-12">
+    <section id="subscribe" className="scroll-mt-20 border-t border-border/60 bg-linen py-5 md:py-7">
       <div className="mx-auto max-w-6xl px-6">
         <h2 className="font-display text-2xl text-forest md:text-3xl">Підписка на розсилку</h2>
         <div className="mt-8">
