@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav, Footer } from "@/components/site-chrome";
 
+const BREVO_FORM_SRC = "https://c0c6a5ab.sibforms.com/v2/serve/MUIFAD2iNkK40B5Eq1hnXnyL2V4GvKOxOcs5G2aUgGoDoJMy_zzb4e_-0iHJT3oVWqOFYpZte8KZprSY78N3-v4Z5xG5vuM-Ekm1aY_88R8LmwGr_E-KiRHGDVpC5oyudqFOK9JX-fx3fXT5Y4MXyrLHiTwSAyfsUgeLnVzB5DS3oiBbqy5GQkNJtS_UP6DmaPcVmGi7tFkZyFL4oQ==";
+
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
@@ -61,12 +63,34 @@ function About() {
   );
 }
 
+function Subscribe() {
+  return (
+    <section id="subscribe" className="scroll-mt-20 border-t border-border/60 bg-sage/40 py-8 md:py-12">
+      <div className="mx-auto max-w-6xl px-6">
+        <p className="font-mono text-xs uppercase tracking-[0.28em] text-gold">/ 02 · розсилка</p>
+        <h2 className="mt-4 font-display text-2xl text-forest md:text-3xl">Підписка на розсилку</h2>
+        <div className="mt-8">
+          <iframe
+            src={BREVO_FORM_SRC}
+            title="Підписка на розсилку АА"
+            width="100%"
+            height="430"
+            loading="lazy"
+            style={{ border: 0, display: "block", maxWidth: 540, margin: "0 auto" }}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function AboutPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Nav />
       <main>
         <About />
+        <Subscribe />
       </main>
       <Footer />
     </div>

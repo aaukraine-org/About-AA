@@ -60,6 +60,12 @@ function Hero() {
           Про алкоголізм та Анонімних Алкоголіків 
           — конфіденційно, без осуду, без страху...
         </p>
+        <a
+          href="/about#subscribe"
+          className="mt-8 inline-flex items-center rounded-full bg-forest px-6 py-3 text-sm text-linen transition hover:bg-forest/90"
+        >
+          Підписатися на розсилку
+        </a>
       </div>
     </section>
   );
